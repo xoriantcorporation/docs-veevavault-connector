@@ -117,7 +117,12 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image1.png[image,width=287,height=182]
+
+| |X
 |===
 
 *For Configurations:*
@@ -142,7 +147,12 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image2.png[image,width=241,height=215]
+
+| |X
 |===
 
 *For Configurations:*
@@ -160,7 +170,12 @@ Create Object Records creates an object records in bulk on vault using object me
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Object Name |String |The list of all vault objects available to select anyone from the list. For e.g | |X
+|Object Name |String a|
+The list of all vault objects available to select anyone from the list. For e.g
+
+image:media/tech-ref/image3.png[image,width=323,height=246]
+
+| |X
 |Metadata Format a|
 Enum (String)
 
@@ -169,7 +184,12 @@ CSV
 JSON
 
 |Metadata format either CSV or JSON. | |X
-|Object Metadata |Input Stream |The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Object Metadata |Input Stream a|
+The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image4.png[image,width=273,height=216]
+
+| |X
 |===
 
 *For Configurations:*
@@ -194,7 +214,12 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image5.png[image,width=283,height=113]
+
+| |X
 |===
 
 *For Configurations:*
@@ -219,8 +244,15 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image6.png[image,width=279,height=39]
+
+| |X
 |===
+
+image:media/tech-ref/image6.png[image,width=300,height=39]
 
 *For Configurations:*
 
@@ -237,7 +269,12 @@ Delete Object Records delete an object records in bulk on vault using object Id 
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Object Name |String |The list of all vault objects available to select anyone from the list. For e.g | |X
+|Object Name |String a|
+The list of all vault objects available to select anyone from the list. For e.g
+
+image:media/tech-ref/image3.png[image,width=323,height=246]
+
+| |X
 |Metadata Format a|
 Enum (String)
 
@@ -246,7 +283,12 @@ CSV
 JSON
 
 |Metadata format either CSV or JSON. | |X
-|Object Metadata |Input Stream |The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Object Metadata |Input Stream a|
+The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image7.png[image,width=300,height=50]
+
+| |X
 |===
 
 *For Configurations:*
@@ -293,7 +335,12 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The document metadata (document Ids) either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: |#[payload] |X
+|Document Metadata |Input Stream a|
+The document metadata (document Ids) either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image6.png[image,width=268,height=39]
+
+|#[payload] |X
 |Source |Boolean |To exclude source files. |True |
 |Renditions |Boolean |To include renditions. |False |
 |All Versions |Boolean |To include all versions or latest version |False |
@@ -315,7 +362,12 @@ Get Audit details retrieves an audit details for a specific audit type.
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Audit Type |String |The list of audit types available on vault to select anyone from the list. For e.g | |X
+|Audit Type |String a|
+The list of audit types available on vault to select anyone from the list. For e.g
+
+image:media/tech-ref/image8.png[image,width=299,height=106]
+
+| |X
 |Start Date |String |A Start date to retrieve audit information from date specified. Dates must be YYYY-MM-DDTHH:MM:SSZ format | |
 |End Date |String |A End date to retrieve audit information till date specified. Dates must be YYYY-MM-DDTHH:MM:SSZ format | |
 |Fetch Size |Integer |The fetch size which limit the records per page |100 |
@@ -337,7 +389,12 @@ Get Document renditions to retrieve document renditions details.
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Document Metadata |Input Stream |The document metadata contains only *documentId* either in CSV OR JSON format as Input Stream. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The document metadata contains only *documentId* either in CSV OR JSON format as Input Stream. Metadata as below:
+
+image:media/tech-ref/image9.png[image,width=293,height=38]
+
+| |X
 |===
 
 *For Configurations:*
@@ -379,7 +436,12 @@ Get Object Records retrieves an object records in bulk on vault using object Id 
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Object Name |String |The list of all vault objects available to select anyone from the list. For e.g | |X
+|Object Name |String a|
+The list of all vault objects available to select anyone from the list. For e.g
+
+image:media/tech-ref/image3.png[image,width=300,height=246]
+
+| |X
 |Object Fields |List<String> |Object fields based on business requirement can be inserted into list. If not provided it will select all active object fields available to build VQL query and invoke internally to retrieve object records details. | |
 |WHERE Clause |String |A where clause which can be appended to VQL query build dynamically. | |
 |Fetch Size |Integer |The fetch size which limit the records per page |100 |
@@ -401,7 +463,12 @@ The Get Picklists retrieve all available values configured on a picklist.
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Picklist Name |String |The list of audit types available on vault to select anyone from the list. For e.g | |X
+|Picklist Name |String a|
+The list of audit types available on vault to select anyone from the list. For e.g
+
+image:media/tech-ref/image10.png[image,width=293,height=249]
+
+| |X
 |===
 
 *For Configurations:*
@@ -461,7 +528,12 @@ Enum (String)
 * JSON
 
 |Metadata format either CSV or JSON. | |X
-|Document Metadata |Input Stream |The editable document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Document Metadata |Input Stream a|
+The editable document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image11.png[image,width=250,height=343]
+
+| |X
 |===
 
 *For Configurations:*
@@ -479,7 +551,12 @@ Update Object Records updates an object records in bulk on vault using editable 
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Object Name |String |The list of all vault objects available to select anyone from the list. For e.g | |X
+|Object Name |String a|
+The list of all vault objects available to select anyone from the list. For e.g
+
+image:media/tech-ref/image3.png[image,width=322,height=246]
+
+| |X
 |Metadata Format a|
 Enum (String)
 
@@ -488,7 +565,12 @@ CSV
 JSON
 
 |Metadata format either CSV or JSON. | |X
-|Object Metadata |Input Stream |The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below: | |X
+|Object Metadata |Input Stream a|
+The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
+
+image:media/tech-ref/image12.png[image,width=309,height=346]
+
+| |X
 |===
 
 *For Configurations:*

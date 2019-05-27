@@ -92,13 +92,13 @@ Inside the <version> tags, put the desired version number, the word RELEASE 
 . Click *Browse* to locate the folder where you installed Maven.
 . Click *Test Maven Configuration*. When the green checkmark is shown, click *OK*.
 +
-image:media/image2.png[image,width=531,height=386]
+image:media/user-guide/user-guide/image2.png[image,width=531,height=386]
 
 [arabic, start=4]
 . *Install the Connector from https://docs.mulesoft.com/exchange/[Anypoint Exchange].*
 
 [loweralpha]
-. In Anypoint Studio, click the Exchange icon image:media/image3.png[image,width=19,height=18] in the taskbar.
+. In Anypoint Studio, click the Exchange icon image:media/user-guide/user-guide/image3.png[image,width=19,height=18] in the taskbar.
 . Click *Login* in the Exchange popup and Sign in.
 +
 *Note:* To complete this step, you must have a Mulesoft account. You can create an account on the https://anypoint.mulesoft.com/login/#/signin[Mulesoft Sign up] page.
@@ -122,14 +122,14 @@ You can configure the connector to connect to Veeva Vault using *Basic Authentic
 
 [arabic]
 . *Drag and drop the any of connector operation to the Studio Canvas.*
-. *Click on icon* image:media/image4.png[image,width=21,height=21]**of Connector configuration to create global element for the connector configurations.**
+. *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21]**of Connector configuration to create global element for the connector configurations.**
 +
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 . *Set these fields:*
 
 *Username Password Authentication:*
 
-image:media/image6.png[image,width=561,height=169]
+image:media/user-guide/image6.png[image,width=561,height=169]
 
 [cols=",",options="header",]
 |===
@@ -152,7 +152,7 @@ image:media/image6.png[image,width=561,height=169]
 
 *By default, this option is disabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-BurstLimitRemaining) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.*
 
-image:media/image7.png[image,width=557,height=126]
+image:media/user-guide/image7.png[image,width=557,height=126]
 
 [cols=",",options="header",]
 |===
@@ -169,7 +169,7 @@ image:media/image7.png[image,width=557,height=126]
 
 *By default, this option is disabled. If Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-DailyLimitRemaining) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each an every jobs/request created until daily limit is reset or roll over next day.*
 
-image:media/image8.png[image,width=560,height=80]
+image:media/user-guide/image8.png[image,width=560,height=80]
 
 [cols=",",options="header",]
 |===
@@ -181,7 +181,7 @@ image:media/image8.png[image,width=560,height=80]
 
 *The maximum time in milliseconds that the connector will wait for the Veeva Vault response. If time elapse will throw Timeout Exception. By default, is 10,000 milliseconds.*
 
-image:media/image9.png[image,width=558,height=31]
+image:media/user-guide/image9.png[image,width=558,height=31]
 
 [cols=",",options="header",]
 |===
@@ -218,13 +218,13 @@ image:media/image9.png[image,width=558,height=31]
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image10.png[image,width=601,height=90]
+image:media/user-guide/image10.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
@@ -234,12 +234,12 @@ image:media/image10.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required in payload under Input tab of operation.
 
-image:media/image11.png[image,width=280,height=188]
+image:media/user-guide/image11.png[image,width=280,height=188]
 
 |Output a|
 You can find following operation output or response under Output tab.
 
-image:media/image12.png[image,width=283,height=202]
+image:media/user-guide/image12.png[image,width=283,height=202]
 
 |===
 
@@ -251,13 +251,13 @@ The Create Documents operation allows to create single or multiple document(s) w
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image10.png[image,width=601,height=90]
+image:media/user-guide/image10.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
@@ -267,12 +267,12 @@ image:media/image10.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
-image:media/image13.png[image,width=283,height=326]
+image:media/user-guide/image13.png[image,width=283,height=326]
 
 |Output a|
 You can find create documents operation output status or response from vault.
 
-image:media/image14.png[image,width=297,height=213]
+image:media/user-guide/image14.png[image,width=297,height=213]
 
 |===
 
@@ -284,13 +284,13 @@ The Create Object Records operation allows to create bulk object records for sel
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image15.png[image,width=601,height=112]
+image:media/user-guide/image15.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
@@ -301,12 +301,12 @@ image:media/image15.png[image,width=601,height=112]
 |Input a|
 You can find following list of object metadata required to create object records.
 
-image:media/image17.png[image,width=283,height=330]
+image:media/user-guide/image17.png[image,width=283,height=330]
 
 |Output a|
 You can find operation output or response retrieved from vault for an object records created.
 
-image:media/image18.png[image,width=296,height=163]
+image:media/user-guide/image18.png[image,width=296,height=163]
 
 |===
 
@@ -318,13 +318,13 @@ The Delete Document Renditions operation allows to delete document renditions in
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image19.png[image,width=601,height=90]
+image:media/user-guide/image19.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
@@ -334,12 +334,12 @@ image:media/image19.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
-image:media/image20.png[image,width=283,height=122]
+image:media/user-guide/image20.png[image,width=283,height=122]
 
 |Output a|
 You can find delete document renditions operation output status or response from vault.
 
-image:media/image21.png[image,width=285,height=208]
+image:media/user-guide/image21.png[image,width=285,height=208]
 
 |===
 
@@ -351,13 +351,13 @@ The Delete Documents operation allows to delete document single or multiple docu
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image19.png[image,width=601,height=90]
+image:media/user-guide/image19.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
@@ -367,12 +367,12 @@ image:media/image19.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required to delete document(s) on vault.
 
-image:media/image22.png[image,width=301,height=55]
+image:media/user-guide/image22.png[image,width=301,height=55]
 
 |Output a|
 You can find delete documents operation output status or response from vault.
 
-image:media/image23.png[image,width=300,height=147]
+image:media/user-guide/image23.png[image,width=300,height=147]
 
 |===
 
@@ -384,13 +384,13 @@ The Delete Object Records operation allows to delete document single or multiple
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image15.png[image,width=601,height=112]
+image:media/user-guide/image15.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
@@ -401,12 +401,12 @@ image:media/image15.png[image,width=601,height=112]
 |Input a|
 You can find following list of object metadata required to delete object records.
 
-image:media/image24.png[image,width=300,height=70]
+image:media/user-guide/image24.png[image,width=300,height=70]
 
 |Output a|
 You can find operation output or response retrieved from vault for an object records deleted.
 
-image:media/image25.png[image,width=303,height=110]
+image:media/user-guide/image25.png[image,width=303,height=110]
 
 |===
 
@@ -418,13 +418,13 @@ image:media/image25.png[image,width=303,height=110]
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image26.png[image,width=536,height=160]
+image:media/user-guide/image26.png[image,width=536,height=160]
 
 [cols=",",options="header",]
 |===
@@ -498,13 +498,13 @@ The above example shows *‘id’* (which is a JobId) and *‘created_by’* (wh
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image27.png[image,width=601,height=221]
+image:media/user-guide/image27.png[image,width=601,height=221]
 
 [cols=",",options="header",]
 |===
@@ -518,12 +518,12 @@ image:media/image27.png[image,width=601,height=221]
 |Input a|
 You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
 
-image:media/image28.png[image,width=297,height=90]
+image:media/user-guide/image28.png[image,width=297,height=90]
 
 |Output a|
 You can find export documents job status response under output tab.
 
-image:media/image29.png[image,width=288,height=256]
+image:media/user-guide/image29.png[image,width=288,height=256]
 
 |===
 
@@ -535,13 +535,13 @@ The Get Audit Detail operation allows to retrieve audit details for specified au
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image30.png[image,width=601,height=168]
+image:media/user-guide/image30.png[image,width=601,height=168]
 
 [cols=",",options="header",]
 |===
@@ -555,7 +555,7 @@ image:media/image30.png[image,width=601,height=168]
 |Output a|
 The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
 
-image:media/image31.png[image,width=282,height=232]
+image:media/user-guide/image31.png[image,width=282,height=232]
 
 |===
 
@@ -567,13 +567,13 @@ The Get Document Renditions operation allows to retrieve document renditions det
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image32.png[image,width=601,height=61]
+image:media/user-guide/image32.png[image,width=601,height=61]
 
 [cols=",",options="header",]
 |===
@@ -582,12 +582,12 @@ image:media/image32.png[image,width=601,height=61]
 |Input a|
 You can see document Id required in payload under Input tab of operation to retrieve document renditions details
 
-image:media/image33.png[image,width=293,height=38]
+image:media/user-guide/image33.png[image,width=293,height=38]
 
 |Output a|
 You can find following operation output or response under Output tab.
 
-image:media/image34.png[image,width=300,height=145]
+image:media/user-guide/image34.png[image,width=300,height=145]
 
 |===
 
@@ -601,13 +601,13 @@ The Get Documents operation allows to retrieve document details based on documen
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image35.png[image,width=601,height=356]
+image:media/user-guide/image35.png[image,width=601,height=356]
 
 [cols=",",options="header",]
 |===
@@ -623,7 +623,7 @@ image:media/image35.png[image,width=601,height=356]
 |Output a|
 You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
 
-image:media/image36.png[image,width=288,height=313]
+image:media/user-guide/image36.png[image,width=288,height=313]
 
 |===
 
@@ -635,13 +635,13 @@ The Get Object Records operation allows to retrieve object records detail using 
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image37.png[image,width=601,height=297]
+image:media/user-guide/image37.png[image,width=601,height=297]
 
 [cols=",",options="header",]
 |===
@@ -655,7 +655,7 @@ image:media/image37.png[image,width=601,height=297]
 |Output a|
 You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail comes as output. Default would be list of all fields.
 
-image:media/image38.png[image,width=282,height=306]
+image:media/user-guide/image38.png[image,width=282,height=306]
 
 |===
 
@@ -667,13 +667,13 @@ The Get Picklists operation allows to retrieve all available picklist values con
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image39.png[image,width=601,height=60]
+image:media/user-guide/image39.png[image,width=601,height=60]
 
 [cols=",",options="header",]
 |===
@@ -683,7 +683,7 @@ image:media/image39.png[image,width=601,height=60]
 |Output a|
 You can find picklist values with name and label as an output of Get Picklists operation.
 
-image:media/image40.png[image,width=284,height=91]
+image:media/user-guide/image40.png[image,width=284,height=91]
 
 |===
 
@@ -695,13 +695,13 @@ The Query Operation allows to execute specified VQL query on Vault and retrieve 
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image41.png[image,width=601,height=286]
+image:media/user-guide/image41.png[image,width=601,height=286]
 
 [cols=",",options="header",]
 |===
@@ -730,7 +730,7 @@ Default parameter is *#[\{}].*
 |Output a|
 You can find the specified VQL query fields in output tab of operation. It returns specified VQL query result contains pagination data.
 
-image:media/image42.png[image,width=305,height=145]
+image:media/user-guide/image42.png[image,width=305,height=145]
 
 |===
 
@@ -755,13 +755,13 @@ The Update Documents operation allows to update bulk document(s) with provided e
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image43.png[image,width=601,height=95]
+image:media/user-guide/image43.png[image,width=601,height=95]
 
 [cols=",",options="header",]
 |===
@@ -771,12 +771,12 @@ image:media/image43.png[image,width=601,height=95]
 |Input a|
 You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
 
-image:media/image44.png[image,width=286,height=343]
+image:media/user-guide/image44.png[image,width=286,height=343]
 
 |Output a|
 You can find create documents operation output status or response from vault.
 
-image:media/image45.png[image,width=303,height=148]
+image:media/user-guide/image45.png[image,width=303,height=148]
 
 |===
 
@@ -790,13 +790,13 @@ The Update Object Records operation allows to update object records of specified
 
 *Connector Configuration:*
 
-image:media/image5.png[image,width=601,height=54]
+image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Follow the instructions mentioned in link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
-image:media/image15.png[image,width=601,height=112]
+image:media/user-guide/image15.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
@@ -807,12 +807,12 @@ image:media/image15.png[image,width=601,height=112]
 |Input a|
 You can find following list of object metadata required to create object records.
 
-image:media/image46.png[image,width=283,height=346]
+image:media/user-guide/image46.png[image,width=283,height=346]
 
 |Output a|
 You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
 
-image:media/image47.png[image,width=281,height=112]
+image:media/user-guide/image47.png[image,width=281,height=112]
 
 |===
 
@@ -869,7 +869,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image48.png[image,width=469,height=246]
+image:media/user-guide/image48.png[image,width=469,height=246]
 
 *Example XML Code:*
 
@@ -927,9 +927,9 @@ To create Mule flow, follow these instructions:
 * For-Each element containing Read file operation and FTPS Write operation to write file on vault FTP server.
 * Configure FTPS connector configuration with vault FTP server credentials details
 
-image:media/image49.png[image,width=601,height=193]
+image:media/user-guide/image49.png[image,width=601,height=193]
 
-image:media/image50.png[image,width=578,height=135]
+image:media/user-guide/image50.png[image,width=578,height=135]
 
 *Example XML code:*
 
@@ -1053,7 +1053,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that will be return to triggering source.
 * Logger to log information in console or log file.
 
-image:media/image51.png[image,width=601,height=222]
+image:media/user-guide/image51.png[image,width=601,height=222]
 
 *Example XML Code:*
 
@@ -1143,7 +1143,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image52.png[image,width=481,height=256]
+image:media/user-guide/image52.png[image,width=481,height=256]
 
 *Example XML Code:*
 
@@ -1206,7 +1206,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image53.png[image,width=482,height=256]
+image:media/user-guide/image53.png[image,width=482,height=256]
 
 *Example XML Code:*
 
@@ -1277,7 +1277,7 @@ To create Mule flow, follow these instructions:
 * Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
 * Drag Logger element to log information in console or log file.
 
-image:media/image54.png[image,width=582,height=255]
+image:media/user-guide/image54.png[image,width=582,height=255]
 
 *Example XML Code:*
 
@@ -1347,7 +1347,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image55.png[image,width=598,height=245]
+image:media/user-guide/image55.png[image,width=598,height=245]
 
 *Example XML code:*
 
@@ -1472,7 +1472,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image56.png[image,width=601,height=244]
+image:media/user-guide/image56.png[image,width=601,height=244]
 
 *Example XML Code:*
 
@@ -1575,7 +1575,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image57.png[image,width=601,height=252]
+image:media/user-guide/image57.png[image,width=601,height=252]
 
 *Example XML Code:*
 
@@ -1658,7 +1658,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image58.png[image,width=601,height=242]
+image:media/user-guide/image58.png[image,width=601,height=242]
 
 *Example XML Code:*
 
