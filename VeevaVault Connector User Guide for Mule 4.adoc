@@ -186,7 +186,7 @@ image:media/image9.png[image,width=558,height=31]
 [cols=",",options="header",]
 |===
 |*Field* |*Description*
-|*Response Timeout* |*Enter timeout value for connector to wait for response from Veeva Vault instance. Default is 10 seconds.*
+|*Response Timeout* |*Enter timeout value for connector to wait for response from Veeva Vault instance. Default is 30 seconds.*
 |===
 
 === Use the Connector in a Mule Flow:
@@ -208,7 +208,7 @@ image:media/image9.png[image,width=558,height=31]
 * link:#get-picklists[*Get Picklists*]
 * link:#query[*Query*]
 * link:#update-documents[*Update Documents*]
-* link:#update-object-records[*Update Object Records*]
+* link:#section[*Update Object Records*]
 
 ==== Create Document Renditions:
 
@@ -231,8 +231,16 @@ image:media/image10.png[image,width=601,height=90]
 |Field |Description
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of document metadata required in payload under Input tab of operation.
-|Output |You can find following operation output or response under Output tab.
+|Input a|
+You can find following list of document metadata required in payload under Input tab of operation.
+
+image:media/image11.png[image,width=280,height=188]
+
+|Output a|
+You can find following operation output or response under Output tab.
+
+image:media/image12.png[image,width=283,height=202]
+
 |===
 
 ==== Create Documents
@@ -256,8 +264,16 @@ image:media/image10.png[image,width=601,height=90]
 |Field |Description
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
-|Output |You can find create documents operation output status or response from vault.
+|Input a|
+You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
+
+image:media/image13.png[image,width=283,height=326]
+
+|Output a|
+You can find create documents operation output status or response from vault.
+
+image:media/image14.png[image,width=297,height=213]
+
 |===
 
 ==== Create Object Records
@@ -282,8 +298,16 @@ image:media/image15.png[image,width=601,height=112]
 |Object Name |Click on icon to retrieve vault object list. Select the object name from the list to create records for selected object.
 |Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of object metadata required to create object records.
-|Output |You can find operation output or response retrieved from vault for an object records created.
+|Input a|
+You can find following list of object metadata required to create object records.
+
+image:media/image17.png[image,width=283,height=330]
+
+|Output a|
+You can find operation output or response retrieved from vault for an object records created.
+
+image:media/image18.png[image,width=296,height=163]
+
 |===
 
 ==== Delete Document Renditions
@@ -307,8 +331,16 @@ image:media/image19.png[image,width=601,height=90]
 |Field |Description
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
-|Input |You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
-|Output |You can find delete document renditions operation output status or response from vault.
+|Input a|
+You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
+
+image:media/image20.png[image,width=283,height=122]
+
+|Output a|
+You can find delete document renditions operation output status or response from vault.
+
+image:media/image21.png[image,width=285,height=208]
+
 |===
 
 ==== Delete Documents
@@ -332,8 +364,16 @@ image:media/image19.png[image,width=601,height=90]
 |Field |Description
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
-|Input |You can find following list of document metadata required to delete document(s) on vault.
-|Output |You can find delete documents operation output status or response from vault.
+|Input a|
+You can find following list of document metadata required to delete document(s) on vault.
+
+image:media/image22.png[image,width=301,height=55]
+
+|Output a|
+You can find delete documents operation output status or response from vault.
+
+image:media/image23.png[image,width=300,height=147]
+
 |===
 
 ==== Delete Object Records
@@ -358,8 +398,16 @@ image:media/image15.png[image,width=601,height=112]
 |Object Name |Click on icon to retrieve vault object list. Select the object name from the list to delete object records for selected object.
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of object metadata required to delete object records.
-|Output |You can find operation output or response retrieved from vault for an object records deleted.
+|Input a|
+You can find following list of object metadata required to delete object records.
+
+image:media/image24.png[image,width=300,height=70]
+
+|Output a|
+You can find operation output or response retrieved from vault for an object records deleted.
+
+image:media/image25.png[image,width=303,height=110]
+
 |===
 
 ==== Download Document
@@ -467,8 +515,16 @@ image:media/image27.png[image,width=601,height=221]
 |Renditions |Optional, to include renditions set to true. Default is false.
 |All Versions |Optional, to include all versions or latest version set to true. Default is false.
 |Polling Interval |Optional, to polls vault at specified interval in seconds until job is successful. Default is 10 seconds.
-|Input |You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
-|Output |You can find export documents job status response under output tab.
+|Input a|
+You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
+
+image:media/image28.png[image,width=297,height=90]
+
+|Output a|
+You can find export documents job status response under output tab.
+
+image:media/image29.png[image,width=288,height=256]
+
 |===
 
 ==== Get Audit Details
@@ -496,7 +552,11 @@ image:media/image30.png[image,width=601,height=168]
 |Fetch Size |Provide number of records per page. Default is 100.
 |Batch Size |Provide number of pages per batch. Default is 10.
 |Input |N/A
-|Output |The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
+|Output a|
+The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
+
+image:media/image31.png[image,width=282,height=232]
+
 |===
 
 ==== Get Document Renditions
@@ -519,8 +579,16 @@ image:media/image32.png[image,width=601,height=61]
 |===
 |Field |Description
 |Document Metadata |Document Id in payload either in CSV or JSON format.
-|Input |You can see document Id required in payload under Input tab of operation to retrieve document renditions details
-|Output |You can find following operation output or response under Output tab.
+|Input a|
+You can see document Id required in payload under Input tab of operation to retrieve document renditions details
+
+image:media/image33.png[image,width=293,height=38]
+
+|Output a|
+You can find following operation output or response under Output tab.
+
+image:media/image34.png[image,width=300,height=145]
+
 |===
 
 ==== Get Documents
@@ -552,7 +620,11 @@ image:media/image35.png[image,width=601,height=356]
 |Fetch Size |Provide number of records per page. Default is 100.
 |Batch Size |Provide number of pages per batch. Default is 10.
 |Input |N/A
-|Output |You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
+|Output a|
+You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
+
+image:media/image36.png[image,width=288,height=313]
+
 |===
 
 ==== Get Object Records
@@ -580,7 +652,11 @@ image:media/image37.png[image,width=601,height=297]
 |Fetch Size |Provide number of records per page. Default is 100.
 |Batch Size |Provide number of pages per batch. Default is 10.
 |Input |N/A
-|Output |You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail comes as output. Default would be list of all fields.
+|Output a|
+You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail comes as output. Default would be list of all fields.
+
+image:media/image38.png[image,width=282,height=306]
+
 |===
 
 ==== Get Picklists
@@ -604,7 +680,11 @@ image:media/image39.png[image,width=601,height=60]
 |Field |Description
 |Picklist Name (Optional) |Click on icon to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
 |Input |N/A
-|Output |You can find picklist values with name and label as an output of Get Picklists operation.
+|Output a|
+You can find picklist values with name and label as an output of Get Picklists operation.
+
+image:media/image40.png[image,width=284,height=91]
+
 |===
 
 ==== Query
@@ -647,8 +727,25 @@ Default parameter is *#[\{}].*
 |Fetch Size |Provide number of records per page. Default is 100.
 |Batch Size |Provide number of pages per batch. Default is 10.
 |Input |N/A
-|Output |You can find the specified VQL query fields in output tab of operation. It returns specified VQL query result contains pagination data.
+|Output a|
+You can find the specified VQL query fields in output tab of operation. It returns specified VQL query result contains pagination data.
+
+image:media/image42.png[image,width=305,height=145]
+
 |===
+
+*Use Input Parameters to Protect VQL Queries*
+
+*The Query operation is used to retrieve documents, object, workflow information from the Vault. The primary concept of this operation is to supply a VQL query and use DataWeave to supply the parameters:*
+
+*In the above example, input parameters are supplied as key-value pairs, which you can create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference a parameter value by name. This is the recommended approach for using parameters in your VQL query.*
+
+*The alternative is to directly write ` <veevavault:vql>SELECT id, name__v, study__v FROM documents WHERE name__v = #[payload] </veevavault:vql>`, but this is a very dangerous practice that is not recommended.*
+
+*Advantages of using input parameters to configure the WHERE clause in a SELECT statement this way:*
+
+* *The query becomes immune to VQL injection attacks.*
+* *The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.*
 
 ==== Update Documents
 
@@ -671,9 +768,19 @@ image:media/image43.png[image,width=601,height=95]
 |Field |Description
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Document Metadata |Document Metadata payload with required editable metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
-|Output |You can find create documents operation output status or response from vault.
+|Input a|
+You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
+
+image:media/image44.png[image,width=286,height=343]
+
+|Output a|
+You can find create documents operation output status or response from vault.
+
+image:media/image45.png[image,width=303,height=148]
+
 |===
+
+==== 
 
 ==== Update Object Records
 
@@ -697,9 +804,24 @@ image:media/image15.png[image,width=601,height=112]
 |Object Name |Click on icon to retrieve vault object list. Select the object name from the list to update object records of vault object.
 |Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input |You can find following list of object metadata required to create object records.
-|Output |You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
+|Input a|
+You can find following list of object metadata required to create object records.
+
+image:media/image46.png[image,width=283,height=346]
+
+|Output a|
+You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
+
+image:media/image47.png[image,width=281,height=112]
+
 |===
+
+*Note:* From the above-mentioned operations in connector the following provides the pagination output based on Mule standard pagination. Please refer to https://docs.mulesoft.com/mule-runtime/4.2/streaming-about[Mule Streaming Strategies] in more details and configure the operation based on your business requirement. In order to retrieve payload (input stream objects) please place For-Each/Splitter to read each object at a time.
+
+* link:#get-audit-details[Get Audit Details]
+* link:#get-documents[Get Documents]
+* link:#get-object-records[Get Object Records]
+* link:#query[Query]
 
 === Demo Projects
 
@@ -747,7 +869,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image47.png[image,width=469,height=246]
+image:media/image48.png[image,width=469,height=246]
 
 *Example XML Code:*
 
@@ -805,9 +927,9 @@ To create Mule flow, follow these instructions:
 * For-Each element containing Read file operation and FTPS Write operation to write file on vault FTP server.
 * Configure FTPS connector configuration with vault FTP server credentials details
 
-image:media/image48.png[image,width=601,height=193]
+image:media/image49.png[image,width=601,height=193]
 
-image:media/image49.png[image,width=578,height=135]
+image:media/image50.png[image,width=578,height=135]
 
 *Example XML code:*
 
@@ -931,7 +1053,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that will be return to triggering source.
 * Logger to log information in console or log file.
 
-image:media/image50.png[image,width=601,height=222]
+image:media/image51.png[image,width=601,height=222]
 
 *Example XML Code:*
 
@@ -1021,7 +1143,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image51.png[image,width=481,height=256]
+image:media/image52.png[image,width=481,height=256]
 
 *Example XML Code:*
 
@@ -1084,7 +1206,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/image52.png[image,width=482,height=256]
+image:media/image53.png[image,width=482,height=256]
 
 *Example XML Code:*
 
@@ -1155,7 +1277,7 @@ To create Mule flow, follow these instructions:
 * Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
 * Drag Logger element to log information in console or log file.
 
-image:media/image53.png[image,width=582,height=255]
+image:media/image54.png[image,width=582,height=255]
 
 *Example XML Code:*
 
@@ -1225,7 +1347,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image54.png[image,width=598,height=245]
+image:media/image55.png[image,width=598,height=245]
 
 *Example XML code:*
 
@@ -1350,7 +1472,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image55.png[image,width=601,height=244]
+image:media/image56.png[image,width=601,height=244]
 
 *Example XML Code:*
 
@@ -1453,7 +1575,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image56.png[image,width=601,height=252]
+image:media/image57.png[image,width=601,height=252]
 
 *Example XML Code:*
 
@@ -1536,7 +1658,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/image57.png[image,width=601,height=242]
+image:media/image58.png[image,width=601,height=242]
 
 *Example XML Code:*
 
