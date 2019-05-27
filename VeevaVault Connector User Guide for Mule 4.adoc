@@ -92,13 +92,13 @@ Inside the <version> tags, put the desired version number, the word RELEASE 
 . Click *Browse* to locate the folder where you installed Maven.
 . Click *Test Maven Configuration*. When the green checkmark is shown, click *OK*.
 +
-image:media/user-guide/user-guide/image2.png[image,width=531,height=386]
+image:media/user-guide/image2.png[image,width=531,height=386]
 
 [arabic, start=4]
 . *Install the Connector from https://docs.mulesoft.com/exchange/[Anypoint Exchange].*
 
 [loweralpha]
-. In Anypoint Studio, click the Exchange icon image:media/user-guide/user-guide/image3.png[image,width=19,height=18] in the taskbar.
+. In Anypoint Studio, click the Exchange icon image:media/user-guide/image3.png[image,width=19,height=18] in the taskbar.
 . Click *Login* in the Exchange popup and Sign in.
 +
 *Note:* To complete this step, you must have a Mulesoft account. You can create an account on the https://anypoint.mulesoft.com/login/#/signin[Mulesoft Sign up] page.
