@@ -252,8 +252,6 @@ image:media/tech-ref/image6.png[image,width=279,height=39]
 | |X
 |===
 
-image:media/tech-ref/image6.png[image,width=300,height=39]
-
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
