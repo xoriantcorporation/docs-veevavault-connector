@@ -13,6 +13,6 @@ The Veeva Vault connector can be use in mule application as an outbound connecto
 
 Additional References:
 
-* link:VeevaVault%20Connector%20%20Release%20Notes%20for%20Mule%204.adoc[Veeva Vault Connector Release Notes].
-* link:VeevaVault%20Connector%20%20Technical%20Reference%20Document%20for%20Mule%204.adoc[Veeva Vault Connector Technical Reference Guide.]
-* link:VeevaVault%20Connector%20%20User%20Guide%20for%20Mule%204.adoc[Veeva Vault Connector User Guide.]
+* link:VeevaVault%20Connector%20Release%20Notes%20for%20Mule%204.adoc[Veeva Vault Connector Release Notes].
+* link:VeevaVault%20Connector%20Technical%20Reference%20Document%20for%20Mule%204.adoc[Veeva Vault Connector Technical Reference Guide.]
+* link:VeevaVault%20Connector%20User%20Guide%20for%20Mule%204.adoc[Veeva Vault Connector User Guide.]
