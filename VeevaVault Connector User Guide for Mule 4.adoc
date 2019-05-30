@@ -122,7 +122,7 @@ You can configure the connector to connect to Veeva Vault using *Basic Authentic
 
 [arabic]
 . *Drag and drop the any of connector operation to the Studio Canvas.*
-. *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21] **of Connector configuration to create global element for the connector configurations.**
+. *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21] *of Connector configuration to create global element for the connector configurations.*
 +
 image:media/user-guide/image5.png[image,width=601,height=54]
 . *Set these fields:*
@@ -295,7 +295,7 @@ image:media/user-guide/image15.png[image,width=601,height=112]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Object Name |Click on icon to retrieve vault object list. Select the object name from the list to create records for selected object.
+|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to create records for selected object.
 |Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
 |Input a|
@@ -395,7 +395,7 @@ image:media/user-guide/image15.png[image,width=601,height=112]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Object Name |Click on icon to retrieve vault object list. Select the object name from the list to delete object records for selected object.
+|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to delete object records for selected object.
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
 |Input a|
@@ -546,7 +546,7 @@ image:media/user-guide/image30.png[image,width=601,height=168]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Audit Type |Click on icon to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
+|Audit Type |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
 |Start date |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
 |End date |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
 |Fetch Size |Provide number of records per page. Default is 100.
@@ -612,9 +612,9 @@ image:media/user-guide/image35.png[image,width=601,height=356]
 [cols=",",options="header",]
 |===
 |Fields |Description
-|Type (Optional) |Click on icon to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
-|Subtype (Optional) |Click on icon to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
-|Classification (Optional) |Click on icon to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
+|Type (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
+|Subtype (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
+|Classification (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
 |Document Properties (Optional) |Insert document properties as per business requirement and these properties will be used to build a VQL query to execute on vault.
 |WHERE Clause |Insert WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g classification__v = ‘study_set_up_worksheet__c’*
 |Fetch Size |Provide number of records per page. Default is 100.
@@ -646,7 +646,7 @@ image:media/user-guide/image37.png[image,width=601,height=297]
 [cols=",",options="header",]
 |===
 |Fields |Description
-|Vault Object |Click on icon to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
+|Vault Object |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
 |Object Fields (Optional) |Insert object fields as per business requirement and these fields will be used to build a VQL query to execute on vault.
 |WHERE Clause |Insert WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g study_country__v = ‘0SC000000000101’*
 |Fetch Size |Provide number of records per page. Default is 100.
@@ -678,7 +678,7 @@ image:media/user-guide/image39.png[image,width=601,height=60]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Picklist Name (Optional) |Click on icon to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
+|Picklist Name (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
 |Input |N/A
 |Output a|
 You can find picklist values with name and label as an output of Get Picklists operation.
@@ -799,7 +799,7 @@ image:media/user-guide/image15.png[image,width=601,height=112]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Object Name |Click on icon to retrieve vault object list. Select the object name from the list to update object records of vault object.
+|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
 |Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
 |Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
 |Input a|
