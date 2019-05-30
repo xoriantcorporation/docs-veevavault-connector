@@ -1,6 +1,6 @@
 *Veeva Vault Connector User Guide for Mule 4*
 
-*1.0.1*
+*1.0.2*
 
 *May 2019*
 
@@ -122,7 +122,7 @@ You can configure the connector to connect to Veeva Vault using *Basic Authentic
 
 [arabic]
 . *Drag and drop the any of connector operation to the Studio Canvas.*
-. *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21] **of Connector configuration to create global element for the connector configurations.**
+. *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21]**of Connector configuration to create global element for the connector configurations.**
 +
 image:media/user-guide/image5.png[image,width=601,height=54]
 . *Set these fields:*
@@ -208,7 +208,7 @@ image:media/user-guide/image9.png[image,width=558,height=31]
 * link:#get-picklists[*Get Picklists*]
 * link:#query[*Query*]
 * link:#update-documents[*Update Documents*]
-* link:#section[*Update Object Records*]
+* link:#update-object-records[*Update Object Records*]
 
 ==== Create Document Renditions:
 
@@ -780,8 +780,6 @@ image:media/user-guide/image45.png[image,width=303,height=148]
 
 |===
 
-==== 
-
 ==== Update Object Records
 
 The Update Object Records operation allows to update object records of specified vault object.
@@ -816,12 +814,53 @@ image:media/user-guide/image47.png[image,width=281,height=112]
 
 |===
 
-*Note:* From the above-mentioned operations in connector the following provides the pagination output based on Mule standard pagination. Please refer to https://docs.mulesoft.com/mule-runtime/4.2/streaming-about[Mule Streaming Strategies] in more details and configure the operation based on your business requirement. In order to retrieve payload (input stream objects) please place For-Each/Splitter to read each object at a time.
+=== Streaming and Pagination
+
+All the operations (except Download Document) in connector returns an InputStream as payload with respective results based on operation output. Because of an InputStream is returned as payload the Mule by default applies Streaming Strategies, please refer to https://docs.mulesoft.com/mule-runtime/4.2/streaming-about[Mule Streaming Strategies] in more details. You can find streaming strategies configuration in *Advanced* tab of connector operations.
+
+image:media/user-guide/image48.png[image,width=601,height=124]
+
+The following operations in connector provides pagination mechanism based on Mule standard pagination.
 
 * link:#get-audit-details[Get Audit Details]
 * link:#get-documents[Get Documents]
 * link:#get-object-records[Get Object Records]
 * link:#query[Query]
+
+While using these above paginated operations make sure to place For-Each/Splitter to retrieve each object (metadata’s in JSON format) at a time. The pagination operations have fields – *Fetch Size and Batch Size.*
+
+* *Fetch Size:* The Fetch Size is a limit number of records that can be retrieve in a page. The operation would return the pages with fetch size number of JSON object records. Note, in some cases, Veeva API’s auto-calculate fetch size (number of records on each page) based on record size accumulated exceed the standard record size. The operation will return calculated records on each page.
+* *Batch Size:* The Batch Size is number of pages it would return in each batch and each page will have fetch size number of records. The operation would return number of records (metadata’s in JSON format) per batch is calculated as below **E.**g:
++
+Fetch Size set as *1000*
++
+Batch Size set as *10*
++
+Total records in vault say has *100,000* records then
++
+Number of pages = Total records/Fetch Size
++
+= 100000/1000
++
+= 100 pages.
++
+Number of pages per batch = Number of pages/Batch Size
++
+= 100/10
++
+= 10 pages per batch.
++
+Number of Records per batch = Number of pages per batch * Fetch Size
++
+= 10 * 1000
++
+= 10,000 records.
++
+Therefore, Number of records return per batch would be 10,000 records.
++
+The repeatable streams measure the buffer size in byte measurements, when handling objects the runtime measures the buffer size using instance counts.
++
+In non-repeatable stream connector operation would returns stream as number of records per batch and in repeatable stream would returns all records in once, so when calculating the in-memory buffer size for repeatable auto-paging, you need to estimate how much memory space each instance takes to avoid running out of memory.
 
 === Demo Projects
 
@@ -845,7 +884,7 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 *To use the demo project:*
 
 * You must know about basic concept of Veeva Vault.
-* You mush know about Veeva VQL query (https://developer.veevavault.com/vql/#introduction-to-vault-queries)
+* You must know about Veeva VQL query (https://developer.veevavault.com/vql/#introduction-to-vault-queries)
 * You must know Mule concepts, flow Anypoint Studio and connectors – HTTP, Database, File. Refer to MuleSoft Documentation (https://docs.mulesoft.com/general/)
 * You must have access to Veeva Vault instance for connector configurations:
 
@@ -869,7 +908,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image48.png[image,width=469,height=246]
+image:media/user-guide/image49.png[image,width=469,height=246]
 
 *Example XML Code:*
 
@@ -927,9 +966,9 @@ To create Mule flow, follow these instructions:
 * For-Each element containing Read file operation and FTPS Write operation to write file on vault FTP server.
 * Configure FTPS connector configuration with vault FTP server credentials details
 
-image:media/user-guide/image49.png[image,width=601,height=193]
+image:media/user-guide/image50.png[image,width=601,height=193]
 
-image:media/user-guide/image50.png[image,width=578,height=135]
+image:media/user-guide/image51.png[image,width=578,height=135]
 
 *Example XML code:*
 
@@ -1053,7 +1092,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that will be return to triggering source.
 * Logger to log information in console or log file.
 
-image:media/user-guide/image51.png[image,width=601,height=222]
+image:media/user-guide/image52.png[image,width=601,height=222]
 
 *Example XML Code:*
 
@@ -1143,7 +1182,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image52.png[image,width=481,height=256]
+image:media/user-guide/image53.png[image,width=481,height=256]
 
 *Example XML Code:*
 
@@ -1206,7 +1245,7 @@ To create Mule flow, follow these instructions:
 * Select CSV from Metadata format drop down list.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image53.png[image,width=482,height=256]
+image:media/user-guide/image54.png[image,width=482,height=256]
 
 *Example XML Code:*
 
@@ -1277,7 +1316,7 @@ To create Mule flow, follow these instructions:
 * Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image54.png[image,width=582,height=255]
+image:media/user-guide/image55.png[image,width=582,height=255]
 
 *Example XML Code:*
 
@@ -1347,7 +1386,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image55.png[image,width=598,height=245]
+image:media/user-guide/image56.png[image,width=598,height=245]
 
 *Example XML code:*
 
@@ -1472,7 +1511,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image56.png[image,width=601,height=244]
+image:media/user-guide/image57.png[image,width=601,height=244]
 
 *Example XML Code:*
 
@@ -1575,7 +1614,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image57.png[image,width=601,height=252]
+image:media/user-guide/image58.png[image,width=601,height=252]
 
 *Example XML Code:*
 
@@ -1658,7 +1697,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image58.png[image,width=601,height=242]
+image:media/user-guide/image59.png[image,width=601,height=242]
 
 *Example XML Code:*
 

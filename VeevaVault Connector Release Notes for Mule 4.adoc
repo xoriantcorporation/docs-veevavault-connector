@@ -1,6 +1,6 @@
 *Veeva Vault Connector Release Notes for Mule 4*
 
-*1.0.1*
+*1.0.2*
 
 *May 2019*
 
@@ -8,7 +8,7 @@ Veeva Vault connector connects Vault instances to integrate Vault data with othe
 
 This is New Release
 
-Version 1.0.1
+Version 1.0.2
 
 Compatibility
 
