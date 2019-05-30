@@ -1,4 +1,4 @@
-*Veeva Vault Connector for Mule 4 Technical Reference Document*
+*Veeva Vault Connector Technical Reference Document for Mule 4*
 
 *1.0.2*
 
