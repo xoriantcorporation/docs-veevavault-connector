@@ -1,6 +1,6 @@
 *Veeva Vault Connector*
 
-*Technical Reference Document*
+*Technical Reference Guide*
 
 *for Mule 4*
 
