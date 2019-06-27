@@ -1,6 +1,6 @@
 *Veeva Vault Connector User Guide for Mule 4*
 
-*1.0.2*
+*1.0.3*
 
 *June 2019*
 
@@ -8,11 +8,11 @@
 
 === Overview
 
-The Anypoint Veeva Vault Connector lets you connect Mule flows to the Veeva Vault platform using Veeva REST API depending on the operation you configure.
+The Anypoint Veeva Vault Connector lets you connect Mule flows to the Veeva Vault platform using the Veeva REST API depending on the operation you configure.
 
-This connector works with the https://developer.veevavault.com/api/18.3/#authentication[Veeva Vault REST, Bulk, and Streaming API], depending on the operation you configure. Each API call uses an JSON/CSV request and returns JSON input stream response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
+This connector works with the https://developer.veevavault.com/api/19.1/#authentication[Veeva Vault REST, Bulk, and Streaming API], depending on the operation you configure. Each API call uses an JSON/CSV request and returns JSON input stream response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
 
-The Veeva Vault connector can be use in mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Download operations on following Vault Objects. These operations are discussed later in this document.
+The Veeva Vault Connector can be use in the Mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Download operations on following Vault Objects. These operations are discussed later in this document.
 
 * Documents – Create, Retrieve, Update, Delete, Download, Export.
 * Document Renditions – Create, Retrieve, Update, Delete.
@@ -39,6 +39,7 @@ To use this connector, you need:
 You need to have basic knowledge of:
 
 * https://docs.mulesoft.com/mule-runtime/4.2/[Mule Runtime and Concepts]
+* https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]
 
 === Setup the Environment
 
@@ -142,7 +143,21 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 |*Client Id* |*Enter Client Id in format mulesoft-\{organisation}-\{server}-connector to send with each request in header for tracking purpose. E.g : mulesoft-abcpharma-clinicalprod-connector*
 |===
 
-*In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ.*
+*In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ. E.g. Below is an example snippet of configuration.yaml file under folder (src/main/resources/config)*
+
+veeva:
+
+#Veeva Vault details
+
+vaultURL: "https://xxxx-xxxx.veevavault.com"
+
+username: "someone@example.com"
+
+password: "xxxxxxx"
+
+version : "v19.1"
+
+clientId: "veeva-clinical-mulesoft-connector"
 
 *The Connection Configuration will do Basic Authentication which will accept required parameters – Vault URL, Username, Password to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.*
 
@@ -155,8 +170,6 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 *Below is an example from the application logs showing a warning message at 2019-06-06 10:34:45,096 and subsequently waiting for 5 minutes before re-running as shown in the next message after 5 minutes at 2019-06-06 10:39:45,098.*
 
 ******
-
-*INFO 2019-06-06 10:34:45,094 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Response received for sync http request :: 'https://[vault-domain]/api/v18.2/metadata/objects/documents/types/site_management__c' in 437 milliseconds.*
 
 *WARN 2019-06-06 10:34:45,096 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Burst API Limit remaining calls [1997] has exceeded/reached an API Limit Profile threshold set as [1997]. As per API Limit Profile, Veeva Vault Connector will wait for [5] MINUTES.*
 
@@ -173,7 +186,6 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 [cols=",",options="header",]
 |===
 |*Field* |*Description*
-|*Response Timeout* |*Enter timeout value for connector to wait for response from Veeva Vault instance. Default is 10 seconds.*
 |*API Limit Threshold* |*Enter API threshold limit that Veeva API Burst limit reached or exceed this threshold, connector will wait for specified wait time. Default is 200.*
 |*Wait Time* |*Enter Wait time for connector to wait if API Limit threshold is reached or exceeded. Default is 5 mins.*
 |*Time Unit* |*Select time unit for wait time. Default is MINUTES.*
@@ -181,21 +193,31 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 
 *Daily API Limit Exceed Profile:*
 
-*The Daily API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24 hour window on a rolling hourly basis.*
+*The Daily API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24-hour window on a daily rolling basis.*
 
-*By default, this option is enabled. If Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-DailyLimitRemaining) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.*
+*By default, this option is enabled. If the Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-DailyLimitRemaining) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.*
 
 *Below is an example logs recorded which shows warning at 2019-06-06 10:47:31,698, then an error is thrown at 2019-06-06 10:47:31,699.*
 
 ******
 
-*INFO 2019-06-06 10:47:31,693 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Response received for sync http request :: 'https://[vault-domain]/api/v18.2/metadata/objects/documents/types/site_management__c' in 558 milliseconds.*
+*WARN 2019-06-06 10:47:31,698 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Veeva Daily API Limit remaining calls [10000] has exceeded/reached an Daily API Limit Profile threshold set as [10000]. As per API Limit Profile, Veeva Vault Connector will throw an exception.*
 
-*WARN 2019-06-06 10:47:31,698 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Veeva Daily API Limit remaining calls [99726] has exceeded/reached an Daily API Limit Profile threshold set as [99729]. As per API Limit Profile, Veeva Vault Connector will throw an exception.*
+*ERROR 2019-06-06 10:47:31,699 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Exception caught while processing Sync request ::: https://xxxxx-xxxxx.veevavault.com/api/v19.1/metadata/vobjects/site__v, Exception ::: \{"responseStatus":"FAILURE","errors":[\{"type":"API_LIMIT_EXCEED","message":"The Veeva Vault Connector has reached/exceeded daily API limit remaining calls [10000]. The configured daily api limit threshold is (10000)"}]}*
 
-*ERROR 2019-06-06 10:47:31,699 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: An error occurred while getting VeevaVaultError value returning default error :: No enum constant org.mule.extension.veevavault.internal.error.VeevaVaultError.THE VEEVA VAULT CONNECTOR DAILY API LIMIT IS REACHED/EXCEEDED*
+*ERROR 2019-06-06 10:47:31,767 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.runtime.core.internal.exception.OnErrorPropagateHandler:*
 
-******
+**********************************************************************************
+
+*Message : An error occurred from the Veeva Vault API.*
+
+*Error Code: API_LIMIT_EXCEED.*
+
+*Original Error Message: The Veeva Vault Connector has reached/exceeded daily API limit remaining calls [10000]. The configured daily api limit threshold is (10000).*
+
+*Error type : VEEVAVAULT:API_LIMIT_EXCEED*
+
+**********************************************************************************
 
 image:media/user-guide/image8.png[image,width=560,height=80]
 
@@ -221,55 +243,41 @@ image:media/user-guide/image9.png[image,width=558,height=31]
 
 *Following are the list of operations with the connector:*
 
-* link:#create-document-renditions[*Create Document Renditions*]
-* link:#_Create_Documents[*Create Documents*]
-* link:#create-object-records[*Create Object Records*]
-* link:#_Delete_Document_Renditions[*Delete Document Renditions*]
-* link:#delete-documents[*Delete Documents*]
-* link:#delete-object-records[*Delete Object Records*]
-* link:#download-document[*Download Document*]
-* link:#export-documents[*Export Documents*]
-* link:#get-audit-details[*Get Audit Details*]
-* link:#get-document-renditions[*Get Document Renditions*]
+*Documents*
+
+* link:#create-documents[*Create Documents*]
 * link:#get-documents[*Get Documents*]
-* link:#get-object-records[*Get Object Records*]
-* link:#get-picklists[*Get Picklists*]
-* link:#query[*Query*]
-* link:#update-documents[*Update Documents*]
-* link:#update-object-records[*Update Object Records*]
+* {blank}
+* link:\l[*Delete Documents*]
+* link:\l[*Update Documents*]
+* link:\l[*Download Document*]
 
-==== Create Document Renditions:
+*link:\l[Export Documents]Document Renditions*
 
-*The Create Document Renditions operation allows to add document renditions in bulk. Your vault must be in Migration Mode before using this operation. It takes maximum CSV input data of size 1GB with value in standard UTF-8 encoded.*
+* {blank}
+* link:\l[*Create Document Renditions*]
+* link:\l[*Get Document Renditions*]
 
-*Configurations:*
+*link:\l[Delete Document Renditions]Vault Objects*
 
-*Connector Configuration:*
+* {blank}
+* link:\l[*Create Object Records*]
+* link:\l[*Get Object Records*]
+* link:\l[*Delete Object Records*]
 
-image:media/user-guide/image5.png[image,width=601,height=54]
+*link:\l[Update Object Records]VQL Query*
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+* {blank}
 
-*Operation Configuration:*
+*link:\l[Query]Picklists*
 
-image:media/user-guide/image10.png[image,width=601,height=90]
+* {blank}
 
-[cols=",",options="header",]
-|===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
-You can find following list of document metadata required in payload under Input tab of operation.
+*link:\l[Get Picklists]Audit*
 
-image:media/user-guide/image11.png[image,width=280,height=188]
+* {blank}
 
-|Output a|
-You can find following operation output or response under Output tab.
-
-image:media/user-guide/image12.png[image,width=283,height=202]
-
-|===
+link:\l[*Get Audit Details*]
 
 ==== Create Documents
 
@@ -295,18 +303,22 @@ image:media/user-guide/image10.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
-image:media/user-guide/image13.png[image,width=283,height=326]
+image:media/user-guide/image11.png[image,width=283,height=326]
 
 |Output a|
 You can find create documents operation output status or response from vault.
 
-image:media/user-guide/image14.png[image,width=297,height=213]
+image:media/user-guide/image12.png[image,width=297,height=213]
 
 |===
 
-==== Create Object Records
+==== Get Documents
 
-The Create Object Records operation allows to create bulk object records for selected vault object with provided object metadata in CSV or JSON format.
+The Get Documents operation allows to retrieve document details based on document type, subtype and classification selected. Using selected type, subtype and classification it fetches document properties metadata and builds VQL queries dynamically. The VQL query is then executed on Vault to retrieve document details. Place For-Each/Splitter element after this Operation to fetch each document data (page) sequentially.
+
+Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+
+The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (/api/\{version}/metadata/objects/documents/properties) and VQL Query is built and executed.
 
 *Configurations:*
 
@@ -318,56 +330,23 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image15.png[image,width=601,height=112]
+image:media/user-guide/image13.png[image,width=601,height=356]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to create records for selected object.
-|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
-You can find following list of object metadata required to create object records.
-
-image:media/user-guide/image17.png[image,width=283,height=330]
-
+|Fields |Description
+|Type (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
+|Subtype (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
+|Classification (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
+|Document Properties (Optional) |Insert document properties as per business requirement and these properties will be used to build a VQL query to execute on vault.
+|WHERE Clause |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g classification__v = ‘study_set_up_worksheet__c’*
+|Fetch Size |Provide number of records per page. Default is 100.
+|Batch Size |Provide number of pages per batch. Default is 10.
+|Input |N/A
 |Output a|
-You can find operation output or response retrieved from vault for an object records created.
+You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
 
-image:media/user-guide/image18.png[image,width=296,height=163]
-
-|===
-
-==== Delete Document Renditions
-
-The Delete Document Renditions operation allows to delete document renditions in bulk using CSV or JSON format input metadata.
-
-*Configurations:*
-
-*Connector Configuration:*
-
-image:media/user-guide/image5.png[image,width=601,height=54]
-
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
-
-*Operation Configuration:*
-
-image:media/user-guide/image19.png[image,width=601,height=90]
-
-[cols=",",options="header",]
-|===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
-|Input a|
-You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
-
-image:media/user-guide/image20.png[image,width=283,height=122]
-
-|Output a|
-You can find delete document renditions operation output status or response from vault.
-
-image:media/user-guide/image21.png[image,width=285,height=208]
+image:media/user-guide/image15.png[image,width=288,height=313]
 
 |===
 
@@ -385,7 +364,7 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image19.png[image,width=601,height=90]
+image:media/user-guide/image16.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
@@ -395,18 +374,18 @@ image:media/user-guide/image19.png[image,width=601,height=90]
 |Input a|
 You can find following list of document metadata required to delete document(s) on vault.
 
-image:media/user-guide/image22.png[image,width=301,height=55]
+image:media/user-guide/image17.png[image,width=301,height=55]
 
 |Output a|
 You can find delete documents operation output status or response from vault.
 
-image:media/user-guide/image23.png[image,width=300,height=147]
+image:media/user-guide/image18.png[image,width=300,height=147]
 
 |===
 
-==== Delete Object Records
+==== Update Documents
 
-The Delete Object Records operation allows to delete document single or multiple document(s) with bulk API using CSV or JSON format input metadata.
+The Update Documents operation allows to update bulk document(s) with provided editable metadata in payload either in CSV or JSON format.
 
 *Configurations:*
 
@@ -418,23 +397,22 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image15.png[image,width=601,height=112]
+image:media/user-guide/image19.png[image,width=601,height=95]
 
 [cols=",",options="header",]
 |===
 |Field |Description
-|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to delete object records for selected object.
 |Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|Document Metadata |Document Metadata payload with required editable metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
 |Input a|
-You can find following list of object metadata required to delete object records.
+You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
 
-image:media/user-guide/image24.png[image,width=300,height=70]
+image:media/user-guide/image20.png[image,width=286,height=343]
 
 |Output a|
-You can find operation output or response retrieved from vault for an object records deleted.
+You can find create documents operation output status or response from vault.
 
-image:media/user-guide/image25.png[image,width=303,height=110]
+image:media/user-guide/image21.png[image,width=303,height=148]
 
 |===
 
@@ -452,7 +430,7 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image26.png[image,width=536,height=160]
+image:media/user-guide/image22.png[image,width=536,height=160]
 
 [cols=",",options="header",]
 |===
@@ -532,7 +510,7 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image27.png[image,width=601,height=221]
+image:media/user-guide/image23.png[image,width=601,height=221]
 
 [cols=",",options="header",]
 |===
@@ -546,18 +524,18 @@ image:media/user-guide/image27.png[image,width=601,height=221]
 |Input a|
 You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
 
-image:media/user-guide/image28.png[image,width=297,height=90]
+image:media/user-guide/image24.png[image,width=297,height=90]
 
 |Output a|
 You can find export documents job status response under output tab.
 
-image:media/user-guide/image29.png[image,width=288,height=256]
+image:media/user-guide/image25.png[image,width=288,height=256]
 
 |===
 
-==== Get Audit Details
+==== Create Document Renditions:
 
-The Get Audit Detail operation allows to retrieve audit details for specified audit type.
+*The Create Document Renditions operation allows to add document renditions in bulk. Your vault must be in Migration Mode before using this operation. It takes maximum CSV input data of size 1GB with value in standard UTF-8 encoded.*
 
 *Configurations:*
 
@@ -569,21 +547,22 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image30.png[image,width=601,height=168]
+image:media/user-guide/image10.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
 |Field |Description
-|Audit Type |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
-|Start date |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|End date |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|Fetch Size |Provide number of records per page. Default is 100.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
-The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
+|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
+|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|Input a|
+You can find following list of document metadata required in payload under Input tab of operation.
 
-image:media/user-guide/image31.png[image,width=282,height=232]
+image:media/user-guide/image26.png[image,width=280,height=188]
+
+|Output a|
+You can find following operation output or response under Output tab.
+
+image:media/user-guide/image27.png[image,width=283,height=202]
 
 |===
 
@@ -601,7 +580,7 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image32.png[image,width=601,height=61]
+image:media/user-guide/image28.png[image,width=601,height=61]
 
 [cols=",",options="header",]
 |===
@@ -610,20 +589,18 @@ image:media/user-guide/image32.png[image,width=601,height=61]
 |Input a|
 You can see document Id required in payload under Input tab of operation to retrieve document renditions details
 
-image:media/user-guide/image33.png[image,width=293,height=38]
+image:media/user-guide/image29.png[image,width=293,height=38]
 
 |Output a|
 You can find following operation output or response under Output tab.
 
-image:media/user-guide/image34.png[image,width=300,height=145]
+image:media/user-guide/image30.png[image,width=300,height=145]
 
 |===
 
-==== Get Documents
+==== Delete Document Renditions
 
-The Get Documents operation allows to retrieve document details based on document type, subtype and classification selected. Using selected type, subtype and classification it fetches document properties metadata and built VQL query dynamically. The VQL query is then executed on vault to retrieve document details. Place For-Each/Splitter element after this Operation to fetch each document data (page) sequentially.
-
-*Note:* The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (/api/\{version}/metadata/objects/documents/properties) and VQL Query is built and executed.
+The Delete Document Renditions operation allows to delete document renditions in bulk using CSV or JSON format input metadata.
 
 *Configurations:*
 
@@ -635,23 +612,56 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image35.png[image,width=601,height=356]
+image:media/user-guide/image16.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
-|Fields |Description
-|Type (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
-|Subtype (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
-|Classification (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
-|Document Properties (Optional) |Insert document properties as per business requirement and these properties will be used to build a VQL query to execute on vault.
-|WHERE Clause |Insert WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g classification__v = ‘study_set_up_worksheet__c’*
-|Fetch Size |Provide number of records per page. Default is 100.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
-You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
+|Field |Description
+|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
+|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
+|Input a|
+You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
-image:media/user-guide/image36.png[image,width=288,height=313]
+image:media/user-guide/image31.png[image,width=283,height=122]
+
+|Output a|
+You can find delete document renditions operation output status or response from vault.
+
+image:media/user-guide/image32.png[image,width=285,height=208]
+
+|===
+
+==== Create Object Records
+
+The Create Object Records operation allows to create bulk object records for selected vault object with provided object metadata in CSV or JSON format.
+
+*Configurations:*
+
+*Connector Configuration:*
+
+image:media/user-guide/image5.png[image,width=601,height=54]
+
+*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+
+*Operation Configuration:*
+
+image:media/user-guide/image33.png[image,width=601,height=112]
+
+[cols=",",options="header",]
+|===
+|Field |Description
+|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to create records for selected object.
+|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
+|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|Input a|
+You can find following list of object metadata required to create object records.
+
+image:media/user-guide/image34.png[image,width=283,height=330]
+
+|Output a|
+You can find operation output or response retrieved from vault for an object records created.
+
+image:media/user-guide/image35.png[image,width=296,height=163]
 
 |===
 
@@ -659,6 +669,8 @@ image:media/user-guide/image36.png[image,width=288,height=313]
 
 The Get Object Records operation allows to retrieve object records detail using object metadata fields to build a VQL query dynamically and execute on vault to get Object details. Place For-Each/Splitter element after this Operation to fetch each object records (page) sequentially.
 
+Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+
 *Configurations:*
 
 *Connector Configuration:*
@@ -669,27 +681,27 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image37.png[image,width=601,height=297]
+image:media/user-guide/image36.png[image,width=601,height=297]
 
 [cols=",",options="header",]
 |===
 |Fields |Description
-|Vault Object |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
+|Vault Object |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
 |Object Fields (Optional) |Insert object fields as per business requirement and these fields will be used to build a VQL query to execute on vault.
-|WHERE Clause |Insert WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g study_country__v = ‘0SC000000000101’*
+|WHERE Clause |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g study_country__v = ‘0SC000000000101’*
 |Fetch Size |Provide number of records per page. Default is 100.
 |Batch Size |Provide number of pages per batch. Default is 10.
 |Input |N/A
 |Output a|
-You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail comes as output. Default would be list of all fields.
+You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail returns as output. Default would be list of all fields.
 
-image:media/user-guide/image38.png[image,width=282,height=306]
+image:media/user-guide/image37.png[image,width=282,height=306]
 
 |===
 
-==== Get Picklists
+==== Delete Object Records
 
-The Get Picklists operation allows to retrieve all available picklist values configured on a picklist.
+The Delete Object Records operation allows to delete document single or multiple document(s) with bulk API using CSV or JSON format input metadata.
 
 *Configurations:*
 
@@ -701,17 +713,57 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image39.png[image,width=601,height=60]
+image:media/user-guide/image33.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
 |Field |Description
-|Picklist Name (Optional) |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
-|Input |N/A
-|Output a|
-You can find picklist values with name and label as an output of Get Picklists operation.
+|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to delete object records for selected object.
+|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
+|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|Input a|
+You can find following list of object metadata required to delete object records.
 
-image:media/user-guide/image40.png[image,width=284,height=91]
+image:media/user-guide/image38.png[image,width=300,height=70]
+
+|Output a|
+You can find operation output or response retrieved from vault for an object records deleted.
+
+image:media/user-guide/image39.png[image,width=303,height=110]
+
+|===
+
+==== Update Object Records
+
+The Update Object Records operation allows to update object records of specified vault object.
+
+*Configurations:*
+
+*Connector Configuration:*
+
+image:media/user-guide/image5.png[image,width=601,height=54]
+
+*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+
+*Operation Configuration:*
+
+image:media/user-guide/image33.png[image,width=601,height=112]
+
+[cols=",",options="header",]
+|===
+|Field |Description
+|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
+|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
+|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|Input a|
+You can find following list of object metadata required to create object records.
+
+image:media/user-guide/image40.png[image,width=283,height=346]
+
+|Output a|
+You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
+
+image:media/user-guide/image41.png[image,width=281,height=112]
 
 |===
 
@@ -719,6 +771,8 @@ image:media/user-guide/image40.png[image,width=284,height=91]
 
 The Query Operation allows to execute specified VQL query on Vault and retrieve result in paginated data input stream. Place For-Each/Splitter after Query Operation to fetch each record in sequence order. Note - Do not specify LIMIT and OFFSET in VQL query. These parameters are incorporated internally.
 
+Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+
 *Configurations:*
 
 *Connector Configuration:*
@@ -729,13 +783,13 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image41.png[image,width=601,height=286]
+image:media/user-guide/image42.png[image,width=601,height=286]
 
 [cols=",",options="header",]
 |===
 |Field |Description
 |VQL Query a|
-Enter VQL Query to send it to Vault.
+Enter https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] query to send it to Vault.
 
 *Note -- Do not specify LIMIT and OFFSET in VQL query.*
 
@@ -758,7 +812,7 @@ Default parameter is *#[\{}].*
 |Output a|
 You can find the specified VQL query fields in output tab of operation. It returns specified VQL query result contains pagination data.
 
-image:media/user-guide/image42.png[image,width=305,height=145]
+image:media/user-guide/image43.png[image,width=305,height=145]
 
 |===
 
@@ -775,42 +829,9 @@ image:media/user-guide/image42.png[image,width=305,height=145]
 * *The query becomes immune to VQL injection attacks.*
 * *The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.*
 
-==== Update Documents
+==== Get Picklists
 
-The Update Documents operation allows to update bulk document(s) with provided editable metadata in payload either in CSV or JSON format.
-
-*Configurations:*
-
-*Connector Configuration:*
-
-image:media/user-guide/image5.png[image,width=601,height=54]
-
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
-
-*Operation Configuration:*
-
-image:media/user-guide/image43.png[image,width=601,height=95]
-
-[cols=",",options="header",]
-|===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required editable metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
-You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
-
-image:media/user-guide/image44.png[image,width=286,height=343]
-
-|Output a|
-You can find create documents operation output status or response from vault.
-
-image:media/user-guide/image45.png[image,width=303,height=148]
-
-|===
-
-==== Update Object Records
-
-The Update Object Records operation allows to update object records of specified vault object.
+The Get Picklists operation allows to retrieve all available picklist values configured on a picklist.
 
 *Configurations:*
 
@@ -822,43 +843,71 @@ image:media/user-guide/image5.png[image,width=601,height=54]
 
 *Operation Configuration:*
 
-image:media/user-guide/image15.png[image,width=601,height=112]
+image:media/user-guide/image44.png[image,width=601,height=60]
 
 [cols=",",options="header",]
 |===
 |Field |Description
-|Object Name |Click on icon image:media/user-guide/image16.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
-|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
-You can find following list of object metadata required to create object records.
-
-image:media/user-guide/image46.png[image,width=283,height=346]
-
+|Picklist Name (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
+|Input |N/A
 |Output a|
-You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
+You can find picklist values with name and label as an output of Get Picklists operation.
 
-image:media/user-guide/image47.png[image,width=281,height=112]
+image:media/user-guide/image45.png[image,width=284,height=91]
+
+|===
+
+==== Get Audit Details
+
+The Get Audit Detail operation allows to retrieve audit details for specified audit type.
+
+Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+
+*Configurations:*
+
+*Connector Configuration:*
+
+image:media/user-guide/image5.png[image,width=601,height=54]
+
+*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+
+*Operation Configuration:*
+
+image:media/user-guide/image46.png[image,width=601,height=168]
+
+[cols=",",options="header",]
+|===
+|Field |Description
+|Audit Type |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
+|Start date |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|End date |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|Fetch Size |Provide number of records per page. Default is 100.
+|Batch Size |Provide number of pages per batch. Default is 10.
+|Input |N/A
+|Output a|
+The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
+
+image:media/user-guide/image47.png[image,width=282,height=232]
 
 |===
 
 === Streaming and Pagination
 
-All the operations (except Download Document) in connector returns an InputStream as payload with respective results based on operation output. Because of an InputStream is returned as payload the Mule by default applies Streaming Strategies, please refer to https://docs.mulesoft.com/mule-runtime/4.2/streaming-about[Mule Streaming Strategies] in more details. You can find streaming strategies configuration in *Advanced* tab of connector operations.
+All the operations (except Download Document) in connector returns an InputStream as payload with respective results based on operation output. Because of an InputStream is returned as payload Mule by default applies Streaming Strategies, please refer to https://docs.mulesoft.com/mule-runtime/4.2/streaming-about[Mule Streaming Strategies] in more details. You can find streaming strategies configuration in *Advanced* tab of connector operations.
 
 image:media/user-guide/image48.png[image,width=601,height=124]
 
 The following operations in connector provides pagination mechanism based on Mule standard pagination.
 
-* link:#get-audit-details[Get Audit Details]
 * link:#get-documents[Get Documents]
 * link:#get-object-records[Get Object Records]
 * link:#query[Query]
+* link:#get-audit-details[Get Audit Details]
 
 While using these above paginated operations make sure to place For-Each/Splitter to retrieve each object (metadata’s in JSON format) at a time. The pagination operations have fields – *Fetch Size and Batch Size.*
 
 * *Fetch Size:* The Fetch Size is a limit number of records that can be retrieve in a page. The operation would return the pages with fetch size number of JSON object records. Note, in some cases, Veeva API’s auto-calculate fetch size (number of records on each page) based on record size accumulated exceed the standard record size. The operation will return calculated records on each page.
-* *Batch Size:* The Batch Size is number of pages it would return in each batch and each page will have fetch size number of records. The operation would return number of records (metadata’s in JSON format) per batch is calculated as below **E.**g:
+* *Batch Size:* The Batch Size is number of pages it would return in each batch and each page will have fetch size number of records. The operation would return number of records (metadata’s in JSON format) per batch is calculated as below, *e.g*.:
 +
 Fetch Size set as *1000*
 +
@@ -894,26 +943,27 @@ In non-repeatable stream connector operation would returns stream as number of r
 
 The demo project we provide can be a starting point for your MuleSoft project. The demo project contains sample flows for these operations:
 
-[cols=",",options="header",]
+[cols=",,,",options="header",]
 |===
-|Operations |Description
-|link:#create-document-renditions-example[Create Document Renditions] |Create Document Renditions operation creates document renditions on vault. Use this option when you want to create document renditions with document metadata received from external source. The document renditions created status is written into file system. However, you can store into any other entities like – Database, Trigger to external source etc.
-|link:#create-documents-example[Create Documents] |Create Document operation creates document(s) on vault. Use this option when you want to create documents in bulk with document metadata received from external source. The documents created status is inserted into – Database. However, you can trigger to external source etc.
-|link:#create-object-records-example[Create Object Records] |Create Object Records operation creates object records of specified object in vault. Use this option when you want to create object records in bulk using object metadata received from external source. The object records created status is inserted into – Database. However, you can trigger to external source etc.
-|link:#update-documents-example[Update Documents] |Update Document operation update document(s) on vault. Use this option when you want to update documents in bulk with editable document metadata received from external source. The documents updates status is stored into file system. However, you can trigger to external source etc.
-|link:#update-object-records-example[Update Object Records] |Update Object Records operation updates object records of specified object in vault. Use this option when you want to update object records in bulk using object metadata received from external source. The object records updated status is stored into file system. However, you can trigger to external source etc.
-|link:#delete-documents-example[Delete Documents] |Delete Documents operation deletes documents from vault. Use this option when you want to delete documents in bulk using document Id received from external source. The documents deleted status is stored into file system. However, you can trigger/insert to external source.
-|link:#get-documents-example[Get Documents] |Get Documents operations retrieves document details. Use this option when you want to retrieve document details based on type, subtype, classification document properties and VQL query. The document details retrieved in pagination and in order to fetch each record a For-Each element is added which will transform insert records into database. However, you can trigger to external source etc.
-|link:#get-object-records-example[Get Object Records] |Get Object Records operation retrieves object details. Use this option when you want to retrieve object details based on object name. The object details retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and insert records into database. However, you can trigger to external source etc.
-|link:#query-example[Query] |Query operation to execute VQL query on vault. Use this option when you want to retrieve document, object and workflow details using VQL query. The VQL query response retrieved in pagination and inorder to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. For more details on VQL please refer Veeva site ( https://developer.veevavault.com/vql/#introduction-to-vault-queries)
-|link:#get-audit-details-example[Get Audit Details] |Get Audit Details operation retrieve audit details of specified audit type. Use this option when you want to retrieve audit details of an audit type. The Audit details response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc.
+|*Operations* |*Description* |*Use Case Template* |*Sample Code*
+|Create Documents |Create Document operation creates document(s) on vault. Use this option when you want to create documents in bulk with document metadata received from external source. The documents created status is inserted into – Database. However, you can trigger to external source etc. |FileSystem to VeevaVault |link:#create-documents-example[Create Documents]
+|Get Documents |Get Documents operations retrieves document details. Use this option when you want to retrieve document details based on type, subtype, classification document properties and VQL query. The document details retrieved in pagination and in order to fetch each record a For-Each element is added which will transform insert records into database. However, you can trigger to external source etc. |VeevaVault to FileSystem |link:#get-documents-example[Get Documents]
+|Delete Documents |Delete Documents operation deletes documents from vault. Use this option when you want to delete documents in bulk using document Id received from external source. The documents deleted status is stored into file system. However, you can trigger/insert to external source. | |link:#delete-documents-example[Delete Documents]
+|Update Documents |Update Document operation update document(s) on vault. Use this option when you want to update documents in bulk with editable document metadata received from external source. The documents updates status is stored into file system. However, you can trigger to external source etc. | |link:#update-documents-example[Update Documents]
+|Create Document Renditions |Create Document Renditions operation creates document renditions on vault. Use this option when you want to create document renditions with document metadata received from external source. The document renditions created status is written into file system. However, you can store into any other entities like – Database, Trigger to external source etc. | |link:#create-document-renditions-example[Create Document Renditions]
+|Get Document Renditions |Get Document Renditions operation retrieves renditions details of particular document. | |link:#_Get_Document_Renditions_2[Get Document Renditions]
+|Create Object Records |Create Object Records operation creates object records of specified object in vault. Use this option when you want to create object records in bulk using object metadata received from external source. The object records created status is inserted into – Database. However, you can trigger to external source etc. |FileSystem to VeevaVault |link:#create-object-records-example[Create Object Records]
+|Get Object Records |Get Object Records operation retrieves object details. Use this option when you want to retrieve object details based on object name. The object details retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and insert records into database. However, you can trigger to external source etc. |VeevaVault to FileSystem |link:#_Get_Object_Records_3[Get Object Records]
+|Update Object Records |Update Object Records operation updates object records of specified object in vault. Use this option when you want to update object records in bulk using object metadata received from external source. The object records updated status is stored into file system. However, you can trigger to external source etc. | |link:#update-object-records-example[Update Object Records]
+|Query |Query operation to execute VQL query on vault. Use this option when you want to retrieve document, object and workflow details using VQL query. The VQL query response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. For more details on VQL please refer Veeva https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]. | |link:#_Query_Example[Query]
+|Get Audit Details |Get Audit Details operation retrieve audit details of specified audit type. Use this option when you want to retrieve audit details of an audit type. The Audit details response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. | |link:#get-audit-details-example[Get Audit Details]
 |===
 
 *To use the demo project:*
 
 * You must know about basic concept of Veeva Vault.
-* You must know about Veeva VQL query (https://developer.veevavault.com/vql/#introduction-to-vault-queries)
-* You must know Mule concepts, flow Anypoint Studio and connectors – HTTP, Database, File. Refer to MuleSoft Documentation (https://docs.mulesoft.com/general/)
+* You must know about Veeva https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]
+* You must know Mule concepts, flow, Anypoint Studio and connectors – HTTP, Database, File. Refer to https://docs.mulesoft.com/connectors/[MuleSoft Documentation]
 * You must have access to Veeva Vault instance for connector configurations:
 
 * *Username*
@@ -923,58 +973,6 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 * *Vault Client Id (This is custom Id in format - \{company}-\{organization}-\{server}-\{component})*
 
 * You must know about https://docs.mulesoft.com/studio/7.3/[Anypoint Studio] on how to create Mule projects.
-
-==== Create Document Renditions Example
-
-To create Mule flow, follow these instructions:
-
-* Drag and drop HTTP Listener from Mule palette to project canvas.
-* Configure HTTP Listener as per your environment.
-* Drag Transform Message component to transform document renditions metadata in CSV format and configure with mapping.
-* Drag Create Document Renditions operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
-* Select CSV from Metadata format drop down list.
-* Drag Logger element to log information in console or log file.
-
-image:media/user-guide/image49.png[image,width=469,height=246]
-
-*Example XML Code:*
-
-<flow name=__"create-document-renditions-operationFlow"__ doc:id=__"7822e654-0dc5-4a4e-9140-ad72b0a76107"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"3ecffd1a-296a-4114-ab06-ee8ebcb126ae"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-document-renditions"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"4be516bc-20da-4445-8463-a530a7605d0d"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true
-
----
-
-payload]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:create-document-renditions doc:name=__"Create Document Renditions"__ doc:id=__"3f35bbe9-0d5b-4dd2-99e9-3094a0da352b"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c370c08d-afc4-461e-9b39-d998d48549f2"__ message=__"Document Renditions Created :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"d261e967-dcfc-425b-99fb-79210c6ceb24"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"f7669bc0-17f0-484d-9278-f3d7e16a578d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
 
 ==== Create Documents Example
 
@@ -987,16 +985,16 @@ To create Mule flow, follow these instructions:
 * Drag Flow Reference element to reference Sub Flow – upload-files-on-vault-ftp-server.
 * Drag Transform Message component to transform document metadata in CSV format.
 * Drag Create Documents operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
+* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
 * Drag Database Bulk Insert operation to insert document created status data into table
 * Drag Logger element to log information in console or log file.
 * Create Sub-Flow with Logger to log information.
 * For-Each element containing Read file operation and FTPS Write operation to write file on vault FTP server.
 * Configure FTPS connector configuration with vault FTP server credentials details
 
-image:media/user-guide/image50.png[image,width=601,height=193]
+image:media/user-guide/image49.png[image,width=601,height=193]
 
-image:media/user-guide/image51.png[image,width=578,height=135]
+image:media/user-guide/image50.png[image,width=578,height=135]
 
 *Example XML code:*
 
@@ -1104,298 +1102,6 @@ payload.data map () -> \{
 
 </sub-flow>
 
-==== Create Object Records Example
-
-To create Mule flow, follow these instructions:
-
-* Drag and drop HTTP Listener from Mule palette to project canvas.
-* Configure HTTP Listener as per your environment.
-* Drag Transform Message component to transform object metadata in CSV format with mapping.
-* Drag Create Object Records operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
-* Select Object Name from Object Name drop down list (Click refresh button to retrieve object name list).
-* Select CSV from Metadata format drop down list.
-* Drag Database Bulk Insert operation to insert document created status data into table. Make sure insert query is defined as per your requirement.
-* Configure Database connector configuration with credentials details.
-* Drag Set Payload element to set payload that will be return to triggering source.
-* Logger to log information in console or log file.
-
-image:media/user-guide/image52.png[image,width=601,height=222]
-
-*Example XML Code:*
-
-<flow name=__"create-object-records-operationFlow"__ doc:id=__"76d86207-916a-4be2-8928-fdd6c717c346"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"2b5b8ff3-491c-4573-96db-a3b0326f667b"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-object-records"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"df08cf9f-3ab4-4f23-97e4-a2726ff78e03"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-name__v: payload01.name__v,
-
-location__v: payload01.location__v,
-
-external_id__v: (payload01.external_id__v default "") ++ "|"++ payload01.name__v,
-
-study_country__v: payload01.study_country__v,
-
-principal_investigator__v: payload01.principal_investigator__v,
-
-actual_siv__v: payload01.actual_siv__v as Date,
-
-site_selected_date__v: payload01.site_selected_date__v as Date
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:create-object-records doc:name=__"Create Object Records"__ doc:id=__"75b80a1e-0338-4f9e-b9e5-81c944381ddb"__ metadataFormat=__"CSV"__ objectName=__"site__v"__ target=__"objectStatus"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"14110393-ec5e-4d69-b9e0-3b52b039da35"__ config-ref=__"Database_Config"__>
-
-<db:bulk-input-parameters ><![CDATA[#[output application/java
-
----
-
-vars.objectStatus.data map () -> \{
-
-'id': $.data.id,
-
-'url': $.data.url,
-
-'responseStatus': $.responseStatus
-
-}]]]></db:bulk-input-parameters>
-
-<db:sql >INSERT INTO [.underline]#deletesiteobject# (id, [.underline]#url#, responseStatus) VALUES (:id, :[.underline]#url#, :responseStatus)</db:sql>
-
-</db:bulk-insert>
-
-<set-payload value=__"#[vars.objectStatus]"__ doc:name=__"Set Payload"__ doc:id=__"e883c1b5-6790-43ba-9d7e-b058793c4a4b"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"b4816f4f-f199-43ee-b00b-c9b389d4343a"__ message=__"Flow completed with object records created :: #[vars.objectStatus]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"e681ed06-c458-42ef-bf24-217a42c85866"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"a47171c6-6b6e-47e5-97cd-8a7d0695410d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
-
-==== Update Documents Example
-
-To create Mule flow, follow these instructions:
-
-* Drag and drop HTTP Listener from Mule palette to project canvas.
-* Configure HTTP Listener as per your environment.
-* Drag Transform Message component to transform document metadata in CSV format and configure with mapping.
-* Drag Update Documents operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
-* Select CSV from Metadata format drop down list.
-* Drag Logger element to log information in console or log file.
-
-image:media/user-guide/image53.png[image,width=481,height=256]
-
-*Example XML Code:*
-
-<flow name=__"update-documents-operationFlow"__ doc:id=__"9745bc16-f9f4-45c4-8ead-0e05a5d1d798"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"f0bc92a7-8c86-41ce-bcb2-d727290a0216"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-documents"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"125f4490-bce5-4379-ac49-6bc680309e20"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id,
-
-notes__v: (payload01.notes__v default "") ++ payload01.product__v,
-
-name__v: payload01.name__v,
-
-product__v: payload01.product__v
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:update-documents metadataFormat=__"CSV"__ doc:name=__"Update Documents"__ doc:id=__"8a13cdda-6ec8-47a9-9117-44a0584ed4d1"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4bc22f37-365f-4f8a-a4a0-6ecf6f939a45"__ message=__"Document Updated :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4b13626b-2dc7-4bcc-a79f-b1ed523a540c"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"bee5def9-acb2-4d83-96ab-e20c60018182"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
-
-==== Update Object Records Example
-
-To create Mule flow, follow these instructions:
-
-* Drag and drop HTTP Listener from Mule palette to project canvas.
-* Configure HTTP Listener as per your environment.
-* Drag Transform Message component to transform object metadata in CSV format and configure with mapping.
-* Drag Update Object Records operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
-* Select Object Name from Object Name drop down list (Click refresh button to retrieve object name list).
-* Select CSV from Metadata format drop down list.
-* Drag Logger element to log information in console or log file.
-
-image:media/user-guide/image54.png[image,width=482,height=256]
-
-*Example XML Code:*
-
-<flow name=__"update-object-records-operationFlow"__ doc:id=__"a51bda88-f358-40ad-9986-8e6aea559e3c"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"cc2fb1da-1f14-4cef-91af-12ea9a7e1beb"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-object-records"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"90ec9543-b70d-485d-b510-802c21d45ff5"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id,
-
-name__v: payload01.name__v,
-
-location__v: payload01.location__v,
-
-external_id__v: payload01.external_id__v,
-
-study_country__v: payload01.study_country__v,
-
-principal_investigator__v: payload01.principal_investigator__v,
-
-actual_siv__v: payload01.actual_siv__v as Date,
-
-site_selected_date__v: payload01.site_selected_date__v as Date
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:update-object-records doc:name=__"Update Object Records"__ doc:id=__"5a16fb75-f150-44c9-bf33-3a25878cf197"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__ objectName=__"site__v"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"507ee77d-7f6c-429d-81ae-17359bb3afc1"__ message=__"Vault Object Updated :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"68925d3d-4e42-4662-84ed-c9ba581e333b"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"d0ea5c85-c456-4ab9-89c7-7da2a51c929b"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
-
-==== Delete Documents Example
-
-To create Mule flow, follow these instructions:
-
-* Drag and drop HTTP Listener from Mule palette to project canvas.
-* Configure HTTP Listener as per your environment.
-* Drag Database Select operation to fetch document Ids from table.
-* Configure Database connector configuration with credentials details.
-* Drag Transform Message component to transform document Ids in CSV format.
-* Drag Delete Documents operation from Veeva Vault Connector palette.
-* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
-* Drag Logger element to log information in console or log file.
-
-image:media/user-guide/image55.png[image,width=582,height=255]
-
-*Example XML Code:*
-
-<flow name=__"delete-documents-operationsFlow"__ doc:id=__"21f3d675-909f-43f9-a778-0a4ffa0691de"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"4a0c72cc-d442-4c0f-b254-b1eaae48729e"__ config-ref=__"HTTP_Listener_config"__ path=__"/delete-documents"__/>
-
-<db:select doc:name=__"Select"__ doc:id=__"060ea275-765b-49c2-b243-c96238cc1a85"__ config-ref=__"Database_Config"__>
-
-<db:sql >select id from [.underline]#deletedocuments#</db:sql>
-
-</db:select>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"8d1e28bb-2f6a-4835-9a68-bb5abf7e3ffc"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id as String
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:delete-documents metadataFormat=__"CSV"__ doc:name=__"Delete Documents"__ doc:id=__"4dde94f1-c0d5-4ea2-8f64-fc95642b823d"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"66db562e-80c1-4db6-993e-addb3f013613"__ message=__"Document Deleted :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4dc356f1-5618-429e-9fc2-8a6eaee96798"__ type=__"ANY"__ >
-
-<set-payload value=__"#[payload]"__ doc:name=__"Set Payload"__ doc:id=__"c9e6b85c-bb64-4de4-827c-02449a9f7566"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c7ed420f-2acc-438a-85f7-01a6505cbb0d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
-
 ==== Get Documents Example
 
 To create Mule flow, follow these instructions:
@@ -1414,7 +1120,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image56.png[image,width=598,height=245]
+image:media/user-guide/image51.png[image,width=598,height=245]
 
 *Example XML code:*
 
@@ -1515,6 +1221,324 @@ output application/json
 <on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"Error Propagate"__ doc:id=__"a7ac2cf2-ec74-408b-8a02-ee1a0d24e8f4"__ type=__"ANY"__ >
 
 <logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"2b932042-57f3-45d8-9e6b-3cd9fcda6509"__ message=__"Flow Exception Handled -- #[payload]"__ />
+
+</on-error-propagate>
+
+</error-handler>
+
+</flow>
+
+==== Delete Documents Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Database Select operation to fetch document Ids from table.
+* Configure Database connector configuration with credentials details.
+* Drag Transform Message component to transform document Ids in CSV format.
+* Drag Delete Documents operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
+* Drag Logger element to log information in console or log file.
+
+image:media/user-guide/image52.png[image,width=582,height=255]
+
+*Example XML Code:*
+
+<flow name=__"delete-documents-operationsFlow"__ doc:id=__"21f3d675-909f-43f9-a778-0a4ffa0691de"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"4a0c72cc-d442-4c0f-b254-b1eaae48729e"__ config-ref=__"HTTP_Listener_config"__ path=__"/delete-documents"__/>
+
+<db:select doc:name=__"Select"__ doc:id=__"060ea275-765b-49c2-b243-c96238cc1a85"__ config-ref=__"Database_Config"__>
+
+<db:sql >select id from [.underline]#deletedocuments#</db:sql>
+
+</db:select>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"8d1e28bb-2f6a-4835-9a68-bb5abf7e3ffc"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/csv headerLineNumber = 0 , header = true , separator = ","
+
+---
+
+payload map ( payload01 , indexOfPayload01 ) -> \{
+
+id: payload01.id as String
+
+}]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:delete-documents metadataFormat=__"CSV"__ doc:name=__"Delete Documents"__ doc:id=__"4dde94f1-c0d5-4ea2-8f64-fc95642b823d"__ config-ref=__"Veeva_Vault_Config"__/>
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"66db562e-80c1-4db6-993e-addb3f013613"__ message=__"Document Deleted :: #[payload]"__/>
+
+<error-handler >
+
+<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4dc356f1-5618-429e-9fc2-8a6eaee96798"__ type=__"ANY"__ >
+
+<set-payload value=__"#[payload]"__ doc:name=__"Set Payload"__ doc:id=__"c9e6b85c-bb64-4de4-827c-02449a9f7566"__ />
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c7ed420f-2acc-438a-85f7-01a6505cbb0d"__ message=__"Flow Exception Handled -- #[payload]"__ />
+
+</on-error-propagate>
+
+</error-handler>
+
+</flow>
+
+==== Update Documents Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Transform Message component to transform document metadata in CSV format and configure with mapping.
+* Drag Update Documents operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
+* Select CSV from Metadata format drop down list.
+* Drag Logger element to log information in console or log file.
+
+image:media/user-guide/image53.png[image,width=481,height=256]
+
+*Example XML Code:*
+
+<flow name=__"update-documents-operationFlow"__ doc:id=__"9745bc16-f9f4-45c4-8ead-0e05a5d1d798"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"f0bc92a7-8c86-41ce-bcb2-d727290a0216"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-documents"__/>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"125f4490-bce5-4379-ac49-6bc680309e20"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/csv headerLineNumber = 0 , header = true , separator = ","
+
+---
+
+payload map ( payload01 , indexOfPayload01 ) -> \{
+
+id: payload01.id,
+
+notes__v: (payload01.notes__v default "") ++ payload01.product__v,
+
+name__v: payload01.name__v,
+
+product__v: payload01.product__v
+
+}]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:update-documents metadataFormat=__"CSV"__ doc:name=__"Update Documents"__ doc:id=__"8a13cdda-6ec8-47a9-9117-44a0584ed4d1"__ config-ref=__"Veeva_Vault_Config"__/>
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4bc22f37-365f-4f8a-a4a0-6ecf6f939a45"__ message=__"Document Updated :: #[payload]"__/>
+
+<error-handler >
+
+<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4b13626b-2dc7-4bcc-a79f-b1ed523a540c"__ type=__"ANY"__ >
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"bee5def9-acb2-4d83-96ab-e20c60018182"__ message=__"Flow Exception Handled -- #[payload]"__ />
+
+</on-error-propagate>
+
+</error-handler>
+
+</flow>
+
+==== Create Document Renditions Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Transform Message component to transform document renditions metadata in CSV format and configure with mapping.
+* Drag Create Document Renditions operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
+* Select CSV from Metadata format drop down list.
+* Drag Logger element to log information in console or log file.
+
+image:media/user-guide/image54.png[image,width=469,height=246]
+
+*Example XML Code:*
+
+<flow name=__"create-document-renditions-operationFlow"__ doc:id=__"7822e654-0dc5-4a4e-9140-ad72b0a76107"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"3ecffd1a-296a-4114-ab06-ee8ebcb126ae"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-document-renditions"__/>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"4be516bc-20da-4445-8463-a530a7605d0d"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/csv headerLineNumber = 0 , header = true
+
+---
+
+payload]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:create-document-renditions doc:name=__"Create Document Renditions"__ doc:id=__"3f35bbe9-0d5b-4dd2-99e9-3094a0da352b"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__/>
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c370c08d-afc4-461e-9b39-d998d48549f2"__ message=__"Document Renditions Created :: #[payload]"__/>
+
+<error-handler >
+
+<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"d261e967-dcfc-425b-99fb-79210c6ceb24"__ type=__"ANY"__ >
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"f7669bc0-17f0-484d-9278-f3d7e16a578d"__ message=__"Flow Exception Handled -- #[payload]"__ />
+
+</on-error-propagate>
+
+</error-handler>
+
+</flow>
+
+==== Get Document Renditions Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Transform Message component to transform document metadata in CSV format and configure with mapping.
+* Drag Get Document Renditions operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
+* Drag Logger element to log information in console or log file.
+
+image:media/user-guide/image55.png[image,width=483,height=254]
+
+*Example XML Code*
+
+<flow name=__"get-document-renditions-operationFlow"__ doc:id=__"d8ccb25d-f10c-43b9-b027-801b5b01041e"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"6a0cd76c-ea9f-4256-b539-db72d8c56325"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-document-renditions"__/>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"b252487e-0400-4247-8c4d-e9f33301d08c"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/json
+
+---
+
+\{
+
+documentId: '127792'
+
+}]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:get-document-renditions doc:name=__"Get Document Renditions"__ doc:id=__"fc181bfe-dc80-474f-9841-f3fec446d4c0"__ config-ref=__"Veeva_Vault_Config"__/>
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"21e525f2-818e-4b3e-8ee8-2f894bb47730"__ message=__"Document Rendtions Retrieved :: #[payload]"__/>
+
+</flow>
+
+==== Create Object Records Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Transform Message component to transform object metadata in CSV format with mapping.
+* Drag Create Object Records operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
+* Select Object Name from Object Name drop down list (Click refresh button to retrieve object name list).
+* Select CSV from Metadata format drop down list.
+* Drag Database Bulk Insert operation to insert document created status data into table. Make sure insert query is defined as per your requirement.
+* Configure Database connector configuration with credentials details.
+* Drag Set Payload element to set payload that will be return to triggering source.
+* Logger to log information in console or log file.
+
+image:media/user-guide/image56.png[image,width=601,height=222]
+
+*Example XML Code:*
+
+<flow name=__"create-object-records-operationFlow"__ doc:id=__"76d86207-916a-4be2-8928-fdd6c717c346"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"2b5b8ff3-491c-4573-96db-a3b0326f667b"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-object-records"__/>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"df08cf9f-3ab4-4f23-97e4-a2726ff78e03"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/csv headerLineNumber = 0 , header = true , separator = ","
+
+---
+
+payload map ( payload01 , indexOfPayload01 ) -> \{
+
+name__v: payload01.name__v,
+
+location__v: payload01.location__v,
+
+external_id__v: (payload01.external_id__v default "") ++ "|"++ payload01.name__v,
+
+study_country__v: payload01.study_country__v,
+
+principal_investigator__v: payload01.principal_investigator__v,
+
+actual_siv__v: payload01.actual_siv__v as Date,
+
+site_selected_date__v: payload01.site_selected_date__v as Date
+
+}]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:create-object-records doc:name=__"Create Object Records"__ doc:id=__"75b80a1e-0338-4f9e-b9e5-81c944381ddb"__ metadataFormat=__"CSV"__ objectName=__"site__v"__ target=__"objectStatus"__ config-ref=__"Veeva_Vault_Config"__/>
+
+<db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"14110393-ec5e-4d69-b9e0-3b52b039da35"__ config-ref=__"Database_Config"__>
+
+<db:bulk-input-parameters ><![CDATA[#[output application/java
+
+---
+
+vars.objectStatus.data map () -> \{
+
+'id': $.data.id,
+
+'url': $.data.url,
+
+'responseStatus': $.responseStatus
+
+}]]]></db:bulk-input-parameters>
+
+<db:sql >INSERT INTO [.underline]#deletesiteobject# (id, [.underline]#url#, responseStatus) VALUES (:id, :[.underline]#url#, :responseStatus)</db:sql>
+
+</db:bulk-insert>
+
+<set-payload value=__"#[vars.objectStatus]"__ doc:name=__"Set Payload"__ doc:id=__"e883c1b5-6790-43ba-9d7e-b058793c4a4b"__ />
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"b4816f4f-f199-43ee-b00b-c9b389d4343a"__ message=__"Flow completed with object records created :: #[vars.objectStatus]"__/>
+
+<error-handler >
+
+<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"e681ed06-c458-42ef-bf24-217a42c85866"__ type=__"ANY"__ >
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"a47171c6-6b6e-47e5-97cd-8a7d0695410d"__ message=__"Flow Exception Handled -- #[payload]"__ />
 
 </on-error-propagate>
 
@@ -1625,6 +1649,77 @@ site_selected_date__v, principal_investigator__v) VALUES (:name__v, :location__v
 
 </flow>
 
+==== Update Object Records Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* Configure HTTP Listener as per your environment.
+* Drag Transform Message component to transform object metadata in CSV format and configure with mapping.
+* Drag Update Object Records operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault url, vault version, vault client Id.
+* Select Object Name from Object Name drop down list (Click refresh button to retrieve object name list).
+* Select CSV from Metadata format drop down list.
+* Drag Logger element to log information in console or log file.
+
+image:media/user-guide/image58.png[image,width=482,height=256]
+
+*Example XML Code:*
+
+<flow name=__"update-object-records-operationFlow"__ doc:id=__"a51bda88-f358-40ad-9986-8e6aea559e3c"__ >
+
+<http:listener doc:name=__"Listener"__ doc:id=__"cc2fb1da-1f14-4cef-91af-12ea9a7e1beb"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-object-records"__/>
+
+<ee:transform doc:name=__"Transform Message"__ doc:id=__"90ec9543-b70d-485d-b510-802c21d45ff5"__ >
+
+<ee:message >
+
+<ee:set-payload ><![CDATA[%dw 2.0
+
+output application/csv headerLineNumber = 0 , header = true , separator = ","
+
+---
+
+payload map ( payload01 , indexOfPayload01 ) -> \{
+
+id: payload01.id,
+
+name__v: payload01.name__v,
+
+location__v: payload01.location__v,
+
+external_id__v: payload01.external_id__v,
+
+study_country__v: payload01.study_country__v,
+
+principal_investigator__v: payload01.principal_investigator__v,
+
+actual_siv__v: payload01.actual_siv__v as Date,
+
+site_selected_date__v: payload01.site_selected_date__v as Date
+
+}]]></ee:set-payload>
+
+</ee:message>
+
+</ee:transform>
+
+<veevavault:update-object-records doc:name=__"Update Object Records"__ doc:id=__"5a16fb75-f150-44c9-bf33-3a25878cf197"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__ objectName=__"site__v"__/>
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"507ee77d-7f6c-429d-81ae-17359bb3afc1"__ message=__"Vault Object Updated :: #[payload]"__/>
+
+<error-handler >
+
+<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"68925d3d-4e42-4662-84ed-c9ba581e333b"__ type=__"ANY"__ >
+
+<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"d0ea5c85-c456-4ab9-89c7-7da2a51c929b"__ message=__"Flow Exception Handled -- #[payload]"__ />
+
+</on-error-propagate>
+
+</error-handler>
+
+</flow>
+
 ==== Query Example
 
 To create Mule flow, follow these instructions:
@@ -1642,7 +1737,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image58.png[image,width=601,height=252]
+image:media/user-guide/image59.png[image,width=601,height=252]
 
 *Example XML Code:*
 
@@ -1725,7 +1820,7 @@ To create Mule flow, follow these instructions:
 * Drag Set Payload element after For-Each to set payload that can be returned to triggered source.
 * Drag Logger element to log information in console or log file.
 
-image:media/user-guide/image59.png[image,width=601,height=242]
+image:media/user-guide/image60.png[image,width=601,height=242]
 
 *Example XML Code:*
 

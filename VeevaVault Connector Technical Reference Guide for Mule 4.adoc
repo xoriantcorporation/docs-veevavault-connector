@@ -1,6 +1,10 @@
-*Veeva Vault Connector Technical Reference Document for Mule 4*
+*Veeva Vault Connector*
 
-*1.0.2*
+*Technical Reference Document*
+
+*for Mule 4*
+
+*1.0.3*
 
 *June 2019*
 
@@ -27,7 +31,7 @@
 |Vault URL |String |The URL of the Veeva Vault instance required for connection | |X
 |Username |String |Username used to initialize the session | |X
 |Password |String |Password used to authenticate the user | |X
-|Version |String |Veeva Vault API version |v18.2 |
+|Version |String |Veeva Vault API version |v19.1 |
 |Client Id |String |The Client Id that need to send with each request header to Vault instance in format - \{company}-\{organization}-\{server}-\{component}. E.g veeva-clinical-mulesoft-connector | |X
 |===
 
@@ -36,7 +40,7 @@
 [cols=",,,,",options="header",]
 |===
 |*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Response Timeout |Integer |Maximum time in milliseconds that the connector will wait for the [.underline]#Veeva# Vault response. If time elapse will throw Response Timeout Exception. |10000 ms |X
+|Response Timeout |Integer |Maximum time in milliseconds that the connector will wait for the [.underline]#Veeva# Vault response. If time elapse will throw Response Timeout Exception. |30000 ms |X
 |===
 
 *Burst API Limit Profile (Advanced Tab)*

@@ -1,6 +1,10 @@
-*Veeva Vault Connector Release Notes for Mule 4*
+*Veeva Vault Connector*
 
-*1.0.2*
+*Release Notes*
+
+*for Mule 4*
+
+*1.0.3*
 
 *June 2019*
 
@@ -8,7 +12,7 @@ Veeva Vault connector connects Vault instances to integrate Vault data with othe
 
 This is New Release
 
-Version 1.0.2
+Version 1.0.3
 
 Compatibility
 
@@ -29,7 +33,7 @@ Third Party Libraries:
 Features
 
 * The Veeva Vault Connector includes Basic Authentication using Username and Password at connector configuration level.
-* At connector configuration level it also provides an option to configure response timeout, Burst API Limit Exceed profile and Daily API Limit Exceed profile – to configure API Limit Threshold, API Wait Time and Time Unit, by default its disable.
+* At connector configuration level it also provides an option to configure response timeout, Burst API Limit Exceed profile and Daily API Limit Exceed profile – to configure API Limit Threshold, API Wait Time and Time Unit, by default it enable.
 * The Veeva Vault Connector includes following operations to create, update, delete, retrieve vault documents, document renditions, objects. It also retrieves picklists and audit details, executes VQL query to extract document, object and workflows data from vault.
 
 * Create Document Renditions – The Create Document Renditions operation *allows to add document renditions in bulk with provided document metadata.*
