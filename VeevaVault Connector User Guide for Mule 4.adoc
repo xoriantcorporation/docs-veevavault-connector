@@ -837,7 +837,7 @@ image:media/user-guide/image45.png[image,width=284,height=91]
 
 The Get Audit Detail operation allows to retrieve audit details for specified audit type.
 
-Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+Note – The output of the operation would be in pagination mechanism, please refer to link:#streaming-and-pagination[*Streaming and Pagination*] for more details.
 
 *Configurations:*
 
