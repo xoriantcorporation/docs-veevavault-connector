@@ -123,7 +123,7 @@ You can configure the connector to connect to Veeva Vault using *Basic Authentic
 
 [arabic]
 . Drag and drop the any of connector operation to the Studio Canvas.
-. Click on icon* image:media/user-guide/image4.png[image,width=21,height=21] *of Connector configuration to create global element for the connector configurations.
+. Click on icon image:media/user-guide/image4.png[image,width=21,height=21] of Connector configuration to create global element for the connector configurations.
 +
 image:media/user-guide/image5.png[image,width=601,height=54]
 . Set these fields:
