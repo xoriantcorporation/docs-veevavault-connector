@@ -257,63 +257,37 @@ Following are the list of operations with the connector:
 
 *Documents*
 
-* link:#create-documents[Create Documents]
-* link:#get-documents[Get Documents]
-* {blank}
-* {blank}
-* link:\l[Delete Documents]
-* {blank}
-* link:\l[Update Documents]
-* {blank}
-* link:\l[Download Document]
-* {blank}
-
-link:\l[Export Documents]
+* link:#create-documents[*Create Documents*]
+* link:#get-documents[*Get Documents*]
+* link:#delete-documents[*Delete Documents*]
+* link:#update-documents[*Update Documents*]
+* link:#download-document[*Download Document*]
+* link:#export-documents[*Export Documents*]
 
 *Document Renditions*
 
-* {blank}
-* {blank}
-* link:\l[Create Document Renditions]
-* {blank}
-* link:\l[Get Document Renditions]
-* {blank}
-
-link:\l[Delete Document Renditions]
+* link:#create-document-renditions[*Create Document Renditions*]
+* link:#get-document-renditions[*Get Document Renditions*]
+* link:#delete-document-renditions[*Delete Document Renditions*]
 
 *Vault Objects*
 
-* {blank}
-* {blank}
-* link:\l[Create Object Records]
-* {blank}
-* link:\l[Get Object Records]
-* {blank}
-* link:\l[Delete Object Records]
-* {blank}
-
-link:\l[Update Object Records]
+* link:#create-object-records[*Create Object Records*]
+* link:#get-object-records[*Get Object Records*]
+* link:#delete-object-records[*Delete Object Records*]
+* link:#update-object-records[*Update Object Records*]
 
 *VQL Query*
 
-* {blank}
-* {blank}
-
-link:\l[Query]
+* link:#query[*Query*]
 
 *Picklists*
 
-* {blank}
-* {blank}
-
-link:\l[Get Picklists]
+* link:#get-picklists[*Get Picklists*]
 
 *Audit*
 
-* {blank}
-* {blank}
-
-link:\l[Get Audit Details]
+* link:#get-audit-details[*Get Audit Details*]
 
 ==== Create Documents
 
