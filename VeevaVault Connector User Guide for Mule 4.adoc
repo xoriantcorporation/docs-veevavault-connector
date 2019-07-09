@@ -940,7 +940,7 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 	 Password
 	 Vault URL
 	 Vault version
-	 Vault Client Id (This is custom Id in format - \{company}-\{organization}-\{server}-\{component})
+	 Vault Client Id (This is custom Id in format - *{company}-{organization}-{server}-{component})*
 
 * You must know about https://docs.mulesoft.com/studio/7.3/[Anypoint Studio] on how to create Mule projects.
 
