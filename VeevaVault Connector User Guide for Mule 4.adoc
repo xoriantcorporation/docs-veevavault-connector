@@ -1018,15 +1018,15 @@ image:media/user-guide/image50.png[image,width=578,height=135]
 *upload-files-on-vault-ftp-server (Subflow)*
 
 --------------------
-	<sub-flow name=__"upload-files-on-vault-ftp-server"__ doc:id=__"b92629e4-69ee-4d9d-a24c-753ff54eff41"__ >
-	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"74d38eea-f86a-4482-a209-06b8fc9dcd8f"__ message=__"Starting File Upload on Vault FTP server...."__/>
-	<foreach doc:name=__"For Each"__ doc:id=__"1d1578a5-ea4b-40d6-8b87-b34ec778f232"__ >
-	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"44acecd2-a655-4eee-94cc-934ab7d32b92"__ message=__"Uploading file #[payload.file] on Vault FTP server......."__ />
-	<file:read doc:name=__"Read"__ doc:id=__"4fad0c52-6d1c-452b-a51d-c5cfd3b2680b"__ config-ref=__"File_Config"__ path=__"test-file.txt"__/>
-	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"76e29521-7854-449e-a7d6-c30a177ef8f9"__ message=__"File Content :: #[payload]"__/>
-	<ftps:write doc:name=__"Write"__ doc:id=__"fa077475-e89e-4618-a394-c01c7ac2efbc"__ config-ref=__"FTPS_Config"__ path=__"#[attributes.fileName]"__/>
-	</foreach>
-	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4d8382e4-61b3-4104-ba89-5a3209a2bb9e"__ message=__"Files are uploaded successfully on Vault FTP server :: #[payload]"__/>
+	<sub-flow name="upload-files-on-vault-ftp-server" doc:id="b92629e4-69ee-4d9d-a24c-753ff54eff41">
+		<logger level="INFO" doc:name="Logger" doc:id="74d38eea-f86a-4482-a209-06b8fc9dcd8f" message="Starting File Upload on Vault FTP server...." />
+		<foreach doc:name="For Each" doc:id="1d1578a5-ea4b-40d6-8b87-b34ec778f232">
+			<logger level="INFO" doc:name="Logger" doc:id="44acecd2-a655-4eee-94cc-934ab7d32b92" message="Uploading file [#[payload.file]] on Vault FTP server......." />
+			<file:read doc:name="Read" doc:id="4fad0c52-6d1c-452b-a51d-c5cfd3b2680b" config-ref="File_Config" path="#[payload.file]" />
+			<ftps:write doc:name="Write" doc:id="fa077475-e89e-4618-a394-c01c7ac2efbc" config-ref="FTPS_Config" path="#[attributes.fileName]" />
+			<set-variable value="#[vars.counter]" doc:name="Set Variable" doc:id="c8378c51-eb34-4739-a7a1-4b8e260faa65" variableName="numberOfFiles" />
+		</foreach>
+		<logger level="INFO" doc:name="Logger" doc:id="4d8382e4-61b3-4104-ba89-5a3209a2bb9e" message="Total Files [#[vars.numberOfFiles]]are uploaded successfully on Vault FTP server." />
 	</sub-flow>
 --------------------
 ==== Get Documents Example
