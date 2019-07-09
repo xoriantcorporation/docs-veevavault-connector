@@ -317,7 +317,7 @@ The Get Documents operation allows to retrieve document details based on documen
 
 Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
 
-The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (/api/\{version}/metadata/objects/documents/properties) and VQL Query is built based on document metadata properties added/inserted in Document Properties list, if metadata properties are not provided then all queryable document properties is used in VQL and executed.
+The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (*/api/\{version}/metadata/objects/documents/properties*) and VQL Query is built based on document metadata properties added/inserted in Document Properties list, if metadata properties are not provided then all queryable document properties is used in VQL and executed.
 
 *Configurations:*
 
@@ -325,7 +325,7 @@ The document type, subtype and classification are optional, if none are selected
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -334,15 +334,15 @@ image:media/user-guide/image13.png[image,width=601,height=356]
 [cols=",",options="header",]
 |===
 |Fields |Description
-|Type (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
-|Subtype (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
-|Classification (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
-|Document Properties (Optional) |Insert document properties as per business requirement and these properties will be used to build a VQL query to execute on vault.
-|WHERE Clause |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g classification__v = ‘study_set_up_worksheet__c’*
-|Fetch Size |Provide number of records per page. Default is 100.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
+|*Type (Optional)* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Types from vault. Select a document type from the list to retrieve document properties.
+|*Subtype (Optional)* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Subtypes from vault. Select a document subtype from the list to retrieve document properties.
+|*Classification (Optional)* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve Document Classification from vault. Select a document classification from the list to retrieve document properties.
+|*Document Properties (Optional)* |Insert document properties as per business requirement and these properties will be used to build a VQL query to execute on vault.
+|*WHERE Clause* |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g classification__v = ‘study_set_up_worksheet__c’*
+|*Fetch Size* |Provide number of records per page. Default is 100.
+|*Batch Size* |Provide number of pages per batch. Default is 10.
+|*Input* |N/A
+|*Output* a|
 You can find list of queryable document properties retrieved from vault. If document properties list is provided, then specified properties detail would retrieve and result in operation output. Default would be list of all queryable properties.
 
 image:media/user-guide/image15.png[image,width=288,height=313]
