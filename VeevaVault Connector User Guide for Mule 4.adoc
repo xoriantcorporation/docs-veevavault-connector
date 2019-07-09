@@ -815,7 +815,7 @@ The Get Picklists operation allows to retrieve all available picklist values con
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -824,9 +824,9 @@ image:media/user-guide/image44.png[image,width=601,height=60]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Picklist Name (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
-|Input |N/A
-|Output a|
+|*Picklist Name (Optional)* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
+|*Input* |N/A
+|*Output* a|
 You can find picklist values with name and label as an output of Get Picklists operation.
 
 image:media/user-guide/image45.png[image,width=284,height=91]
@@ -845,7 +845,7 @@ Note – The output of the operation would be in pagination mechanism, please re
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -854,13 +854,13 @@ image:media/user-guide/image46.png[image,width=601,height=168]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Audit Type |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
-|Start date |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|End date |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|Fetch Size |Provide number of records per page. Default is 100.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
+|*Audit Type* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
+|*Start date* |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be *YYYY-MM-DDTHH:MM:SSZ* format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|*End date* |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be *YYYY-MM- DDTHH:MM:SSZ* format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|*Fetch Size* |Provide number of records per page. Default is 100.
+|*Batch Size* |Provide number of pages per batch. Default is 10.
+|*Input* |N/A
+|*Output* a|
 The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
 
 image:media/user-guide/image47.png[image,width=282,height=232]
@@ -875,40 +875,40 @@ image:media/user-guide/image48.png[image,width=601,height=124]
 
 The following operations in connector provides pagination mechanism based on Mule standard pagination.
 
-* link:#get-documents[Get Documents]
-* link:#get-object-records[Get Object Records]
-* link:#query[Query]
-* link:#get-audit-details[Get Audit Details]
+* link:#get-documents[*Get Documents*]
+* link:#get-object-records[*Get Object Records*]
+* link:#query[*Query*]
+* link:#get-audit-details[*Get Audit Details*]
 
 While using these above paginated operations make sure to place For-Each/Splitter to retrieve each object (metadata’s in JSON format) at a time. The pagination operations have fields – *Fetch Size and Batch Size.*
 
 * *Fetch Size:* The Fetch Size is a limit number of records that can be retrieve in a page. The operation would return the pages with fetch size number of JSON object records. Note, in some cases, Veeva API’s auto-calculate fetch size (number of records on each page) based on record size accumulated exceed the standard record size. The operation will return calculated records on each page.
 * *Batch Size:* The Batch Size is number of pages it would return in each batch and each page will have fetch size number of records. The operation would return number of records (metadata’s in JSON format) per batch is calculated as below, *e.g*.:
-+
-Fetch Size set as *1000*
-+
-Batch Size set as *10*
-+
-Total records in vault say has *100,000* records then
-+
-Number of pages = Total records/Fetch Size
-+
-= 100000/1000
-+
-= 100 pages.
-+
-Number of pages per batch = Number of pages/Batch Size
-+
-= 100/10
-+
-= 10 pages per batch.
-+
-Number of Records per batch = Number of pages per batch * Fetch Size
-+
-= 10 * 1000
-+
-= 10,000 records.
-+
+	+
+	Fetch Size set as *1000*
+	+
+	Batch Size set as *10*
+	+
+	Total records in vault say has *100,000* records then
+	+
+	Number of pages = Total records/Fetch Size
+	+
+	= 100000/1000
+	+
+	= 100 pages.
+	+
+	Number of pages per batch = Number of pages/Batch Size
+	+
+	= 100/10
+	+
+	= 10 pages per batch.
+	+
+	Number of Records per batch = Number of pages per batch * Fetch Size
+	+
+	= 10 * 1000
+	+
+	= 10,000 records.
+	+
 Therefore, Number of records return per batch would be 10,000 records.
 +
 The repeatable streams measure the buffer size in byte measurements, when handling objects the runtime measures the buffer size using instance counts.
