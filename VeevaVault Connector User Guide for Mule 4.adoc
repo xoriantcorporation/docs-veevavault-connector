@@ -167,11 +167,11 @@ The Burst API limit exceed profile configuration (Connector Configuration > Adva
 
 By default, this option is enabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-BurstLimitRemaining) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.
 
-Below is an example from the application logs showing a warning message at 2019-06-06 10:34:45,096 and subsequently waiting for 5 minutes before re-running as shown in the next message after 5 minutes at 2019-06-06 10:39:45,098.
+Below is an example from the application logs showing a warning message at *2019-06-06 10:34:45,096* and subsequently waiting for *5 minutes* before re-running as shown in the next message after 5 minutes at *2019-06-06 10:39:45,098.*
 
 --------------------
 
-WARN 2019-06-06 10:34:45,096 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Burst API Limit remaining calls [1997] has exceeded/reached an API Limit Profile threshold set as [1997]. As per API Limit Profile, Veeva Vault Connector will wait for [5] MINUTES.
+WARN 2019-06-06 10:34:45,096 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: *Burst API Limit remaining calls [1997] has exceeded/reached an API Limit Profile threshold set as [1997]. As per API Limit Profile, Veeva Vault Connector will wait for [5] MINUTES.*
 
 WARN 2019-06-06 10:39:45,098 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.operations.VeevaVaultOperations: Properties or Fields is not available for api [/api/v18.2/metadata/objects/documents/types/site_management__c] , will use input list [[name__v, type__v, subtype__v, classification__v, lifecycle__v, status__v, study__v, product__v, id]] if configured to build VQL query
 
