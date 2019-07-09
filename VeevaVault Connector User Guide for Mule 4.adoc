@@ -237,7 +237,7 @@ image:media/user-guide/image9.png[image,width=558,height=31]
 [cols=",",options="header",]
 |===
 |*Field* |*Description*
-|*Response Timeout* |*Enter timeout value for connector to wait for response from Veeva Vault instance. Default is 30 seconds.*
+|*Response Timeout* |Enter timeout value for connector to wait for response from Veeva Vault instance. Default is 30 seconds.
 |===
 
 === Use the Connector in a Mule Flow:
