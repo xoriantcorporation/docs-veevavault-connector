@@ -311,7 +311,7 @@ image:media/user-guide/image12.png[image,width=297,height=213]
 
 The Get Documents operation allows to retrieve document details based on document type, subtype and classification selected. Using selected type, subtype and classification it fetches document properties metadata and builds VQL queries dynamically. The VQL query is then executed on Vault to retrieve document details. Place For-Each/Splitter element after this Operation to fetch each document data (page) sequentially.
 
-Note – The output of the operation would be in pagination mechanism, please refer to link:#_Streaming_and_Pagination[Streaming and Pagination] for more details.
+Note – The output of the operation would be in pagination mechanism, please refer to link:#*streaming-and-pagination[*Streaming and Pagination*] for more details.
 
 The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (*/api/\{version}/metadata/objects/documents/properties*) and VQL Query is built based on document metadata properties added/inserted in Document Properties list, if metadata properties are not provided then all queryable document properties is used in VQL and executed.
 
