@@ -159,9 +159,9 @@ The Connection Configuration will do Basic Authentication which will accept requ
 
 *Burst API Limit Exceed Profile:*
 
-The Burst API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Burst API limit of Veeva Vault API is exceeded or reach threshold configure.
+The Burst API limit exceed profile configuration (*Connector Configuration > Advanced Tab*) to act upon if Burst API limit of Veeva Vault API is exceeded or reach threshold configure.
 
-By default, this option is enabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-BurstLimitRemaining) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.
+By default, this option is enabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (*X-VaultAPI-BurstLimitRemaining*) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.
 
 Below is an example from the application logs showing a warning message at *2019-06-06 10:34:45,096* and subsequently waiting for *5 minutes* before re-running as shown in the next message after 5 minutes at *2019-06-06 10:39:45,098.*
 
