@@ -193,9 +193,9 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 
 *Daily API Limit Exceed Profile:*
 
-The Daily API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24-hour window on a daily rolling basis.
+The Daily API limit exceed profile configuration (*Connector Configuration > Advanced Tab*) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24-hour window on a daily rolling basis.
 
-By default, this option is enabled. If the Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-DailyLimitRemaining) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.
+By default, this option is enabled. If the Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (*X-VaultAPI-DailyLimitRemaining*) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.
 
 Below is an example logs recorded which shows warning at *2019-06-06 10:47:31,698,* then an error is thrown at *2019-06-06 10:47:31,699.*
 
@@ -209,27 +209,28 @@ ERROR 2019-06-06 10:47:31,767 [[MuleRuntime].io.44: [veevavault-connector-demo].
 
 **********************************************************************************
 
-*Message : An error occurred from the Veeva Vault API.*
+Message : An error occurred from the Veeva Vault API.
 
-*Error Code: API_LIMIT_EXCEED.*
+Error Code: API_LIMIT_EXCEED.
 
-*Original Error Message: The Veeva Vault Connector has reached/exceeded daily API limit remaining calls [10000]. The configured daily api limit threshold is (10000).*
+Original Error Message: The Veeva Vault Connector has reached/exceeded daily API limit remaining calls [10000]. The configured daily api limit threshold is (10000).
 
-*Error type : VEEVAVAULT:API_LIMIT_EXCEED*
+Error type : VEEVAVAULT:API_LIMIT_EXCEED
 
 **********************************************************************************
 --------------------
+
 image:media/user-guide/image8.png[image,width=560,height=80]
 
 [cols=",",options="header",]
 |===
 |*Field* |*Description*
-|*API Limit Threshold* |*Enter API threshold limit that Veeva API Burst limit reached or exceed this threshold, connector will wait for specified wait time. Default is 10000.*
+|*API Limit Threshold* |Enter API threshold limit that Veeva API Burst limit reached or exceed this threshold, connector will wait for specified wait time. Default is 10000.
 |===
 
 *Response Timeout:*
 
-*The maximum time in milliseconds that the connector will wait for the Veeva Vault response. If time elapse will throw Timeout Exception. By default, is 10,000 milliseconds.*
+The maximum time in milliseconds that the connector will wait for the Veeva Vault response. If time elapse will throw Timeout Exception. By default, is 10,000 milliseconds.
 
 image:media/user-guide/image9.png[image,width=558,height=31]
 
@@ -241,7 +242,7 @@ image:media/user-guide/image9.png[image,width=558,height=31]
 
 === Use the Connector in a Mule Flow:
 
-*Following are the list of operations with the connector:*
+Following are the list of operations with the connector:
 
 *Documents*
 
@@ -287,7 +288,7 @@ The Create Documents operation allows to create single or multiple document(s) w
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -296,14 +297,14 @@ image:media/user-guide/image10.png[image,width=601,height=90]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Document Metadata* |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
 image:media/user-guide/image11.png[image,width=283,height=326]
 
-|Output a|
+|*Output* a|
 You can find create documents operation output status or response from vault.
 
 image:media/user-guide/image12.png[image,width=297,height=213]
