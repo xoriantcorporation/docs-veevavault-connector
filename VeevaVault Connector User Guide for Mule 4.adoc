@@ -145,19 +145,15 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 
 In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ. E.g. Below is an example snippet of configuration.yaml file under folder (src/main/resources/config)
 
-veeva:
-
-#Veeva Vault details
-
-vaultURL: "https://xxxx-xxxx.veevavault.com"
-
-username: "someone@example.com"
-
-password: "xxxxxxx"
-
-version : "v19.1"
-
-clientId: "veeva-clinical-mulesoft-connector"
+--------------------
+	#Veeva Vault details
+	veeva:
+		vaultURL: "https://xxxx-xxxx.veevavault.com"
+		username: "someone@example.com"
+		password: "xxxxxxx"
+		version : "v19.1"
+		clientId: "veeva-clinical-mulesoft-connector"
+--------------------	
 
 The Connection Configuration will do Basic Authentication which will accept required parameters – Vault URL, Username, Password to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.
 
