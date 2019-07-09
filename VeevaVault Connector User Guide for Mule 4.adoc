@@ -388,7 +388,7 @@ The Update Documents operation allows to update bulk document(s) with provided e
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -397,14 +397,14 @@ image:media/user-guide/image19.png[image,width=601,height=95]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required editable metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Document Metadata* |Document Metadata payload with required editable metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of editable document metadata to update document(s) on vault. Make sure payload should have only editable metadata as per vault.
 
 image:media/user-guide/image20.png[image,width=286,height=343]
 
-|Output a|
+|*Output* a|
 You can find create documents operation output status or response from vault.
 
 image:media/user-guide/image21.png[image,width=303,height=148]
