@@ -103,17 +103,17 @@ image:media/user-guide/image2.png[image,width=531,height=386]
 . Click *Login* in the Exchange popup and Sign in.
 +
 *Note:* To complete this step, you must have a Mulesoft account. You can create an account on the https://anypoint.mulesoft.com/login/#/signin[Mulesoft Sign up] page.
-. *Enter _Veeva Vault_ in the search box and hit Enter.*
-. *Click Veeva Vault Connection and then click Install*
-. *Follow the remaining instructions to complete the installation of the connector.*
-. *In Anypoint Studio click Help > Installation Details.*
-. *Verify Veeva Vault connector appears in the list of installed software.*
+. Enter _Veeva Vault_ in the search box and hit Enter.
+. Click Veeva Vault Connection and then click Install
+. Follow the remaining instructions to complete the installation of the connector.
+. In Anypoint Studio click Help > Installation Details.
+. Verify Veeva Vault connector appears in the list of installed software.
 +
 *Note:* The steps in the version of Anypoint Studio on your system might be different to the ones described here.
 
 For information about installing connectors, see https://docs.mulesoft.com/connectors/[Installing Connectors]
 
-*When Studio has an update, a message displays in the lower right corner, which you can click to install the update.*
+When Studio has an update, a message displays in the lower right corner, which you can click to install the update.
 
 ==== Configuration:
 
@@ -122,7 +122,7 @@ You can configure the connector to connect to Veeva Vault using *Basic Authentic
 *Basic Authentication*
 
 [arabic]
-. *Drag and drop the any of connector operation to the Studio Canvas.*
+. Drag and drop the any of connector operation to the Studio Canvas.
 . *Click on icon* image:media/user-guide/image4.png[image,width=21,height=21] *of Connector configuration to create global element for the connector configurations.*
 +
 image:media/user-guide/image5.png[image,width=601,height=54]
