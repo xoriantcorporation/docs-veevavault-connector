@@ -6,7 +6,7 @@
 
 *1.0.3*
 
-*June 2019*
+*July 2019*
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
 

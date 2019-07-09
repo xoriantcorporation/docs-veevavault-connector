@@ -1,12 +1,12 @@
 *Veeva Vault Connector*
 
-*Technical Reference Guide*
+*Technical Reference Document*
 
 *for Mule 4*
 
 *1.0.3*
 
-*June 2019*
+*July 2019*
 
 == VeevaVault Connector Reference
 
