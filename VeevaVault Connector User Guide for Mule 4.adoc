@@ -802,8 +802,8 @@ The alternative is to directly write ` <veevavault:vql>SELECT id, name__v, study
 
 Advantages of using input parameters to configure the WHERE clause in a SELECT statement this way:
 
- *The query becomes immune to VQL injection attacks.
- *The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.
+* The query becomes immune to VQL injection attacks.
+* The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.
 
 ==== Get Picklists
 
