@@ -771,16 +771,16 @@ Enter https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] q
 
 *Note -- Do not specify LIMIT and OFFSET in VQL query.*
 
-|Input Parameters a|
+|*Input Parameters* a|
 The input parameters are to pass parameter(s) to VQL query dynamically. The parameters should be name-value pair, payload or variables value can be pass. Eg.
 
-____
-#[\{
+--------------------
+	#[{
 
-'table': 'site__v',
+		'table': 'site__v',
 
-}]
-____
+	}]
+--------------------
 
 Default parameter is *#[\{}].*
 
