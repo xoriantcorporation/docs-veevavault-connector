@@ -936,11 +936,11 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 * You must know Mule concepts, flow, Anypoint Studio and connectors – HTTP, Database, File. Refer to https://docs.mulesoft.com/connectors/[MuleSoft Documentation]
 * You must have access to Veeva Vault instance for connector configurations:
 
-	 *Username*
-	 *Password*
-	 *Vault URL*
-	 *Vault version*
-	 *Vault Client Id (This is custom Id in format - \{company}-\{organization}-\{server}-\{component})*
+	 Username
+	 Password
+	 Vault URL
+	 Vault version
+	 Vault Client Id (This is custom Id in format - \{company}-\{organization}-\{server}-\{component})
 
 * You must know about https://docs.mulesoft.com/studio/7.3/[Anypoint Studio] on how to create Mule projects.
 
