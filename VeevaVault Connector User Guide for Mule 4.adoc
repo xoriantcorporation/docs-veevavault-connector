@@ -884,36 +884,30 @@ While using these above paginated operations make sure to place For-Each/Splitte
 
 * *Fetch Size:* The Fetch Size is a limit number of records that can be retrieve in a page. The operation would return the pages with fetch size number of JSON object records. Note, in some cases, Veeva API’s auto-calculate fetch size (number of records on each page) based on record size accumulated exceed the standard record size. The operation will return calculated records on each page.
 * *Batch Size:* The Batch Size is number of pages it would return in each batch and each page will have fetch size number of records. The operation would return number of records (metadata’s in JSON format) per batch is calculated as below, *e.g*.:
-	+
+
+--------------------
 	Fetch Size set as *1000*
-	+
 	Batch Size set as *10*
-	+
 	Total records in vault say has *100,000* records then
-	+
+	
 	Number of pages = Total records/Fetch Size
-	+
-	= 100000/1000
-	+
-	= 100 pages.
-	+
+					= 100000/1000
+					= 100 pages.
+	
 	Number of pages per batch = Number of pages/Batch Size
-	+
-	= 100/10
-	+
-	= 10 pages per batch.
-	+
+							  = 100/10
+							  = 10 pages per batch.
+	
 	Number of Records per batch = Number of pages per batch * Fetch Size
-	+
-	= 10 * 1000
-	+
-	= 10,000 records.
-	+
-Therefore, Number of records return per batch would be 10,000 records.
-+
-The repeatable streams measure the buffer size in byte measurements, when handling objects the runtime measures the buffer size using instance counts.
-+
-In non-repeatable stream connector operation would returns stream as number of records per batch and in repeatable stream would returns all records in once, so when calculating the in-memory buffer size for repeatable auto-paging, you need to estimate how much memory space each instance takes to avoid running out of memory.
+								= 10 * 1000
+								= 10,000 records.
+
+	Therefore, Number of records return per batch would be *10,000* records.
+--------------------
+
+*The repeatable streams measure the buffer size in byte measurements, when handling objects the runtime measures the buffer size using instance counts.*
+
+*In non-repeatable stream connector operation would returns stream as number of records per batch and in repeatable stream would returns all records in once, so when calculating the in-memory buffer size for repeatable auto-paging, you need to estimate how much memory space each instance takes to avoid running out of memory.*
 
 === Demo Projects
 
