@@ -355,7 +355,7 @@ The Delete Documents operation allows to delete document single or multiple docu
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -364,14 +364,14 @@ image:media/user-guide/image16.png[image,width=601,height=90]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
-|Input a|
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Document Metadata* |Document Metadata payload with required metadata either in CSV or JSON format.
+|*Input* a|
 You can find following list of document metadata required to delete document(s) on vault.
 
 image:media/user-guide/image17.png[image,width=301,height=55]
 
-|Output a|
+|*Output* a|
 You can find delete documents operation output status or response from vault.
 
 image:media/user-guide/image18.png[image,width=300,height=147]
