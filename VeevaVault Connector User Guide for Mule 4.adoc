@@ -413,7 +413,7 @@ image:media/user-guide/image21.png[image,width=303,height=148]
 
 ==== Download Document
 
-*The Download Document allows to* download latest or specified version of document file from vault and save to specified file system path.
+The Download Document allows to download latest or specified version of document file from vault and save to specified file system path.
 
 *Configurations:*
 
@@ -421,7 +421,7 @@ image:media/user-guide/image21.png[image,width=303,height=148]
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in *link:#configuration[Connector Configuration]*
 
 *Operation Configuration:*
 
@@ -430,11 +430,11 @@ image:media/user-guide/image22.png[image,width=536,height=160]
 [cols=",",options="header",]
 |===
 |Field |Description
-|Document Id |Provide document Id whose document file need to download.
-|File Path |Provide an absolute directory path at which downloaded file will be save.
-|Major version |Optional, if not provided latest version is download otherwise specified version.
-|Minor version |Optional, if not provided latest version is download otherwise specified version.
-|Lock Document |Set to true to Check Out this document before retrieval. Default is false.
+|*Document Id* |Provide document Id whose document file need to download.
+|*File Path* |Provide an absolute directory path at which downloaded file will be save.
+|*Major version* |Optional, if not provided latest version is download otherwise specified version.
+|*Minor version* |Optional, if not provided latest version is download otherwise specified version.
+|*Lock Document* |Set to true to Check Out this document before retrieval. Default is false.
 |===
 
 ==== Export Documents
@@ -443,45 +443,28 @@ An Export Documents operation allows to query a set of documents for export to y
 
 The exported documents are stored on FTP Staging area in folder hierarchy structure – \{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}. For example, following is job status response:
 
-\{
-
-"data": \{
-
-"run_end_date": "2019-05-22T10:48:57.000Z",
-
-"run_start_date": "2019-05-22T10:48:56.000Z",
-
-"method": "POST",
-
-"links": [
-
-\{
-
-"method": "GET",
-
-"rel": "self",
-
-"href": "/api/v18.2/services/jobs/34931",
-
-"accept": "application/json"
-
-}
-
-],
-
-"id": 34931,
-
-"created_date": "2019-05-22T10:48:55.000Z",
-
-"created_by": 2888511,
-
-"status": "SUCCESS"
-
-},
-
-"responseStatus": "SUCCESS"
-
-}
+--------------------
+	{
+		"data": {
+		"run_end_date": "2019-05-22T10:48:57.000Z",
+		"run_start_date": "2019-05-22T10:48:56.000Z",
+		"method": "POST",
+		"links": [
+			{
+				"method": "GET",
+				"rel": "self",
+				"href": "/api/v18.2/services/jobs/34931",
+				"accept": "application/json"
+			}
+		],
+		"id": 34931,
+		"created_date": "2019-05-22T10:48:55.000Z",
+		"created_by": 2888511,
+		"status": "SUCCESS"
+		},
+		"responseStatus": "SUCCESS"
+	}
+--------------------
 
 The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like *– \{root}/34931/u2888511/\{documentIds}/\{versions}.*
 
