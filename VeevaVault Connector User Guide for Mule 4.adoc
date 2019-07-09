@@ -981,7 +981,7 @@ image:media/user-guide/image50.png[image,width=578,height=135]
 		<ee:message >
 		<ee:set-payload ><![CDATA[%dw 2.0
 			output application/csv headerLineNumber = 0 , header = true
-		/---
+		---
 		payload map ( payload01 , indexOfPayload01 ) -> \{
 		lifecycle__v: payload01.lifecycle__v,
 		study__v: payload01.study__v,
@@ -996,7 +996,7 @@ image:media/user-guide/image50.png[image,width=578,height=135]
 	<veevavault:create-documents metadataFormat=__"CSV"__ doc:name=__"Create Documents"__ doc:id=__"5b98678c-1559-4827-80a9-289aad4a8873"__ config-ref=__"Veeva_Vault_Config"__/>
 	<db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"e8dd307e-40db-42bb-b82a-b72f6b235d00"__ config-ref=__"Database_Config"__>
 		<db:bulk-input-parameters ><![CDATA[#[output application/java
-		/---
+		---
 		payload.data map () -> \{
 		'id': $.id as String,
 		'external_id__v': $.external_id__v as String,
@@ -1016,26 +1016,18 @@ image:media/user-guide/image50.png[image,width=578,height=135]
 
 *upload-files-on-vault-ftp-server (Subflow)*
 
-<sub-flow name=__"upload-files-on-vault-ftp-server"__ doc:id=__"b92629e4-69ee-4d9d-a24c-753ff54eff41"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"74d38eea-f86a-4482-a209-06b8fc9dcd8f"__ message=__"Starting File Upload on Vault FTP server...."__/>
-
-<foreach doc:name=__"For Each"__ doc:id=__"1d1578a5-ea4b-40d6-8b87-b34ec778f232"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"44acecd2-a655-4eee-94cc-934ab7d32b92"__ message=__"Uploading file #[payload.file] on Vault FTP server......."__ />
-
-<file:read doc:name=__"Read"__ doc:id=__"4fad0c52-6d1c-452b-a51d-c5cfd3b2680b"__ config-ref=__"File_Config"__ path=__"test-file.txt"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"76e29521-7854-449e-a7d6-c30a177ef8f9"__ message=__"File Content :: #[payload]"__/>
-
-<ftps:write doc:name=__"Write"__ doc:id=__"fa077475-e89e-4618-a394-c01c7ac2efbc"__ config-ref=__"FTPS_Config"__ path=__"#[attributes.fileName]"__/>
-
-</foreach>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4d8382e4-61b3-4104-ba89-5a3209a2bb9e"__ message=__"Files are uploaded successfully on Vault FTP server :: #[payload]"__/>
-
-</sub-flow>
-
+--------------------
+	<sub-flow name=__"upload-files-on-vault-ftp-server"__ doc:id=__"b92629e4-69ee-4d9d-a24c-753ff54eff41"__ >
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"74d38eea-f86a-4482-a209-06b8fc9dcd8f"__ message=__"Starting File Upload on Vault FTP server...."__/>
+	<foreach doc:name=__"For Each"__ doc:id=__"1d1578a5-ea4b-40d6-8b87-b34ec778f232"__ >
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"44acecd2-a655-4eee-94cc-934ab7d32b92"__ message=__"Uploading file #[payload.file] on Vault FTP server......."__ />
+	<file:read doc:name=__"Read"__ doc:id=__"4fad0c52-6d1c-452b-a51d-c5cfd3b2680b"__ config-ref=__"File_Config"__ path=__"test-file.txt"__/>
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"76e29521-7854-449e-a7d6-c30a177ef8f9"__ message=__"File Content :: #[payload]"__/>
+	<ftps:write doc:name=__"Write"__ doc:id=__"fa077475-e89e-4618-a394-c01c7ac2efbc"__ config-ref=__"FTPS_Config"__ path=__"#[attributes.fileName]"__/>
+	</foreach>
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4d8382e4-61b3-4104-ba89-5a3209a2bb9e"__ message=__"Files are uploaded successfully on Vault FTP server :: #[payload]"__/>
+	</sub-flow>
+--------------------
 ==== Get Documents Example
 
 To create Mule flow, follow these instructions:
@@ -1058,109 +1050,60 @@ image:media/user-guide/image51.png[image,width=598,height=245]
 
 *Example XML code:*
 
-<flow name=__"get-documents-operationFlow"__ doc:id=__"facc29d2-8025-4b58-a3ec-322ded221705"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"93298153-7da4-4fcc-b028-00e692b0d19e"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-documents"__/>
-
-<veevavault:get-documents doc:name=__"Get Documents"__ doc:id=__"c9e9f482-91ce-40d2-a7f7-92b39fc7e8a3"__ config-ref=__"Veeva_Vault_Config"__>
-
-<veevavault:documents type=__"site_management__c"__>
-
-<veevavault:document-properties >
-
-<veevavault:document-property value=__"name__v"__ />
-
-<veevavault:document-property value=__"type__v"__ />
-
-<veevavault:document-property value=__"subtype__v"__ />
-
-<veevavault:document-property value=__"classification__v"__ />
-
-<veevavault:document-property value=__"lifecycle__v"__ />
-
-<veevavault:document-property value=__"status__v"__ />
-
-<veevavault:document-property value=__"study__v"__ />
-
-<veevavault:document-property value=__"product__v"__ />
-
-</veevavault:document-properties>
-
-</veevavault:documents>
-
-</veevavault:get-documents>
-
-<foreach doc:name=__"For Each"__ doc:id=__"a05bd532-48eb-42a8-af56-7c9830a4433d"__ >
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"d5bf0da9-e544-4728-a3e9-57dc05a02fa9"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/json
-
----
-
-payload]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<db:insert doc:name=__"Insert"__ doc:id=__"bf5a1288-8f37-456d-b26c-d18b8ea411db"__ config-ref=__"Database_Config"__>
-
-<db:sql >INSERT INTO [.underline]#createdocuments# (name__v, type__v, subtype__v, classification__v, lifecycle__v,
-
-product__v, status__v, study__v, file) VALUES (:name__v, :type__v, :subtype__v, :classification__v, :lifecycle__v, :product__v, :status__v, :study__v, :file)</db:sql>
-
-<db:input-parameters ><![CDATA[#[%dw 2.0
-
-output application/json
-
----
-
-\{
-
-'name__v': payload.name__v as String,
-
-'type__v': payload.type__v as String,
-
-'subtype__v': payload.subtype__v as String,
-
-'classification__v': payload.classification__v as String,
-
-'lifecycle__v': payload.lifecycle__v as String,
-
-'product__v': payload.product__v[0],
-
-'status__v': payload.status__v as String,
-
-'study__v': payload.study__v[0],
-
-'file': "CDA.docx"
-
-}]]]></db:input-parameters>
-
-</db:insert>
-
-</foreach>
-
-<set-payload value=__"#[output application/json --- payload.payload]"__ doc:name=__"Set Payload"__ doc:id=__"abcb3160-55a5-49f8-9b31-d7e61dca3d2e"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"ab49834e-389e-483e-84a4-2b61752bba72"__ message=__"Document Details :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"Error Propagate"__ doc:id=__"a7ac2cf2-ec74-408b-8a02-ee1a0d24e8f4"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"2b932042-57f3-45d8-9e6b-3cd9fcda6509"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name=__"get-documents-operationFlow"__ doc:id=__"facc29d2-8025-4b58-a3ec-322ded221705"__ >
+	<http:listener doc:name=__"Listener"__ doc:id=__"93298153-7da4-4fcc-b028-00e692b0d19e"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-documents"__/>
+	<veevavault:get-documents doc:name=__"Get Documents"__ doc:id=__"c9e9f482-91ce-40d2-a7f7-92b39fc7e8a3"__ config-ref=__"Veeva_Vault_Config"__>
+		<veevavault:documents type=__"site_management__c"__>
+		<veevavault:document-properties >
+		<veevavault:document-property value=__"name__v"__ />
+		<veevavault:document-property value=__"type__v"__ />
+		<veevavault:document-property value=__"subtype__v"__ />
+		<veevavault:document-property value=__"classification__v"__ />
+		<veevavault:document-property value=__"lifecycle__v"__ />
+		<veevavault:document-property value=__"status__v"__ />
+		<veevavault:document-property value=__"study__v"__ />
+		<veevavault:document-property value=__"product__v"__ />
+		</veevavault:document-properties>
+		</veevavault:documents>
+	</veevavault:get-documents>
+	<foreach doc:name=__"For Each"__ doc:id=__"a05bd532-48eb-42a8-af56-7c9830a4433d"__ >
+	<ee:transform doc:name=__"Transform Message"__ doc:id=__"d5bf0da9-e544-4728-a3e9-57dc05a02fa9"__ >
+		<ee:message >
+		<ee:set-payload ><![CDATA[%dw 2.0
+		output application/json
+		---
+		payload]]></ee:set-payload>
+		</ee:message>
+	</ee:transform>
+	<db:insert doc:name=__"Insert"__ doc:id=__"bf5a1288-8f37-456d-b26c-d18b8ea411db"__ config-ref=__"Database_Config"__>
+		<db:sql >INSERT INTO [.underline]#createdocuments# (name__v, type__v, subtype__v, classification__v, lifecycle__v,
+		product__v, status__v, study__v, file) VALUES (:name__v, :type__v, :subtype__v, :classification__v, :lifecycle__v, :product__v, :status__v, :study__v, :file)</db:sql>
+		<db:input-parameters ><![CDATA[#[%dw 2.0
+		output application/json
+		---
+		{
+			'name__v': payload.name__v as String,
+			'type__v': payload.type__v as String,
+			'subtype__v': payload.subtype__v as String,
+			'classification__v': payload.classification__v as String,
+			'lifecycle__v': payload.lifecycle__v as String,
+			'product__v': payload.product__v[0],
+			'status__v': payload.status__v as String,
+			'study__v': payload.study__v[0],
+			'file': "CDA.docx"
+		}]]]></db:input-parameters>
+	</db:insert>
+	</foreach>
+	<set-payload value=__"#[output application/json --- payload.payload]"__ doc:name=__"Set Payload"__ doc:id=__"abcb3160-55a5-49f8-9b31-d7e61dca3d2e"__ />
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"ab49834e-389e-483e-84a4-2b61752bba72"__ message=__"Document Details :: #[payload]"__/>
+	<error-handler >
+	<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"Error Propagate"__ doc:id=__"a7ac2cf2-ec74-408b-8a02-ee1a0d24e8f4"__ type=__"ANY"__ >
+	<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"2b932042-57f3-45d8-9e6b-3cd9fcda6509"__ message=__"Flow Exception Handled -- #[payload]"__ />
+	</on-error-propagate>
+	</error-handler>
+	</flow>
+--------------------
 
 ==== Delete Documents Example
 
