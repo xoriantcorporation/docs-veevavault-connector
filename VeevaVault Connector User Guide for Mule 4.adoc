@@ -1582,29 +1582,29 @@ When creating an app manually from the XML, you need to set up the pom.xml for y
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-[.underline]#maven#-[.underline]#plugin#</artifactId>
-				<version>$\{mule.maven.plugin.version}</version>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-			<configuration>
-				<sharedLibraries> 
-					<sharedLibrary>
-						<groupId>org.json</groupId>
-						<artifactId>json</artifactId>
-					</sharedLibrary>
-				</sharedLibraries>
-			</configuration>
+				<configuration>
+					<sharedLibraries> 
+						<sharedLibrary>
+							<groupId>org.json</groupId>
+							<artifactId>json</artifactId>
+						</sharedLibrary>
+					</sharedLibraries>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<repositories>
 		<repository>
-			<id>[.underline]#anypoint#-exchange-v2</id>
-			<name>[.underline]#Anypoint# Exchange</name>
+			<id>anypoint-exchange-v2</id>
+			<name>Anypoint Exchange</name>
 			<url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
-			<id>[.underline]#mulesoft#-releases</id>
+			<id>mulesoft-releases</id>
 			<name>MuleSoft Releases Repository</name>
 			<url>https://repository.mulesoft.org/releases/</url>
 			<layout>default</layout>
@@ -1615,8 +1615,8 @@ This snippet specifies a project dependency for a specific release version:
 
 	<dependency>
 		<groupId>org.mule.extension</groupId>
-		<artifactId>mule-[.underline]#veevavault#-connector</artifactId>
+		<artifactId>mule-veevavault-connector</artifactId>
 		<version>RELEASE</version>
-		<classifier>mule-[.underline]#plugin#</classifier>
+		<classifier>mule-plugin</classifier>
 	</dependency>
 --------------------
