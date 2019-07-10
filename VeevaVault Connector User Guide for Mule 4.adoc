@@ -1351,87 +1351,50 @@ image:media/user-guide/image57.png[image,width=601,height=244]
 
 *Example XML Code:*
 
-<flow name=__"get-object-records-operationFlow"__ doc:id=__"53818dc8-f0fd-4ccd-967f-e83dadcc1525"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"190a5ad6-d379-4ff8-a8c4-b2b9cddbed2b"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-object-records"__/>
-
-<veevavault:get-object-records doc:name=__"Get Object Records"__ doc:id=__"0ee4a657-c261-43c4-acce-00577bebb6c1"__ config-ref=__"Veeva_Vault_Config"__ vaultObject=__"site__v"__>
-
-<veevavault:object-fields >
-
-<veevavault:object-field value=__"name__v"__ />
-
-<veevavault:object-field value=__"location__v"__ />
-
-<veevavault:object-field value=__"study_country__v"__ />
-
-<veevavault:object-field value=__"external_id__v"__ />
-
-<veevavault:object-field value=__"actual_siv__v"__ />
-
-<veevavault:object-field value=__"site_selected_date__v"__ />
-
-<veevavault:object-field value=__"principal_investigator__v"__ />
-
-</veevavault:object-fields>
-
-</veevavault:get-object-records>
-
-<foreach doc:name=__"For Each"__ doc:id=__"ab811c9e-2595-487e-a9ab-05aa5e4dc1d8"__ >
-
-<set-variable value=__"#[output application/java --- vars.records default[] ++ [payload]]"__ doc:name=__"Set Variable"__ doc:id=__"060d7249-9251-4d5c-9b5d-1a63102cf6ae"__ variableName=__"records"__/>
-
-</foreach>
-
-<db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"3a3f03cd-afc2-48e8-9049-38b3058457f4"__ config-ref=__"Database_Config"__>
-
-<db:bulk-input-parameters><![CDATA[#[%dw 2.0
-
-output application/java
-
----
-
-vars.records map \{
-
-'name__v': $.name__v,
-
-'location__v': $.location__v,
-
-'study_country__v': $.study_country__v,
-
-'external_id__v': $.external_id__v,
-
-'actual_siv__v': $.actual_siv__v,
-
-'site_selected_date__v': $.site_selected_date__v,
-
-'principal_investigator__v': $.principal_investigator__v
-
-}]]]></db:bulk-input-parameters>
-
-<db:sql>INSERT INTO [.underline]#siteobjectrecords# (name__v, location__v, study_country__v, external_id__v, actual_siv__v,
-
-site_selected_date__v, principal_investigator__v) VALUES (:name__v, :location__v, :study_country__v, :external_id__v,
-
-:actual_siv__v, :site_selected_date__v, :principal_investigator__v)</db:sql>
-
-</db:bulk-insert>
-
-<set-payload value=__"#[output application/json --- vars.records]"__ doc:name=__"Set Payload"__ doc:id=__"4bb1eb6d-f703-4871-8b5e-0a46a771a59e"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"b9e95b86-ac51-4846-aa06-e8fcbeee4a46"__ message=__"Vault Object retrieved :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"54095f77-47cc-4768-ad37-113a2d1481ec"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"b14cc42b-9c2a-4e36-bbb3-30c834e8e3f0"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
+--------------------
+	<flow name="get-object-records-operationFlow" doc:id="53818dc8-f0fd-4ccd-967f-e83dadcc1525">
+		<http:listener doc:name="Listener" doc:id="190a5ad6-d379-4ff8-a8c4-b2b9cddbed2b" config-ref="HTTP_Listener_config" path="/get-object-records" />
+		<veevavault:get-object-records doc:name="Get Object Records" doc:id="0ee4a657-c261-43c4-acce-00577bebb6c1" vaultObject="site__v" config-ref="Veeva_Vault_Config" whereClause="principal_investigator__v = '0PE000000000101'" fetchSize="1000">
+			<veevavault:object-fields>
+				<veevavault:object-field value="name__v" />
+				<veevavault:object-field value="location__v" />
+				<veevavault:object-field value="study_country__v" />
+				<veevavault:object-field value="external_id__v" />
+				<veevavault:object-field value="actual_siv__v" />
+				<veevavault:object-field value="site_selected_date__v" />
+				<veevavault:object-field value="principal_investigator__v" />
+				<veevavault:object-field value="site_status__v" />
+			</veevavault:object-fields>
+		</veevavault:get-object-records>
+		<foreach doc:name="For Each" doc:id="ab811c9e-2595-487e-a9ab-05aa5e4dc1d8">
+			<set-variable value="#[output application/java --- vars.records default[] ++ [payload]]" doc:name="Set Variable" doc:id="060d7249-9251-4d5c-9b5d-1a63102cf6ae" variableName="records" />
+		</foreach>
+		<db:bulk-insert doc:name="Bulk insert" doc:id="3a3f03cd-afc2-48e8-9049-38b3058457f4" config-ref="Database_Config">
+			<db:bulk-input-parameters><![CDATA[#[%dw 2.0
+			output application/java
+			---
+			vars.records map  {
+				'name__v': $.name__v,
+				'location__v': $.location__v,
+				'study_country__v': $.study_country__v,
+				'external_id__v': $.external_id__v,
+				'actual_siv__v': $.actual_siv__v,
+				'site_selected_date__v': $.site_selected_date__v,
+				'principal_investigator__v': $.principal_investigator__v
+			}]]]></db:bulk-input-parameters>
+						<db:sql>INSERT INTO siteobjectrecords (name__v, location__v, study_country__v, external_id__v, actual_siv__v,
+			site_selected_date__v, principal_investigator__v) VALUES (:name__v, :location__v, :study_country__v, :external_id__v,
+			 :actual_siv__v, :site_selected_date__v, :principal_investigator__v)</db:sql>
+		</db:bulk-insert>
+		<set-payload value="#[output application/json --- vars.records]" doc:name="Set Payload" doc:id="142fde66-1c98-4a4d-abd9-283bf3c031d7" />
+		<logger level="INFO" doc:name="Logger" doc:id="b9e95b86-ac51-4846-aa06-e8fcbeee4a46" message="Vault Object retrieved :: #[payload]" />
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="54095f77-47cc-4768-ad37-113a2d1481ec" type="ANY">
+				<logger level="INFO" doc:name="Logger" doc:id="b14cc42b-9c2a-4e36-bbb3-30c834e8e3f0" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>	
 </flow>
+--------------------
 
 ==== Update Object Records Example
 
@@ -1450,59 +1413,31 @@ image:media/user-guide/image58.png[image,width=482,height=256]
 
 *Example XML Code:*
 
-<flow name=__"update-object-records-operationFlow"__ doc:id=__"a51bda88-f358-40ad-9986-8e6aea559e3c"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"cc2fb1da-1f14-4cef-91af-12ea9a7e1beb"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-object-records"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"90ec9543-b70d-485d-b510-802c21d45ff5"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id,
-
-name__v: payload01.name__v,
-
-location__v: payload01.location__v,
-
-external_id__v: payload01.external_id__v,
-
-study_country__v: payload01.study_country__v,
-
-principal_investigator__v: payload01.principal_investigator__v,
-
-actual_siv__v: payload01.actual_siv__v as Date,
-
-site_selected_date__v: payload01.site_selected_date__v as Date
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:update-object-records doc:name=__"Update Object Records"__ doc:id=__"5a16fb75-f150-44c9-bf33-3a25878cf197"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__ objectName=__"site__v"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"507ee77d-7f6c-429d-81ae-17359bb3afc1"__ message=__"Vault Object Updated :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"68925d3d-4e42-4662-84ed-c9ba581e333b"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"d0ea5c85-c456-4ab9-89c7-7da2a51c929b"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="update-object-records-from-external" doc:id="a51bda88-f358-40ad-9986-8e6aea559e3c" >
+		<http:listener doc:name="Listener" doc:id="cc2fb1da-1f14-4cef-91af-12ea9a7e1beb" config-ref="HTTP_Listener_config" path="/update-object-records"/>
+		<ee:transform doc:name="Transform Message" doc:id="6f84dd71-083e-404d-ad7a-c896daa3f796" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/json
+				---
+				payload map ( payload01 , indexOfPayload01 ) -> {
+					id: payload01.id,
+					name__v: payload01.name__v,
+					location__v: payload01.location__v,
+					external_id__v: payload01.external_id__v
+				}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<veevavault:update-object-records doc:name="Update Object Records (Site)" doc:id="5a16fb75-f150-44c9-bf33-3a25878cf197" metadataFormat="JSON" objectName="site__v" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="507ee77d-7f6c-429d-81ae-17359bb3afc1" message="Vault Object Updated :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="68925d3d-4e42-4662-84ed-c9ba581e333b" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="d0ea5c85-c456-4ab9-89c7-7da2a51c929b" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+--------------------	
 
 ==== Query Example
 
@@ -1525,67 +1460,40 @@ image:media/user-guide/image59.png[image,width=601,height=252]
 
 *Example XML Code:*
 
-<flow name=__"query-operation-with-database-operationFlow"__ doc:id=__"451f0f78-1e2e-4cc4-b56d-4f427f01e30a"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"454e6602-2c2f-4e98-8569-b3e928bf3da5"__ config-ref=__"HTTP_Listener_config"__ path=__"/query"__/>
-
-<veevavault:query doc:name=__"Query"__ doc:id=__"e4310f17-b0f5-49c0-8662-bc2d798fd9de"__ config-ref=__"Veeva_Vault_Config"__>
-
-<veevavault:vql >SELECT id, name__v, type__v, subtype__v, classification__v, lifecycle__v, status__v, study__v, product__v from :table</veevavault:vql>
-
-<veevavault:input-parameters ><![CDATA[#[\{
-
-'table': 'documents'
-
-}]]]></veevavault:input-parameters>
-
-</veevavault:query>
-
-<foreach doc:name=__"For Each"__ doc:id=__"55a3f3e9-b0ad-4c6d-8ccf-96f2d11f7bc8"__ >
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"f4875262-fe32-42e6-8e21-a21e592a729d"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/json
-
----
-
-payload]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<file:write doc:name=__"Write"__ doc:id=__"cb88f995-b31f-4dcf-b508-ea8340ae84fb"__ path=__"query.json"__ config-ref=__"File_Config"__ mode=__"APPEND"__>
-
-<file:content><![CDATA[#[output application/json
-
----
-
-payload]]]></file:content>
-
-</file:write>
-
-</foreach>
-
-<set-payload value=__"#['Flow Completed']"__ doc:name=__"Set Payload"__ doc:id=__"66f96a83-dfc9-4855-a65c-c35327cfec2a"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"016dc7a0-7014-44d9-bcbd-d2f540c2fc2e"__ message=__"Query Operation flow Completed - #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"6a7998b6-4384-41fb-bb5a-625f5410003a"__ type=__"ANY"__>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"46ee422c-4430-4b63-b1c3-6c993ad732fa"__ message=__"Flow Exception Handled -- #[payload]"__/>
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="query-operation-with-database-operationFlow" doc:id="451f0f78-1e2e-4cc4-b56d-4f427f01e30a" >
+		<http:listener doc:name="Listener" doc:id="454e6602-2c2f-4e98-8569-b3e928bf3da5" config-ref="HTTP_Listener_config" path="/query"/>
+		<veevavault:query doc:name="Query" doc:id="e4310f17-b0f5-49c0-8662-bc2d798fd9de" fetchSize="1000" config-ref="Veeva_Vault_Config">
+			<veevavault:vql >SELECT id, name__v, type__v, subtype__v, classification__v, lifecycle__v, status__v, study__v, product__v  from :table WHERE name__v= 'F22611234--6764'</veevavault:vql>
+			<veevavault:input-parameters ><![CDATA[#[{
+				'table': 'documents'
+			}]]]></veevavault:input-parameters>
+		</veevavault:query>
+		<foreach doc:name="For Each" doc:id="55a3f3e9-b0ad-4c6d-8ccf-96f2d11f7bc8" >
+		<ee:transform doc:name="Transform Message" doc:id="f4875262-fe32-42e6-8e21-a21e592a729d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/json
+				---
+				payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<file:write doc:name="Write" doc:id="cb88f995-b31f-4dcf-b508-ea8340ae84fb" path="query.json" config-ref="File_Config" mode="APPEND">
+			<file:content><![CDATA[#[output application/json
+			---
+			payload]]]></file:content>
+						</file:write>
+		
+		</foreach>
+		<set-payload value="#['Flow Completed']" doc:name="Set Payload" doc:id="66f96a83-dfc9-4855-a65c-c35327cfec2a" />
+		<logger level="INFO" doc:name="Logger" doc:id="016dc7a0-7014-44d9-bcbd-d2f540c2fc2e" message="Query Operation flow Completed - #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="6a7998b6-4384-41fb-bb5a-625f5410003a" type="ANY">
+				<logger level="INFO" doc:name="Logger" doc:id="46ee422c-4430-4b63-b1c3-6c993ad732fa" message="Flow Exception Handled --  #[payload]"/>
+			</on-error-propagate>
+		</error-handler>		
+	</flow>
+--------------------
 
 ==== Get Audit Details Example
 
@@ -1608,170 +1516,107 @@ image:media/user-guide/image60.png[image,width=601,height=242]
 
 *Example XML Code:*
 
-<flow name=__"get-audit-details-operationFlow"__ doc:id=__"33cb5d09-419b-435e-8744-e93a318a7ccb"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"3880815e-a45e-45dc-bd93-163adea84db6"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-audit-details"__/>
-
-<veevavault:get-audit-details doc:name=__"Get Audit Details"__ doc:id=__"e05e19d4-1422-43f4-a14e-f4c94660a838"__ config-ref=__"Veeva_Vault_Config"__ auditType=__"object_audit_trail"__/>
-
-<foreach doc:name=__"For Each"__ doc:id=__"40573cba-b238-44f9-bf71-9a1fa7b23197"__ >
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"6a17ec35-1ec0-4b83-9bbd-1dbc59feacb5"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/json
-
----
-
-payload]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<file:write doc:name=__"Write"__ doc:id=__"09e842a6-6cee-42ee-8fce-4aeb3eb4898e"__ path=__"get-audit-details.json"__ config-ref=__"File_Config"__ mode=__"APPEND"__>
-
-<file:content ><![CDATA[#[%dw 2.0
-
-output application/json
-
----
-
-payload]]]></file:content>
-
-</file:write>
-
-</foreach>
-
-<set-payload value=__"#[output application/json --- payload.payload]"__ doc:name=__"Set Payload"__ doc:id=__"a48d5e43-1377-4d3e-82ba-984b18c9cde5"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"51f56870-73ee-4b41-9d3e-078e64bd370a"__ message=__"Audit Details :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"1933ca25-531a-4e43-baac-fc145ad79c93"__ type=__"ANY"__>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"e02a58e6-2028-4c59-a649-e112443a3431"__ message=__"Flow Exception Captured #[payload]"__/>
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="get-audit-details-operationFlow" doc:id="33cb5d09-419b-435e-8744-e93a318a7ccb" >
+		<http:listener doc:name="Listener" doc:id="3880815e-a45e-45dc-bd93-163adea84db6" config-ref="HTTP_Listener_config" path="/get-audit-details"/>
+		<veevavault:get-audit-details doc:name="Get Audit Details" doc:id="e05e19d4-1422-43f4-a14e-f4c94660a838" config-ref="Veeva_Vault_Config" auditType="object_audit_trail"/>
+		<foreach doc:name="For Each" doc:id="40573cba-b238-44f9-bf71-9a1fa7b23197" >
+			<ee:transform doc:name="Transform Message" doc:id="6a17ec35-1ec0-4b83-9bbd-1dbc59feacb5" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+					output application/json
+					---
+					payload]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<file:write doc:name="Write" doc:id="09e842a6-6cee-42ee-8fce-4aeb3eb4898e" path="get-audit-details.json" config-ref="File_Config" mode="APPEND">
+				<file:content ><![CDATA[#[%dw 2.0 
+				output application/json
+				--- 
+				payload]]]></file:content>
+			</file:write>
+		</foreach>
+		<set-payload value="#[output application/json --- payload.payload map () -&gt; $]" doc:name="Set Payload" doc:id="a48d5e43-1377-4d3e-82ba-984b18c9cde5" />
+		<logger level="INFO" doc:name="Logger" doc:id="51f56870-73ee-4b41-9d3e-078e64bd370a" message="Audit Details :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="1933ca25-531a-4e43-baac-fc145ad79c93" type="ANY">
+				<logger level="INFO" doc:name="Logger" doc:id="e02a58e6-2028-4c59-a649-e112443a3431" message="Flow Exception Captured #[payload]"/>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+--------------------
 
 === Connector Namespace and Schema
 
 If you are creating Veeva Vault connector XML by hand, add the namespace for the connector. By contrast, Anypoint Studio creates the namespace for a connector automatically when you create a project for a Mule app.
 
-xsi:schemaLocation="
+--------------------
+	xsi:schemaLocation="
 
-...
+	...
 
-http://www.mulesoft.org/schema/mule/veevavault
+	http://www.mulesoft.org/schema/mule/veevavault
+	http://www.mulesoft.org/schema/mule/veevavault/current/mule-veevavault.xsd"
 
-http://www.mulesoft.org/schema/mule/veevavault/current/mule-veevavault.xsd"
+	Example:
 
-Example:
+	<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:veevavault="http://www.mulesoft.org/schema/mule/veevavault"
+	xsi:schemaLocation="
+	http://www.mulesoft.org/schema/mule/core
+	http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	http://www.mulesoft.org/schema/mule/veevavault
+	http://www.mulesoft.org/schema/mule/veevavault/current/mule-veevavault.xsd">
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+	<!-- Insert your configuration elements and your flow here -->
 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-xmlns:veevavault="http://www.mulesoft.org/schema/mule/veevavault"
-
-xsi:schemaLocation="
-
-http://www.mulesoft.org/schema/mule/core
-
-http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-
-http://www.mulesoft.org/schema/mule/veevavault
-
-http://www.mulesoft.org/schema/mule/veevavault/current/mule-veevavault.xsd">
-
-<!-- Insert your configuration elements and your flow here -->
-
-</mule>
-
+	</mule>
+--------------------
 === Maven Dependencies Information
 
 When creating an app manually from the XML, you need to set up the pom.xml for your project:
 
-<build>
-
-<plugins>
-
-<plugin>
-
-<groupId>org.mule.tools.maven</groupId>
-
-<artifactId>mule-[.underline]#maven#-[.underline]#plugin#</artifactId>
-
-<version>$\{mule.maven.plugin.version}</version>
-
-<extensions>true</extensions>
-
-<configuration>
-
-<sharedLibraries> <sharedLibrary>
-
-<groupId>org.json</groupId>
-
-<artifactId>json</artifactId>
-
-</sharedLibrary>
-
-</sharedLibraries>
-
-</configuration>
-
-</plugin>
-
-</plugins>
-
-</build>
-
-<repositories>
-
-<repository>
-
-<id>[.underline]#anypoint#-exchange-v2</id>
-
-<name>[.underline]#Anypoint# Exchange</name>
-
-<url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
-
-<layout>default</layout>
-
-</repository>
-
-<repository>
-
-<id>[.underline]#mulesoft#-releases</id>
-
-<name>MuleSoft Releases Repository</name>
-
-<url>https://repository.mulesoft.org/releases/</url>
-
-<layout>default</layout>
-
-</repository>
-
-</repositories>
+--------------------
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-[.underline]#maven#-[.underline]#plugin#</artifactId>
+				<version>$\{mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+			<configuration>
+				<sharedLibraries> 
+					<sharedLibrary>
+						<groupId>org.json</groupId>
+						<artifactId>json</artifactId>
+					</sharedLibrary>
+				</sharedLibraries>
+			</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>[.underline]#anypoint#-exchange-v2</id>
+			<name>[.underline]#Anypoint# Exchange</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>[.underline]#mulesoft#-releases</id>
+			<name>MuleSoft Releases Repository</name>
+			<url>https://repository.mulesoft.org/releases/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 This snippet specifies a project dependency for a specific release version:
 
-<dependency>
-
-<groupId>org.mule.extension</groupId>
-
-<artifactId>mule-[.underline]#veevavault#-connector</artifactId>
-
-<version>RELEASE</version>
-
-<classifier>mule-[.underline]#plugin#</classifier>
-
-</dependency>
+	<dependency>
+		<groupId>org.mule.extension</groupId>
+		<artifactId>mule-[.underline]#veevavault#-connector</artifactId>
+		<version>RELEASE</version>
+		<classifier>mule-[.underline]#plugin#</classifier>
+	</dependency>
+--------------------
