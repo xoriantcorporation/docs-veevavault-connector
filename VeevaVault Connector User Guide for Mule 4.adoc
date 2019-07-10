@@ -1123,53 +1123,32 @@ image:media/user-guide/image52.png[image,width=582,height=255]
 
 *Example XML Code:*
 
-<flow name=__"delete-documents-operationsFlow"__ doc:id=__"21f3d675-909f-43f9-a778-0a4ffa0691de"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"4a0c72cc-d442-4c0f-b254-b1eaae48729e"__ config-ref=__"HTTP_Listener_config"__ path=__"/delete-documents"__/>
-
-<db:select doc:name=__"Select"__ doc:id=__"060ea275-765b-49c2-b243-c96238cc1a85"__ config-ref=__"Database_Config"__>
-
-<db:sql >select id from [.underline]#deletedocuments#</db:sql>
-
-</db:select>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"8d1e28bb-2f6a-4835-9a68-bb5abf7e3ffc"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id as String
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:delete-documents metadataFormat=__"CSV"__ doc:name=__"Delete Documents"__ doc:id=__"4dde94f1-c0d5-4ea2-8f64-fc95642b823d"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"66db562e-80c1-4db6-993e-addb3f013613"__ message=__"Document Deleted :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4dc356f1-5618-429e-9fc2-8a6eaee96798"__ type=__"ANY"__ >
-
-<set-payload value=__"#[payload]"__ doc:name=__"Set Payload"__ doc:id=__"c9e6b85c-bb64-4de4-827c-02449a9f7566"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c7ed420f-2acc-438a-85f7-01a6505cbb0d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="delete-documents-operationsFlow" doc:id="21f3d675-909f-43f9-a778-0a4ffa0691de" >
+		<http:listener doc:name="Listener" doc:id="4a0c72cc-d442-4c0f-b254-b1eaae48729e" config-ref="HTTP_Listener_config" path="/delete-documents"/>
+		<db:select doc:name="Select" doc:id="060ea275-765b-49c2-b243-c96238cc1a85" config-ref="Database_Config">
+			<db:sql >select id from deletedocuments</db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="8d1e28bb-2f6a-4835-9a68-bb5abf7e3ffc" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/csv headerLineNumber = 0 , header = true , separator = ","
+				---
+				payload map ( payload01 , indexOfPayload01 ) -> {
+					id: payload01.id as String
+				}]]></ee:set-payload>
+				</ee:message>
+		</ee:transform>
+		<veevavault:delete-documents metadataFormat="CSV" doc:name="Delete Documents" doc:id="4dde94f1-c0d5-4ea2-8f64-fc95642b823d" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="66db562e-80c1-4db6-993e-addb3f013613" message="Document Deleted :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="4dc356f1-5618-429e-9fc2-8a6eaee96798" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="c7ed420f-2acc-438a-85f7-01a6505cbb0d" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>
+	
+	</flow>	
+--------------------
 
 ==== Update Documents Example
 
@@ -1187,51 +1166,32 @@ image:media/user-guide/image53.png[image,width=481,height=256]
 
 *Example XML Code:*
 
-<flow name=__"update-documents-operationFlow"__ doc:id=__"9745bc16-f9f4-45c4-8ead-0e05a5d1d798"__ >
+--------------------
+	<flow name="update-documents-operationFlow" doc:id="9745bc16-f9f4-45c4-8ead-0e05a5d1d798" >
+		<http:listener doc:name="Listener" doc:id="f0bc92a7-8c86-41ce-bcb2-d727290a0216" config-ref="HTTP_Listener_config" path="/update-documents"/>
+		<ee:transform doc:name="Transform Message" doc:id="125f4490-bce5-4379-ac49-6bc680309e20" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/csv headerLineNumber = 0 , header = true , separator = ","
+				---
+				payload map ( payload01 , indexOfPayload01 ) -> {
+					id: payload01.id,
+					notes__v: (payload01.notes__v default "") ++ payload01.product__v,
+					name__v: payload01.name__v,
+					product__v: payload01.product__v
+				}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<veevavault:update-documents metadataFormat="CSV" doc:name="Update Documents" doc:id="8a13cdda-6ec8-47a9-9117-44a0584ed4d1" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="4bc22f37-365f-4f8a-a4a0-6ecf6f939a45" message="Document Updated :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="4b13626b-2dc7-4bcc-a79f-b1ed523a540c" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="bee5def9-acb2-4d83-96ab-e20c60018182" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>	
+	</flow>
+--------------------
 
-<http:listener doc:name=__"Listener"__ doc:id=__"f0bc92a7-8c86-41ce-bcb2-d727290a0216"__ config-ref=__"HTTP_Listener_config"__ path=__"/update-documents"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"125f4490-bce5-4379-ac49-6bc680309e20"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-id: payload01.id,
-
-notes__v: (payload01.notes__v default "") ++ payload01.product__v,
-
-name__v: payload01.name__v,
-
-product__v: payload01.product__v
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:update-documents metadataFormat=__"CSV"__ doc:name=__"Update Documents"__ doc:id=__"8a13cdda-6ec8-47a9-9117-44a0584ed4d1"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"4bc22f37-365f-4f8a-a4a0-6ecf6f939a45"__ message=__"Document Updated :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"4b13626b-2dc7-4bcc-a79f-b1ed523a540c"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"bee5def9-acb2-4d83-96ab-e20c60018182"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
 
 ==== Create Document Renditions Example
 
@@ -1249,41 +1209,27 @@ image:media/user-guide/image54.png[image,width=469,height=246]
 
 *Example XML Code:*
 
-<flow name=__"create-document-renditions-operationFlow"__ doc:id=__"7822e654-0dc5-4a4e-9140-ad72b0a76107"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"3ecffd1a-296a-4114-ab06-ee8ebcb126ae"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-document-renditions"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"4be516bc-20da-4445-8463-a530a7605d0d"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true
-
----
-
-payload]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:create-document-renditions doc:name=__"Create Document Renditions"__ doc:id=__"3f35bbe9-0d5b-4dd2-99e9-3094a0da352b"__ config-ref=__"Veeva_Vault_Config"__ metadataFormat=__"CSV"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"c370c08d-afc4-461e-9b39-d998d48549f2"__ message=__"Document Renditions Created :: #[payload]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"d261e967-dcfc-425b-99fb-79210c6ceb24"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"f7669bc0-17f0-484d-9278-f3d7e16a578d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="create-document-renditions-operationFlow" doc:id="7822e654-0dc5-4a4e-9140-ad72b0a76107" >
+		<http:listener doc:name="Listener" doc:id="3ecffd1a-296a-4114-ab06-ee8ebcb126ae" config-ref="HTTP_Listener_config" path="/create-document-renditions"/>
+		<ee:transform doc:name="Transform Message" doc:id="4be516bc-20da-4445-8463-a530a7605d0d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/csv headerLineNumber = 0 , header = true , separator = ","
+				---
+				payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<veevavault:create-document-renditions doc:name="Create Document Renditions" doc:id="3f35bbe9-0d5b-4dd2-99e9-3094a0da352b" metadataFormat="CSV" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c370c08d-afc4-461e-9b39-d998d48549f2" message="Document Renditions Created :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="d261e967-dcfc-425b-99fb-79210c6ceb24" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="f7669bc0-17f0-484d-9278-f3d7e16a578d" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>
+	
+	</flow>
+--------------------
 
 ==== Get Document Renditions Example
 
@@ -1300,35 +1246,28 @@ image:media/user-guide/image55.png[image,width=483,height=254]
 
 *Example XML Code*
 
-<flow name=__"get-document-renditions-operationFlow"__ doc:id=__"d8ccb25d-f10c-43b9-b027-801b5b01041e"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"6a0cd76c-ea9f-4256-b539-db72d8c56325"__ config-ref=__"HTTP_Listener_config"__ path=__"/get-document-renditions"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"b252487e-0400-4247-8c4d-e9f33301d08c"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/json
-
----
-
-\{
-
-documentId: '127792'
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:get-document-renditions doc:name=__"Get Document Renditions"__ doc:id=__"fc181bfe-dc80-474f-9841-f3fec446d4c0"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"21e525f2-818e-4b3e-8ee8-2f894bb47730"__ message=__"Document Rendtions Retrieved :: #[payload]"__/>
-
-</flow>
+--------------------
+	<flow name="get-document-renditions-operationsFlow" doc:id="aafb952d-a198-4ea1-9b56-0730e98f32ca" >
+		<http:listener doc:name="Listener" doc:id="e2835683-4c51-4202-9398-14226871dfb0" config-ref="HTTP_Listener_config" path="/get-document-renditions"/>
+		<ee:transform doc:name="Transform Message" doc:id="e8ebd61f-346e-43f1-a66a-ac4c4eb781f5" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/json
+				---
+				{
+					documentId: '1'
+				}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<veevavault:get-document-renditions doc:name="Get Document Renditions" doc:id="6bff5c92-b33f-4b45-aef7-c3f900cb3fd5" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="575d0148-3b82-46a1-a95d-5dc2f8c52cbd" message="Get Document Renditions Response :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="14c32e1c-6e66-463e-b36f-d16d88e8821c" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="57958c28-61c8-45c0-898c-f7971b44303b" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+--------------------
 
 ==== Create Object Records Example
 
@@ -1350,79 +1289,46 @@ image:media/user-guide/image56.png[image,width=601,height=222]
 
 *Example XML Code:*
 
-<flow name=__"create-object-records-operationFlow"__ doc:id=__"76d86207-916a-4be2-8928-fdd6c717c346"__ >
-
-<http:listener doc:name=__"Listener"__ doc:id=__"2b5b8ff3-491c-4573-96db-a3b0326f667b"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-object-records"__/>
-
-<ee:transform doc:name=__"Transform Message"__ doc:id=__"df08cf9f-3ab4-4f23-97e4-a2726ff78e03"__ >
-
-<ee:message >
-
-<ee:set-payload ><![CDATA[%dw 2.0
-
-output application/csv headerLineNumber = 0 , header = true , separator = ","
-
----
-
-payload map ( payload01 , indexOfPayload01 ) -> \{
-
-name__v: payload01.name__v,
-
-location__v: payload01.location__v,
-
-external_id__v: (payload01.external_id__v default "") ++ "|"++ payload01.name__v,
-
-study_country__v: payload01.study_country__v,
-
-principal_investigator__v: payload01.principal_investigator__v,
-
-actual_siv__v: payload01.actual_siv__v as Date,
-
-site_selected_date__v: payload01.site_selected_date__v as Date
-
-}]]></ee:set-payload>
-
-</ee:message>
-
-</ee:transform>
-
-<veevavault:create-object-records doc:name=__"Create Object Records"__ doc:id=__"75b80a1e-0338-4f9e-b9e5-81c944381ddb"__ metadataFormat=__"CSV"__ objectName=__"site__v"__ target=__"objectStatus"__ config-ref=__"Veeva_Vault_Config"__/>
-
-<db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"14110393-ec5e-4d69-b9e0-3b52b039da35"__ config-ref=__"Database_Config"__>
-
-<db:bulk-input-parameters ><![CDATA[#[output application/java
-
----
-
-vars.objectStatus.data map () -> \{
-
-'id': $.data.id,
-
-'url': $.data.url,
-
-'responseStatus': $.responseStatus
-
-}]]]></db:bulk-input-parameters>
-
-<db:sql >INSERT INTO [.underline]#deletesiteobject# (id, [.underline]#url#, responseStatus) VALUES (:id, :[.underline]#url#, :responseStatus)</db:sql>
-
-</db:bulk-insert>
-
-<set-payload value=__"#[vars.objectStatus]"__ doc:name=__"Set Payload"__ doc:id=__"e883c1b5-6790-43ba-9d7e-b058793c4a4b"__ />
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"b4816f4f-f199-43ee-b00b-c9b389d4343a"__ message=__"Flow completed with object records created :: #[vars.objectStatus]"__/>
-
-<error-handler >
-
-<on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"e681ed06-c458-42ef-bf24-217a42c85866"__ type=__"ANY"__ >
-
-<logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"a47171c6-6b6e-47e5-97cd-8a7d0695410d"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
-</on-error-propagate>
-
-</error-handler>
-
-</flow>
+--------------------
+	<flow name="create-object-records-operationFlow" doc:id="76d86207-916a-4be2-8928-fdd6c717c346" >
+		<http:listener doc:name="Listener" doc:id="2b5b8ff3-491c-4573-96db-a3b0326f667b" config-ref="HTTP_Listener_config" path="/create-object-records"/>
+		<ee:transform doc:name="Transform Message" doc:id="df08cf9f-3ab4-4f23-97e4-a2726ff78e03" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+				output application/csv headerLineNumber = 0 , header = true , separator = ","
+				---
+				payload map ( payload01 , indexOfPayload01 ) -> {
+					name__v: payload01.name__v ++ '|' ++ randomInt(10000) as String,
+					location__v: payload01.location__v,
+					external_id__v: (payload01.external_id__v default "") ++ "|" ++ randomInt(10000) as String,
+					study_country__v: payload01.study_country__v,
+					principal_investigator__v: payload01.principal_investigator__v,
+					actual_siv__v: (payload01.actual_siv__v default "2018-07-19") as Date,
+					site_selected_date__v: payload01.site_selected_date__v as Date
+				}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<veevavault:create-object-records doc:name="Create Object Records" doc:id="75b80a1e-0338-4f9e-b9e5-81c944381ddb" metadataFormat="CSV" objectName="site__v" target="objectstatus" config-ref="Veeva_Vault_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a5fa54dd-1538-4d67-978a-565fba62fbb9" message="Create Object Response :: #[vars.objectstatus]"/>
+		<db:bulk-insert doc:name="Bulk insert" doc:id="14110393-ec5e-4d69-b9e0-3b52b039da35" config-ref="Database_Config">
+			<db:bulk-input-parameters ><![CDATA[#[output application/java
+			---
+			vars.objectstatus.data map () -> {
+				'id': $.data.id,
+				'url': $.data.url,
+				'responseStatus': $.responseStatus
+			}]]]></db:bulk-input-parameters>
+			<db:sql >INSERT INTO deletesiteobject (id, url, responseStatus) VALUES (:id, :url, :responseStatus)</db:sql>
+		</db:bulk-insert>
+		<set-payload value="#[vars.objectstatus]" doc:name="Set Payload" doc:id="1d7bd1ba-9b04-4634-b3e6-380de0fe64f7" />
+		<logger level="INFO" doc:name="Logger" doc:id="b4816f4f-f199-43ee-b00b-c9b389d4343a" message="Create Object Flow complete :: #[payload]"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e681ed06-c458-42ef-bf24-217a42c85866" type="ANY" >
+				<logger level="INFO" doc:name="Logger" doc:id="a47171c6-6b6e-47e5-97cd-8a7d0695410d" message="Flow Exception Handled --  #[payload]" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+--------------------
 
 ==== Get Object Records Example
 
