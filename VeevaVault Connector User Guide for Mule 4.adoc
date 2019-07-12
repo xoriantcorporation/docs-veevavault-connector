@@ -498,7 +498,7 @@ image:media/user-guide/image23.png[image,width=601,height=221]
 |*Source* |Optional, to exclude source files set to false. Default is true.
 |*Renditions* |Optional, to include renditions set to true. Default is false.
 |*All Versions* |Optional, to include all versions or latest version set to true. Default is false.
-|*Polling Interval* |Optional, to polls vault at specified interval in seconds until job is successful. Default is 10 seconds.
+|*Polling Interval* |Optional, to polls vault at specified interval in seconds until job is successful. Default is 30 seconds.
 |*Input* a|
 You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
 

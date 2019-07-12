@@ -346,7 +346,7 @@ image:media/tech-ref/image6.png[image,width=268,height=39]
 |Source |Boolean |To exclude source files. |True |
 |Renditions |Boolean |To include renditions. |False |
 |All Versions |Boolean |To include all versions or latest version |False |
-|Polling Interval |Integer |To poll the vault at specified interval in seconds until job is successful. |10 |
+|Polling Interval |Integer |To poll the vault at specified interval in seconds until job is successful. |30 |
 |===
 
 *For Configurations:*
