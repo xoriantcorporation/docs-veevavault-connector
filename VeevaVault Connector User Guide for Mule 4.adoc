@@ -431,9 +431,9 @@ The exported documents are stored on FTP Staging area in folder hierarchy struct
 				"accept": "application/json"
 			}
 		],
-		"id": *34931*,
+		"id": 34931,
 		"created_date": "2019-05-22T10:48:55.000Z",
-		"created_by": *XXXXXXX*,
+		"created_by": XXXXXXX,
 		"status": "SUCCESS"
 	},
 	"responseStatus": "SUCCESS"
@@ -457,7 +457,7 @@ The above example shows *‘id’* (which is a JobId) and *‘created_by’* (wh
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
