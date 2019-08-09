@@ -465,19 +465,19 @@ image:media/user-guide/image22.png[image,width=601,height=221]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept metadata document Id in specified format.
-|Document Metadata |Document Metadata payload contains document Ids in either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Source |Optional, to exclude source files set to false. Default is true.
-|Renditions |Optional, to include renditions set to true. Default is false.
-|All Versions |Optional, to include all versions or latest version set to true. Default is false.
-|Polling Interval |Optional, to polls vault at specified interval in seconds until job is successful. Default is 30 seconds.
-|Input a|
+|*Field* |*Description*
+|*Metadata Format* |Select CSV or JSON option to accept metadata document Id in specified format.
+|*Document Metadata* |Document Metadata payload contains document Ids in either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Source* |Optional, to exclude source files set to false. Default is true.
+|*Renditions* |Optional, to include renditions set to true. Default is false.
+|*All Versions* |Optional, to include all versions or latest version set to true. Default is false.
+|*Polling Interval* |Optional, to polls vault at specified interval in seconds until job is successful. Default is 30 seconds.
+|*Input* a|
 You can find following input document metadata required to export document(s) from vault to FTP staging server. Make sure payload should have mandatory metadata as per vault.
 
 image:media/user-guide/image23.png[image,width=297,height=90]
 
-|Output a|
+|*Output* a|
 You can find export documents job status response under output tab.
 
 image:media/user-guide/image24.png[image,width=288,height=256]
