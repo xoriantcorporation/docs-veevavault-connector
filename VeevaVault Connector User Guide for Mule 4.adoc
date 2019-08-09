@@ -1061,90 +1061,50 @@ image:media/user-guide/image49.png[image,width=578,height=135]
 *Example XML code:*
 
 *create-documents-operationsFlow*
-
+--------------------
 <flow name=__"create-documents-operationFlow"__ doc:id=__"22381713-1ba9-48c4-acbf-982be12bfecb"__ >
-
 <http:listener doc:name=__"Listener"__ doc:id=__"3a127a7f-2783-467a-b19e-cbf8edec1526"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-documents"__/>
-
 <db:select doc:name=__"Select"__ doc:id=__"82b86a9c-062a-4b18-8b14-d59a4a3dacc7"__ config-ref=__"Database_Config"__>
-
 <db:sql >SELECT * FROM [.underline]#createdocuments#</db:sql>
-
 </db:select>
-
 <flow-ref doc:name=__"Flow Reference"__ doc:id=__"66246c35-d38b-4d09-b609-eb90ee3fcea5"__ name=__"upload-files-on-vault-ftp-server"__/>
-
 <foreach doc:name=__"For Each"__ doc:id=__"c4247c0d-c432-4c07-bd90-1a64ca495818"__ batchSize=__"500"__>
-
 <ee:transform doc:name=__"Transform Message"__ doc:id=__"1bb2fc8e-b342-4819-88db-2953db5963df"__>
-
 <ee:message>
-
 <ee:set-payload><![CDATA[%dw 2.0
-
 output application/csv headerLineNumber = 0 , header = true
-
 ---
-
 payload map ( payload01 , indexOfPayload01 ) -> \{
-
 lifecycle__v: payload01.lifecycle__v,
-
 study__v: payload01.study__v,
-
 subtype__v: payload01.subtype__v,
-
 name__v: payload01.name__v,
-
 type__v: payload01.type__v,
-
 classification__v: payload01.classification__v,
-
 file: payload01.file
-
 }]]></ee:set-payload>
-
 </ee:message>
-
 </ee:transform>
-
 <veevavault:create-documents metadataFormat=__"CSV"__ doc:name=__"Create Documents"__ doc:id=__"3265806f-7793-45a0-8b03-5c9e207ad7fb"__ config-ref=__"Veeva_Vault_Config"__ />
-
 <db:bulk-insert doc:name=__"Bulk insert"__ doc:id=__"9f59cd7e-34fc-4ef4-9107-8d688992e890"__ config-ref=__"Database_Config"__>
-
 <db:bulk-input-parameters><![CDATA[#[output application/java
-
 ---
-
 payload.data map () -> \{
-
 'id': $.id as String,
-
 'external_id__v': $.external_id__v as String,
-
 'responseStatus': $.responseStatus
-
 }]]]></db:bulk-input-parameters>
-
 <db:sql>INSERT into documents (id, external_id__v, responseStatus) VALUES (:id, :external_id__v, :responseStatus)</db:sql>
-
 </db:bulk-insert>
-
 </foreach>
-
 <logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"bc565969-8908-43c9-be58-ba31284a9e50"__ />
-
 <error-handler >
-
 <on-error-propagate enableNotifications=__"true"__ logException=__"true"__ doc:name=__"On Error Propagate"__ doc:id=__"855f771a-ab32-42e3-a230-16ef94a2f142"__ type=__"ANY"__ >
-
 <logger level=__"INFO"__ doc:name=__"Logger"__ doc:id=__"9ac47d86-b8cc-40e3-943c-7edb6502f157"__ message=__"Flow Exception Handled -- #[payload]"__ />
-
 </on-error-propagate>
-
 </error-handler>
-
 </flow>
+--------------------
 
 *upload-files-on-vault-ftp-server (Subflow)*
 
