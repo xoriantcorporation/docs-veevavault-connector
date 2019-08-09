@@ -1061,6 +1061,7 @@ image:media/user-guide/image49.png[image,width=578,height=135]
 *Example XML code:*
 
 *create-documents-operationsFlow*
+--------------------
 _____
 <flow name=__"create-documents-operationFlow"__ doc:id=__"22381713-1ba9-48c4-acbf-982be12bfecb"__ >
 <http:listener doc:name=__"Listener"__ doc:id=__"3a127a7f-2783-467a-b19e-cbf8edec1526"__ config-ref=__"HTTP_Listener_config"__ path=__"/create-documents"__/>
@@ -1105,7 +1106,7 @@ payload.data map () -> \{
 </error-handler>
 </flow>
 _____
-
+--------------------
 *upload-files-on-vault-ftp-server (Subflow)*
 
 <sub-flow name=__"upload-files-on-vault-ftp-server"__ doc:id=__"b92629e4-69ee-4d9d-a24c-753ff54eff41"__ >
