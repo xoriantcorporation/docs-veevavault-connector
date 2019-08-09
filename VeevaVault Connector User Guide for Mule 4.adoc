@@ -442,9 +442,13 @@ The exported documents are stored on FTP Staging area in folder hierarchy struct
 The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like – *\{root}/34931/uXXXXXXX/\{documentIds}/\{versions}.*
 
 *root* – Its root location of staging server.
+
 *userId* – It’s a *created_by* prefix with ‘*u*’. In above case is *uXXXXXXX.*
+
 *jobId* – It’s an ‘*id’.* In above case is *34931.*
+
 *documentIds –* The N number of folders with name as documentIds which are passed to export documents operation. The number of folders would be number of documentIds sent to export documents operation.
+
 *versions –* A version folders with name as document versions number and can be multiple version folders associated with document.
 
 *Configurations:*
