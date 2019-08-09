@@ -416,7 +416,7 @@ image:media/user-guide/image21.png[image,width=303,height=148]
 
 An Export Documents operation allows to query a set of documents for export to your vault’s FTP Staging server. It is recommended to use Export Documents operation is separate asynchronous flow using Async Scope and passing payload with document ids. Using asynchronously the operation executes in separate flow thread, will wait for specified polling interval to poll the Job status until it gets successful while the main flow continues its process.
 
-The exported documents are stored on FTP Staging area in folder hierarchy structure – \{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}. For example, following is job status response:
+The exported documents are stored on FTP Staging area in folder hierarchy structure – *\{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}*. For example, following is job status response:
 --------------------
 {
 	"data": {
@@ -431,24 +431,20 @@ The exported documents are stored on FTP Staging area in folder hierarchy struct
 				"accept": "application/json"
 			}
 		],
-		"id": 34931,
+		"id": *34931*,
 		"created_date": "2019-05-22T10:48:55.000Z",
-		"created_by": 2888511,
+		"created_by": *XXXXXXX*,
 		"status": "SUCCESS"
 	},
 	"responseStatus": "SUCCESS"
 }
 --------------------
-The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like – *\{root}/34931/u2888511/\{documentIds}/\{versions}.*
+The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like – *\{root}/34931/uXXXXXXX/\{documentIds}/\{versions}.*
 
 *root* – Its root location of staging server.
-
-*userId* – It’s a *created_by* prefix with ‘*u*’. In above case is *u2888511.*
-
+*userId* – It’s a *created_by* prefix with ‘*u*’. In above case is *uXXXXXXX.*
 *jobId* – It’s an ‘*id’.* In above case is *34931.*
-
 *documentIds –* The N number of folders with name as documentIds which are passed to export documents operation. The number of folders would be number of documentIds sent to export documents operation.
-
 *versions –* A version folders with name as document versions number and can be multiple version folders associated with document.
 
 *Configurations:*
