@@ -6,7 +6,7 @@
 
 *1.0.3*
 
-*July 2019*
+*August 2019*
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
 
@@ -42,10 +42,9 @@ Features
 * Delete Document Renditions – The Delete Document Renditions operation allows to delete document renditions in bulk using CSV or JSON format input metadata.
 * Delete Documents – The Delete Documents operation allows to delete document single or multiple document(s) with bulk API using CSV or JSON format input metadata.
 * Delete Object Records – The Delete Object Records operation allows to delete document single or multiple document(s) with bulk API using CSV or JSON format input metadata.
-* Download Document – *The Download Document operation allows to* download latest or specified version of document file from vault and save to specified file system path.
 * Export Documents – The Export Documents operation allows to query a set of documents for export to your vault’s FTP staging server. The operation exports the artefacts - Source documents, Renditions and All versions or latest version.
 * Get Audit Details – The Get Audit Details operation allows to retrieve audit details for specified audit type.
-* Get Document Renditions – The Get Document Renditions operation allows to retrieve document renditions detail.
+* Get Document Renditions Types – The Get Document Renditions Types operation allows to retrieve document renditions detail.
 * Get Documents – The Get Documents operation allows to retrieve document details based on document type, subtype and classification selected. Using selected type, subtype and classification it fetches document properties metadata and built VQL query dynamically.
 * Get Object Records – The Get Object Records operation allows to retrieve object records detail using object metadata fields to build a VQL query dynamically and execute on vault to get Object details.
 * Get Picklists – The Get Picklists operation allows to retrieve all available picklist values configured on a picklist.
@@ -55,10 +54,10 @@ Features
 
 See Also
 
-* https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-co[Anypoint Connector Support Policy]
+https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-co[Anypoint Connector Support Policy]
 
-* link:VeevaVault%20Connector%20User%20Guide%20for%20Mule%204.adoc[Veeva Vault Connector User Guide.]
+Veeva Vault Connector User Guide
 
-* https://forums.mulesoft.com/index.html[MuleSoft Forum]
+https://forums.mulesoft.com/index.html[MuleSoft Forum]
 
-* https://support.mulesoft.com[Contact MuleSoft Support]
+https://support.mulesoft.com[Contact MuleSoft Support]

@@ -6,7 +6,7 @@
 
 *1.0.3*
 
-*July 2019*
+*August 2019*
 
 == VeevaVault Connector Reference
 
@@ -90,10 +90,10 @@ The Daily API Limit Profile to configure API limit threshold for evaluation with
 * link:#delete-document-renditions[*Delete Document Renditions*]
 * link:#delete-documents[*Delete Documents*]
 * link:#delete-object-records[*Delete Object Records*]
-* link:#download-document[*Download Document*]
+* link:#export-documents[*Download Document*]
 * link:#export-documents[*Export Documents*]
 * link:#get-audit-details[*Get Audit Details*]
-* link:#get-document-renditions[*Get Document Renditions*]
+* link:#get-document-renditions-types[*Get Document Renditions*]
 * link:#get-documents[*Get Documents*]
 * link:#get-object-records[*Get Object Records*]
 * link:#get-picklists[*Get Picklists*]
@@ -124,7 +124,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image1.png[image,width=287,height=182]
+image:media/tech-ref/media/image1.png[image,width=287,height=182]
 
 | |X
 |===
@@ -132,6 +132,20 @@ image:media/tech-ref/image1.png[image,width=287,height=182]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Create Documents
 
@@ -154,7 +168,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image2.png[image,width=241,height=215]
+image:media/tech-ref/media/image2.png[image,width=241,height=215]
 
 | |X
 |===
@@ -162,6 +176,20 @@ image:media/tech-ref/image2.png[image,width=241,height=215]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Create Object Records
 
@@ -177,7 +205,7 @@ Create Object Records creates an object records in bulk on vault using object me
 |Object Name |String a|
 The list of all vault objects available to select anyone from the list. For e.g
 
-image:media/tech-ref/image3.png[image,width=323,height=246]
+image:media/tech-ref/media/image3.png[image,width=323,height=246]
 
 | |X
 |Metadata Format a|
@@ -191,7 +219,7 @@ JSON
 |Object Metadata |Input Stream a|
 The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image4.png[image,width=273,height=216]
+image:media/tech-ref/media/image4.png[image,width=273,height=216]
 
 | |X
 |===
@@ -199,6 +227,20 @@ image:media/tech-ref/image4.png[image,width=273,height=216]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Delete Document Renditions
 
@@ -221,7 +263,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image5.png[image,width=283,height=113]
+image:media/tech-ref/media/image5.png[image,width=283,height=113]
 
 | |X
 |===
@@ -229,6 +271,20 @@ image:media/tech-ref/image5.png[image,width=283,height=113]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Delete Documents
 
@@ -251,7 +307,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image6.png[image,width=279,height=39]
+image:media/tech-ref/media/image6.png[image,width=279,height=39]
 
 | |X
 |===
@@ -259,6 +315,20 @@ image:media/tech-ref/image6.png[image,width=279,height=39]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Delete Object Records
 
@@ -274,7 +344,7 @@ Delete Object Records delete an object records in bulk on vault using object Id 
 |Object Name |String a|
 The list of all vault objects available to select anyone from the list. For e.g
 
-image:media/tech-ref/image3.png[image,width=323,height=246]
+image:media/tech-ref/media/image3.png[image,width=323,height=246]
 
 | |X
 |Metadata Format a|
@@ -288,7 +358,7 @@ JSON
 |Object Metadata |Input Stream a|
 The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image7.png[image,width=300,height=50]
+image:media/tech-ref/media/image7.png[image,width=300,height=50]
 
 | |X
 |===
@@ -297,27 +367,19 @@ image:media/tech-ref/image7.png[image,width=300,height=50]
 
 link:#veevavault-connector-connection-config[Connection Configuration]
 
-==== Download Document
+*Throws:*
 
-Download document to latest or specified version of document file from vault and save to specified file system path.
-
-*<veevavault:download-document>*
-
-*Parameters:*
-
-[cols=",,,,",options="header",]
-|===
-|*Name* |*Type* |*Description* |*Default Value* |*Required*
-|Document Id |String |A document Id whose document file content to download on local filesystem. | |X
-|File Path |String |A directory path where downloaded file will be copied or saved. | |X
-|Major Version |String |A major version to retrieve specific version or leave blank for latest version to download document | |
-|Minor Version |String |A minor version to retrieve specific version or leave blank for latest version to download document | |
-|Lock Document |Boolean |Set to false to Check Out the document before retrieval. |False |
-|===
-
-*For Configurations:*
-
-link:#veevavault-connector-connection-config[Connection Configuration]
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Export Documents
 
@@ -340,7 +402,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The document metadata (document Ids) either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image6.png[image,width=268,height=39]
+image:media/tech-ref/media/image6.png[image,width=268,height=39]
 
 |#[payload] |X
 |Source |Boolean |To exclude source files. |True |
@@ -352,6 +414,20 @@ image:media/tech-ref/image6.png[image,width=268,height=39]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Get Audit Details
 
@@ -367,7 +443,7 @@ Get Audit details retrieves an audit details for a specific audit type.
 |Audit Type |String a|
 The list of audit types available on vault to select anyone from the list. For e.g
 
-image:media/tech-ref/image8.png[image,width=299,height=106]
+image:media/tech-ref/media/image8.png[image,width=299,height=106]
 
 | |X
 |Start Date |String |A Start date to retrieve audit information from date specified. Dates must be YYYY-MM-DDTHH:MM:SSZ format | |
@@ -380,9 +456,23 @@ image:media/tech-ref/image8.png[image,width=299,height=106]
 
 link:#veevavault-connector-connection-config[Connection Configuration]
 
-==== Get Document Renditions
+*Throws:*
 
-Get Document renditions to retrieve document renditions details.
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
+
+==== Get Document Renditions Types
+
+Get Document renditions types to retrieve document renditions details.
 
 *<veevavault:get-document-renditions>*
 
@@ -394,7 +484,7 @@ Get Document renditions to retrieve document renditions details.
 |Document Metadata |Input Stream a|
 The document metadata contains only *documentId* either in CSV OR JSON format as Input Stream. Metadata as below:
 
-image:media/tech-ref/image9.png[image,width=293,height=38]
+image:media/tech-ref/media/image9.png[image,width=293,height=38]
 
 | |X
 |===
@@ -402,6 +492,20 @@ image:media/tech-ref/image9.png[image,width=293,height=38]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Get Documents
 
@@ -427,6 +531,20 @@ Get documents retrieve document details from vault based on document type, subty
 
 link:#veevavault-connector-connection-config[Connection Configuration]
 
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
+
 ==== Get Object Records
 
 Get Object Records retrieves an object records in bulk on vault using object Id metadata either in CSV or JSON format.
@@ -441,7 +559,7 @@ Get Object Records retrieves an object records in bulk on vault using object Id 
 |Object Name |String a|
 The list of all vault objects available to select anyone from the list. For e.g
 
-image:media/tech-ref/image3.png[image,width=300,height=246]
+image:media/tech-ref/media/image3.png[image,width=300,height=246]
 
 | |X
 |Object Fields |List<String> |Object fields based on business requirement can be inserted into list. If not provided it will select all active object fields available to build VQL query and invoke internally to retrieve object records details. | |
@@ -453,6 +571,20 @@ image:media/tech-ref/image3.png[image,width=300,height=246]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Get Picklists
 
@@ -468,7 +600,7 @@ The Get Picklists retrieve all available values configured on a picklist.
 |Picklist Name |String a|
 The list of audit types available on vault to select anyone from the list. For e.g
 
-image:media/tech-ref/image10.png[image,width=293,height=249]
+image:media/tech-ref/media/image10.png[image,width=293,height=249]
 
 | |X
 |===
@@ -476,6 +608,20 @@ image:media/tech-ref/image10.png[image,width=293,height=249]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Query
 
@@ -512,6 +658,20 @@ A Maps of String and Object in which every item represents a row to be inserted,
 
 link:#veevavault-connector-connection-config[Connection Configuration]
 
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
+
 ==== Update Documents
 
 Update documents update the documents on vault using editable document metadata provided in CSV or JSON format.
@@ -533,7 +693,7 @@ Enum (String)
 |Document Metadata |Input Stream a|
 The editable document metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image11.png[image,width=250,height=343]
+image:media/tech-ref/media/image11.png[image,width=250,height=343]
 
 | |X
 |===
@@ -541,6 +701,20 @@ image:media/tech-ref/image11.png[image,width=250,height=343]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
 
 ==== Update Object Records
 
@@ -556,7 +730,7 @@ Update Object Records updates an object records in bulk on vault using editable 
 |Object Name |String a|
 The list of all vault objects available to select anyone from the list. For e.g
 
-image:media/tech-ref/image3.png[image,width=322,height=246]
+image:media/tech-ref/media/image3.png[image,width=322,height=246]
 
 | |X
 |Metadata Format a|
@@ -570,7 +744,7 @@ JSON
 |Object Metadata |Input Stream a|
 The object metadata either in CSV OR JSON format as Input Stream respective to Metadata format option selected. Metadata as below:
 
-image:media/tech-ref/image12.png[image,width=309,height=346]
+image:media/tech-ref/media/image12.png[image,width=309,height=346]
 
 | |X
 |===
@@ -578,3 +752,17 @@ image:media/tech-ref/image12.png[image,width=309,height=346]
 *For Configurations:*
 
 link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED

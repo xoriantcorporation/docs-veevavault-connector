@@ -1,11 +1,11 @@
 *Veeva Vault Connector – Mule 4*
 
-The Veeva Vault Connector lets you integrate Veeva Vault platform to third party vendors using connector operations in Mule Flow. The connector performs CRUD (Create, Retrieve, Update, Delete) operations on Vault using Veeva Vault APIs. The connector works with the Veeva Vault REST, Bulk, and Streaming API, depending on the operation you configure.
+The Veeva Vault Connector lets you integrate Veeva Vault platform to third party vendors using connector operations in Mule Flow. The connector performs CRUD (Create, Retrieve, Update, Delete), Query, Export operations on Vault using Veeva Vault APIs. The connector works with the Veeva Vault REST, Bulk, and Streaming API, depending on the operation you configure.
 
-The Veeva Vault connector can be use in mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Download operations on following Vault Objects.
+The Veeva Vault connector can be use in mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Export operations on following Vault Objects.
 
-* Documents – Create, Retrieve, Update, Delete, Download, Export.
-* Document Renditions – Create, Retrieve, Update, Delete.
+* Documents – Create, Retrieve, Update, Delete, Export.
+* Document Renditions – Create, Retrieve, Delete.
 * Vault Object – Create, Retrieve, Update, Delete.
 * Picklists – Retrieve.
 * Audit Trial – Retrieve.
@@ -13,6 +13,6 @@ The Veeva Vault connector can be use in mule application as an outbound connecto
 
 Additional References:
 
-* link:VeevaVault%20Connector%20Release%20Notes%20for%20Mule%204.adoc[VeevaVault Connector Release Notes].
-* link:VeevaVault%20Connector%20Technical%20Reference%20Guide%20for%20Mule%204.adoc[VeevaVault Connector Technical Reference Guide.]
-* link:VeevaVault%20Connector%20User%20Guide%20for%20Mule%204.adoc[VeevaVault Connector User Guide.]
+* link:VeevaVault%20Connector%20v1.0.2%20Release%20Notes%20for%20Mule%204.docx[Veeva Vault Connector Release Notes].
+* link:VeevaVault%20Connector%20v1.0.2%20Technical%20Reference%20Document%20for%20Mule%204.docx[Veeva Vault Connector Technical Reference Guide.]
+* link:VeevaVault%20Connector%20v1.0.2%20User%20Guide%20for%20Mule%204.docx[Veeva Vault Connector User Guide.]
