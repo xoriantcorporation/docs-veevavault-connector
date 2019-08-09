@@ -417,48 +417,29 @@ image:media/user-guide/image21.png[image,width=303,height=148]
 An Export Documents operation allows to query a set of documents for export to your vault’s FTP Staging server. It is recommended to use Export Documents operation is separate asynchronous flow using Async Scope and passing payload with document ids. Using asynchronously the operation executes in separate flow thread, will wait for specified polling interval to poll the Job status until it gets successful while the main flow continues its process.
 
 The exported documents are stored on FTP Staging area in folder hierarchy structure – \{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}. For example, following is job status response:
-
+--------------------
 \{
-
-"data": \{
-
-"run_end_date": "2019-05-22T10:48:57.000Z",
-
-"run_start_date": "2019-05-22T10:48:56.000Z",
-
-"method": "POST",
-
-"links": [
-
-\{
-
-"method": "GET",
-
-"rel": "self",
-
-"href": "/api/v18.2/services/jobs/34931",
-
-"accept": "application/json"
-
+	"data": \{
+		"run_end_date": "2019-05-22T10:48:57.000Z",
+		"run_start_date": "2019-05-22T10:48:56.000Z",
+		"method": "POST",
+		"links": [
+			\{
+				"method": "GET",
+				"rel": "self",
+				"href": "/api/v18.2/services/jobs/34931",
+				"accept": "application/json"
+			}
+		],
+		"id": 34931,
+		"created_date": "2019-05-22T10:48:55.000Z",
+		"created_by": 2888511,
+		"status": "SUCCESS"
+	},
+	"responseStatus": "SUCCESS"
 }
-
-],
-
-"id": 34931,
-
-"created_date": "2019-05-22T10:48:55.000Z",
-
-"created_by": 2888511,
-
-"status": "SUCCESS"
-
-},
-
-"responseStatus": "SUCCESS"
-
-}
-
-The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like *– \{root}/34931/u2888511/\{documentIds}/\{versions}.*
+--------------------
+The above example shows *‘id’* (which is a JobId) and *‘created_by’* (which is an userId), so folder path on staging server would be like – *\{root}/34931/u2888511/\{documentIds}/\{versions}.*
 
 *root* – Its root location of staging server.
 
