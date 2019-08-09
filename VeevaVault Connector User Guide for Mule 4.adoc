@@ -488,7 +488,7 @@ image:media/user-guide/image24.png[image,width=288,height=256]
 
 ==== Create Document Renditions:
 
-*The Create Document Renditions operation allows to add document renditions in bulk. Your vault must be in Migration Mode before using this operation. It takes maximum CSV input data of size 1GB with value in standard UTF-8 encoded.*
+The Create Document Renditions operation allows to add document renditions in bulk. Your vault must be in Migration Mode before using this operation. It takes maximum CSV input data of size 1GB with value in standard UTF-8 encoded.
 
 *Configurations:*
 
@@ -504,20 +504,20 @@ image:media/user-guide/image10.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Field* |*Description*
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Document Metadata* |Document Metadata payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of document metadata required in payload under Input tab of operation.
 
 image:media/user-guide/image25.png[image,width=280,height=188]
 
-|Output a|
+|*Output* a|
 You can find following operation output or response under Output tab.
 
 image:media/user-guide/image26.png[image,width=283,height=202]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -531,7 +531,7 @@ The Get Document Renditions Types operation allows to retrieve document renditio
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -539,19 +539,19 @@ image:media/user-guide/image27.png[image,width=601,height=61]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Document Metadata |Document Id in payload either in CSV or JSON format.
-|Input a|
+|*Field* |*Description*
+|*Document Metadata* |Document Id in payload either in CSV or JSON format.
+|*Input* a|
 You can see document Id required in payload under Input tab of operation to retrieve document renditions details
 
 image:media/user-guide/image28.png[image,width=293,height=38]
 
-|Output a|
+|*Output* a|
 You can find following operation output or response under Output tab.
 
 image:media/user-guide/image29.png[image,width=300,height=145]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -565,7 +565,7 @@ The Delete Document Renditions operation allows to delete document renditions in
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -573,20 +573,20 @@ image:media/user-guide/image16.png[image,width=601,height=90]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Document Metadata |Document Metadata payload with required metadata either in CSV or JSON format.
-|Input a|
+|*Field* |*Description*
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Document Metadata* |Document Metadata payload with required metadata either in CSV or JSON format.
+|*Input* a|
 You can find following list of document metadata required to create document(s) on vault. Make sure payload should have mandatory metadata as per vault.
 
 image:media/user-guide/image30.png[image,width=283,height=122]
 
-|Output a|
+|*Output* a|
 You can find delete document renditions operation output status or response from vault.
 
 image:media/user-guide/image31.png[image,width=285,height=208]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -600,7 +600,7 @@ The Create Object Records operation allows to create bulk object records for sel
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -608,21 +608,21 @@ image:media/user-guide/image32.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to create records for selected object.
-|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Field* |*Description*
+|*Object Name* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to create records for selected object.
+|*Metadata Format* |Select CSV or JSON option to accept object metadata in specified format.
+|*Object Metadata* |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of object metadata required to create object records.
 
 image:media/user-guide/image33.png[image,width=283,height=330]
 
-|Output a|
+|*Output* a|
 You can find operation output or response retrieved from vault for an object records created.
 
 image:media/user-guide/image34.png[image,width=296,height=163]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -638,7 +638,7 @@ Note – The output of the operation would be in pagination mechanism, please re
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -646,14 +646,14 @@ image:media/user-guide/image35.png[image,width=601,height=355]
 
 [cols=",",options="header",]
 |===
-|Fields |Description
-|Vault Object |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
-|Object Fields (Optional) |Insert object fields as per business requirement and these fields will be used to build a VQL query to execute on vault.
-|WHERE Clause |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g study_country__v = ‘0SC000000000101’*
-|Fetch Size |Provide number of records per page. Default is 1000.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
+|*Fields* |*Description*
+|*Vault Object* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault objects list from vault. Select an object from the list to retrieve object records detail.
+|*Object Fields* (Optional) |Insert object fields as per business requirement and these fields will be used to build a VQL query to execute on vault.
+|*WHERE Clause* |Insert a https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] WHERE clause (without using keyword WHERE) conditions as per business requirement and it will be appended to dynamically to build VQL query to execute on vault. *E.g study_country__v = ‘0SC000000000101’*
+|*Fetch Size* |Provide number of records per page. Default is 1000.
+|*Batch Size* |Provide number of pages per batch. Default is 10.
+|*Input* |N/A
+|*Output* a|
 You can find the list of object records fields to refer to add into Object fields list. If object fields list is provided, then specified fields detail returns as output. Default would be list of all fields.
 
 image:media/user-guide/image36.png[image,width=282,height=306]
