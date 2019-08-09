@@ -967,7 +967,7 @@ image:media/user-guide/image47.png[image,width=601,height=124]
 
 The following operations in connector provides pagination mechanism based on Mule standard pagination.
 
-* link:#get-documents[Get Documents]
+* link:#get-documents[*Get Documents*]
 * link:#get-object-records[*Get Object Records*]
 * link:#query[*Query*]
 * link:#get-audit-details[*Get Audit Details*]
@@ -998,7 +998,7 @@ Therefore, Number of records return per batch would be 10,000 records.
 --------------------
 
 The repeatable streams measure the buffer size in byte measurements, when handling objects the runtime measures the buffer size using instance counts.
-+
+
 In non-repeatable stream connector operation would returns stream as number of records per batch and in repeatable stream would returns all records in once, so when calculating the in-memory buffer size for repeatable auto-paging, you need to estimate how much memory space each instance takes to avoid running out of memory.
 
 === Demo Projects
@@ -1008,17 +1008,17 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 [cols=",,,",options="header",]
 |===
 |*Operations* |*Description* |*Use Case Template* |*Sample Code*
-|Create Documents |Create Document operation creates document(s) on vault. Use this option when you want to create documents in bulk with document metadata received from external source. The documents created status is inserted into – Database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/filesystem-to-veeva-vault-template/[FileSystem to VeevaVault] |link:#create-documents-example[Create Documents]
-|Get Documents |Get Documents operations retrieves document details. Use this option when you want to retrieve document details based on type, subtype, classification document properties and VQL query. The document details retrieved in pagination and in order to fetch each record a For-Each element is added which will transform insert records into database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/veevavault-connector-project-templates/[VeevaVault to FileSystem] |link:#get-documents-example[Get Documents]
-|Delete Documents |Delete Documents operation deletes documents from vault. Use this option when you want to delete documents in bulk using document Id received from external source. The documents deleted status is stored into file system. However, you can trigger/insert to external source. | |link:#delete-documents-example[Delete Documents]
-|Update Documents |Update Document operation update document(s) on vault. Use this option when you want to update documents in bulk with editable document metadata received from external source. The documents updates status is stored into file system. However, you can trigger to external source etc. | |link:#update-documents-example[Update Documents]
-|Create Document Renditions |Create Document Renditions operation creates document renditions on vault. Use this option when you want to create document renditions with document metadata received from external source. The document renditions created status is written into file system. However, you can store into any other entities like – Database, Trigger to external source etc. | |link:#create-document-renditions-example[Create Document Renditions]
-|Get Document Renditions Types |Get Document Renditions Types operation retrieves renditions types details of particular document. | |link:#_Get_Document_Renditions_2[Get Document Renditions Types]
-|Create Object Records |Create Object Records operation creates object records of specified object in vault. Use this option when you want to create object records in bulk using object metadata received from external source. The object records created status is inserted into – Database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/filesystem-to-veeva-vault-template/[FileSystem to VeevaVault] |link:#create-object-records-example[Create Object Records]
-|Get Object Records |Get Object Records operation retrieves object details. Use this option when you want to retrieve object details based on object name. The object details retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and insert records into database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/veevavault-connector-project-templates/[VeevaVault to FileSystem] |link:#_Get_Object_Records_3[Get Object Records]
-|Update Object Records |Update Object Records operation updates object records of specified object in vault. Use this option when you want to update object records in bulk using object metadata received from external source. The object records updated status is stored into file system. However, you can trigger to external source etc. | |link:#update-object-records-example[Update Object Records]
-|Query |Query operation to execute VQL query on vault. Use this option when you want to retrieve document, object and workflow details using VQL query. The VQL query response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. For more details on VQL please refer Veeva https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]. | |link:#_Query_Example[Query]
-|Get Audit Details |Get Audit Details operation retrieve audit details of specified audit type. Use this option when you want to retrieve audit details of an audit type. The Audit details response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. | |link:#get-audit-details-example[Get Audit Details]
+|*Create Documents* |Create Document operation creates document(s) on vault. Use this option when you want to create documents in bulk with document metadata received from external source. The documents created status is inserted into – Database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/filesystem-to-veeva-vault-template/[FileSystem to VeevaVault] |link:#create-documents-example[Create Documents]
+|*Get Documents* |Get Documents operations retrieves document details. Use this option when you want to retrieve document details based on type, subtype, classification document properties and VQL query. The document details retrieved in pagination and in order to fetch each record a For-Each element is added which will transform insert records into database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/veevavault-connector-project-templates/[VeevaVault to FileSystem] |link:#get-documents-example[Get Documents]
+|*Delete Documents* |Delete Documents operation deletes documents from vault. Use this option when you want to delete documents in bulk using document Id received from external source. The documents deleted status is stored into file system. However, you can trigger/insert to external source. | |link:#delete-documents-example[Delete Documents]
+|*Update Documents* |Update Document operation update document(s) on vault. Use this option when you want to update documents in bulk with editable document metadata received from external source. The documents updates status is stored into file system. However, you can trigger to external source etc. | |link:#update-documents-example[Update Documents]
+|*Create Document Renditions* |Create Document Renditions operation creates document renditions on vault. Use this option when you want to create document renditions with document metadata received from external source. The document renditions created status is written into file system. However, you can store into any other entities like – Database, Trigger to external source etc. | |link:#create-document-renditions-example[Create Document Renditions]
+|*Get Document Renditions Types* |Get Document Renditions Types operation retrieves renditions types details of particular document. | |link:#_Get_Document_Renditions_2[Get Document Renditions Types]
+|*Create Object Records* |Create Object Records operation creates object records of specified object in vault. Use this option when you want to create object records in bulk using object metadata received from external source. The object records created status is inserted into – Database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/filesystem-to-veeva-vault-template/[FileSystem to VeevaVault] |link:#create-object-records-example[Create Object Records]
+|*Get Object Records* |Get Object Records operation retrieves object details. Use this option when you want to retrieve object details based on object name. The object details retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and insert records into database. However, you can trigger to external source etc. |https://anypoint.mulesoft.com/exchange/c5788341-a495-4d6f-a931-875757082c63/veevavault-connector-project-templates/[VeevaVault to FileSystem] |link:#_Get_Object_Records_3[Get Object Records]
+|*Update Object Records* |Update Object Records operation updates object records of specified object in vault. Use this option when you want to update object records in bulk using object metadata received from external source. The object records updated status is stored into file system. However, you can trigger to external source etc. | |link:#update-object-records-example[Update Object Records]
+|*Query* |Query operation to execute VQL query on vault. Use this option when you want to retrieve document, object and workflow details using VQL query. The VQL query response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. For more details on VQL please refer Veeva https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]. | |link:#_Query_Example[Query]
+|*Get Audit Details* |Get Audit Details operation retrieve audit details of specified audit type. Use this option when you want to retrieve audit details of an audit type. The Audit details response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. | |link:#get-audit-details-example[Get Audit Details]
 |===
 
 *To use the demo project:*
@@ -1028,11 +1028,11 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 * You must know Mule concepts, flow, Anypoint Studio and connectors – HTTP, Database, File. Refer to https://docs.mulesoft.com/connectors/[MuleSoft Documentation]
 * You must have access to Veeva Vault instance for connector configurations:
 
-* *Username*
-* *Password*
-* *Vault URL*
-* *Vault version*
-* *Vault Client Id (This is custom Id in format - \{organization}-\{component|team})*
+	 *Username*
+	 *Password*
+	 *Vault URL*
+	 *Vault version*
+	 *Vault Client Id (This is custom Id in format - \{organization}-{component|team})*
 
 * You must know about https://docs.mulesoft.com/studio/7.3/[Anypoint Studio] on how to create Mule projects.
 
