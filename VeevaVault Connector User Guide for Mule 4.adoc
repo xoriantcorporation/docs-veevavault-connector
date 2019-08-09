@@ -153,7 +153,7 @@ In the images above, the placeholder values refer to a configuration file placed
 		username: "someone@example.com"
 		password: "xxxxxxx"
 		version : "v19.1"
-		clientId: "mulesoft-abcpharma-clinicalprod-connector"
+		clientId: "mulesoft-abcpharma-clinicalprod-client-vaultconnector"
 --------------------
 
 The Connection Configuration will do Basic Authentication which will accept required parameters – *Vault URL, Username, Password* to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.
@@ -190,11 +190,11 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 
 *Daily API Limit Exceed Profile:*
 
-The Daily API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24-hour window on a daily rolling basis.
+The Daily API limit exceed profile configuration (*Connector Configuration > Advanced Tab*) to act upon if Daily API limit of Veeva Vault API is exceeded or reach threshold configure. The Daily limit is the total numbers of API calls within any 24-hour window on a daily rolling basis.
 
-By default, this option is enabled. If the Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-DailyLimitRemaining) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.
+By default, this option is enabled. If the Daily API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (*X-VaultAPI-DailyLimitRemaining*) value with API Limit threshold specified value, the connector will throw an exception indicating the Daily API Limit is exceeded, the exception will continue for each and every jobs/request created until daily limit is reset or roll over next day.
 
-Below is an example logs recorded which shows warning at 2019-06-06 10:47:31,698, then an error is thrown at 2019-06-06 10:47:31,699.
+Below is an example logs recorded which shows warning at *2019-06-06 10:47:31,698*, then an error is thrown at *2019-06-06 10:47:31,699*.
 
 --------------------
 
@@ -207,11 +207,8 @@ ERROR 2019-06-06 10:47:31,767 [[MuleRuntime].io.44: [veevavault-connector-demo].
 **********************************************************************************
 
 Message : An error occurred from the Veeva Vault API.
-
 Error Code: API_LIMIT_EXCEED.
-
 Original Error Message: The Veeva Vault Connector has reached/exceeded daily API limit remaining calls [10000]. The configured daily api limit threshold is (10000).
-
 Error type : VEEVAVAULT:API_LIMIT_EXCEED
 
 **********************************************************************************
@@ -315,7 +312,7 @@ The Get Documents operation allows to retrieve document details based on documen
 
 Note – The output of the operation would be in pagination mechanism, please refer to link:#streaming-and-pagination[Streaming and Pagination] for more details.
 
-The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API (/api/\{version}/metadata/objects/documents/properties) and VQL Query is built based on document metadata properties added/inserted in Document Properties list, if metadata properties are not provided then all queryable document properties is used in VQL and executed.
+The document type, subtype and classification are optional, if none are selected then document properties metadata are fetched using API *(/api/\{version}/metadata/objects/documents/properties)* and VQL Query is built based on document metadata properties added/inserted in Document Properties list, if metadata properties are not provided then all queryable document properties is used in VQL and executed.
 
 *Configurations:*
 
