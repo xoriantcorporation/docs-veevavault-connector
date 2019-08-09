@@ -16,7 +16,7 @@ The Anypoint Veeva Vault Connector lets you connect Mule flows to the Veeva Vaul
 
 This connector works with the https://developer.veevavault.com/api/19.1/#authentication[Veeva Vault REST, Bulk, and Streaming API], depending on the operation you configure. Each API call uses an JSON/CSV request and returns JSON input stream response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
 
-The Veeva Vault Connector can be use in the Mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, operations on following Vault Objects. These operations are discussed later in this document.
+The Veeva Vault Connector can be use in the Mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Export operations on following Vault Objects. These operations are discussed later in this document.
 
 * Documents – Create, Retrieve, Update, Delete, Export.
 * Document Renditions – Create, Retrieve, Delete.
@@ -149,19 +149,15 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 
 *In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ. E.g. Below is an example snippet of configuration.yaml file under folder (src/main/resources/config)*
 
-veeva:
-
-#Veeva Vault details
-
-vaultURL: "https://xxxx-xxxx.veevavault.com"
-
-username: "someone@example.com"
-
-password: "xxxxxxx"
-
-version : "v19.1"
-
-clientId: "veeva-clinical-mulesoft-connector"
+--------------------
+	#Veeva Vault details
+	veeva:
+		vaultURL: "https://xxxx-xxxx.veevavault.com"
+		username: "someone@example.com"
+		password: "xxxxxxx"
+		version : "v19.1"
+		clientId: "mulesoft-abcpharma-clinicalprod-connector"
+--------------------
 
 *The Connection Configuration will do Basic Authentication which will accept required parameters – Vault URL, Username, Password to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.*
 
@@ -173,7 +169,7 @@ clientId: "veeva-clinical-mulesoft-connector"
 
 *Below is an example from the application logs showing a warning message at 2019-06-06 10:34:45,096 and subsequently waiting for 5 minutes before re-running as shown in the next message after 5 minutes at 2019-06-06 10:39:45,098.*
 
-*--------------------------------*
+--------------------
 
 *WARN 2019-06-06 10:34:45,096 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Burst API Limit remaining calls [1997] has exceeded/reached an API Limit Profile threshold set as [1997]. As per API Limit Profile, Veeva Vault Connector will wait for [5] MINUTES.*
 
@@ -183,7 +179,7 @@ clientId: "veeva-clinical-mulesoft-connector"
 
 *INFO 2019-06-06 10:39:46,024 [[MuleRuntime].io.27: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @2dd2ffaf] [event: 99716950-8818-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Response received for sync http request :: 'https://[vault-domain]/api/v18.2/query?q=SELECT+name__v%2C+type__v%2C+subtype__v%2C+classification__v%2C+lifecycle__v%2C+status__v%2C+study__v%2C+product__v%2C+id+FROM+documents+WHERE+name__v%3D+%27F22611234--6764%27++LIMIT+1000+OFFSET+0' in 925 milliseconds.*
 
-*--------------------------------*
+--------------------
 
 image:media/user-guide/image7.png[image,width=557,height=126]
 
@@ -203,7 +199,7 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 
 *Below is an example logs recorded which shows warning at 2019-06-06 10:47:31,698, then an error is thrown at 2019-06-06 10:47:31,699.*
 
-******
+--------------------
 
 *WARN 2019-06-06 10:47:31,698 [[MuleRuntime].io.44: [veevavault-connector-demo].get-documents-operationFlow.BLOCKING @108e7f43] [event: 624cfa50-881a-11e9-90e2-d61515f42856] org.mule.extension.veevavault.internal.service.HttpRequestService: Veeva Daily API Limit remaining calls [10000] has exceeded/reached an Daily API Limit Profile threshold set as [10000]. As per API Limit Profile, Veeva Vault Connector will throw an exception.*
 
@@ -222,6 +218,7 @@ image:media/user-guide/image7.png[image,width=557,height=126]
 *Error type : VEEVAVAULT:API_LIMIT_EXCEED*
 
 **********************************************************************************
+--------------------
 
 image:media/user-guide/image8.png[image,width=560,height=80]
 
@@ -251,36 +248,34 @@ image:media/user-guide/image9.png[image,width=558,height=31]
 
 * link:#create-documents[*Create Documents*]
 * link:#get-documents[*Get Documents*]
-* {blank}
-* *link:\l[Delete Documents]link:#update-documents[Update Documents]*
-* {blank}
+* link:#delete-documents[*Delete Documents*]
+* link:#update-documents[*Update Documents*]
+* link:#export-documents[*Export Documents*]
 
-*link:\l[Export Documents]Document Renditions*
+*Document Renditions*
 
-* {blank}
-* *link:\l[Create Document Renditions]link:#get-document-renditions-types[Get Document Renditions Types]*
-* {blank}
+* link:#create-document-renditions[*Create Document Renditions*]
+* link:#get-document-renditions-types[*Get Document Renditions Types*]
+* link:#delete-document-renditions[*Delete Document Renditions*]
 
-*link:\l[Delete Document Renditions]Vault Objects*
+*Vault Objects*
 
-* {blank}
-* link:\l[*Create Object Records*]
-* link:\l[*Get Object Records*]
-* link:\l[*Delete Object Records*]
+* link:#create-object-records[*Create Object Records*]
+* link:#get-object-records[*Get Object Records*]
+* link:#delete-object-records[*Delete Object Records*]
+* link:#update-object-records[*Update Object Records*]
 
-*link:\l[Update Object Records]VQL Query*
+*VQL Query*
 
-* {blank}
+* link:#query[*Query*]
 
-*link:\l[Query]Picklists*
+*Picklists*
 
-* {blank}
+* link:#get-picklists[*Get Picklists*]
 
-*link:\l[Get Picklists]Audit*
+*Audit*
 
-* {blank}
-
-link:\l[*Get Audit Details*]
+* link:#get-audit-details[*Get Audit Details*]
 
 ==== Create Documents
 
@@ -313,7 +308,7 @@ You can find create documents operation output status or response from vault.
 
 image:media/user-guide/image12.png[image,width=297,height=213]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 

@@ -54,10 +54,10 @@ Features
 
 See Also
 
-https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-co[Anypoint Connector Support Policy]
+* https://www.mulesoft.com/legal/versioning-back-support-policy#anypoint-co[Anypoint Connector Support Policy]
 
-Veeva Vault Connector User Guide
+* link:VeevaVault%20Connector%20User%20Guide%20for%20Mule%204.adoc[Veeva Vault Connector User Guide.]
 
-https://forums.mulesoft.com/index.html[MuleSoft Forum]
+* https://forums.mulesoft.com/index.html[MuleSoft Forum]
 
-https://support.mulesoft.com[Contact MuleSoft Support]
+* https://support.mulesoft.com[Contact MuleSoft Support]
