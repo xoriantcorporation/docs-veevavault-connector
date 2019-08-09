@@ -849,7 +849,7 @@ image:media/user-guide/image45.png[image,width=600,height=179]
 |*Start date* |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
 |*End date* |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
 |*Fetch Size* |Provide number of records per page. Default is 1000.
-|*Batch* Size |Provide number of pages per batch. Default is 10.
+|*Batch Size* |Provide number of pages per batch. Default is 10.
 |*Input* |N/A
 |*Output* a|
 The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
@@ -863,143 +863,87 @@ image:media/user-guide/image46.png[image,width=282,height=232]
 The Veeva Vault Connector operation responses are based on the Veeva API success or failure response with an error. The connector returns SUCCESS response at HIGH LEVEL and SUCCESS or FAILURE at LOW LEVEL (it means connector operation is SUCCESS but some to documents/object records failed to create/update due to some irrelevant metadata pass in request. For e.g.:
 
 * *SUCCESS with SUCCESS response*
-+
-\{
-+
+--------------------
+{
+
 "responseStatus": "SUCCESS"
-+
-"data":
-+
-[
-+
-\{
-+
-"id": 239026,
-+
-"name__v": "E22611234--38483",
-+
-"responseStatus": "SUCCESS"
-+
-},
-+
-\{
-+
-"id": 239025,
-+
-"name__v": "Kick-off Meeting Material Updated12341234--81032",
-+
-"responseStatus": "SUCCESS"
-+
+	"data":[
+		{
+			"id": 239026,
+			"name__v": "E22611234--38483",
+			"responseStatus": "SUCCESS"
+		},
+		{
+			"id": 239025,
+			"name__v": "Kick-off Meeting Material Updated12341234--81032",
+			"responseStatus": "SUCCESS"
+		}
+	]
 }
-+
-]
-+
-}
+--------------------
+
 * *SUCCESS with a FAILURE response*
 
-____
-\{
-
-"data": [
-
-\{
-
-"external_id__v": "TEST-238924",
-
-"rendition_type__v": "imported_rendition__c",
-
-"id": 238924,
-
-"responseStatus": "FAILURE",
-
-"minor_version_number__v": 1,
-
-"errors": [
-
-\{
-
-"type": "INVALID_DATA",
-
-"message": "Document not found [238924/0/1]."
-
+--------------------
+{
+	"data": [
+		{
+			"external_id__v": "TEST-238924",
+			"rendition_type__v": "imported_rendition__c",
+			"id": 238924,
+			"responseStatus": "FAILURE",
+			"minor_version_number__v": 1,
+			"errors": [
+				{
+					"type": "INVALID_DATA",
+					"message": "Document not found [238924/0/1]."
+				}
+			],
+			"major_version_number__v": 0
+		},
+		{
+			"external_id__v": "TEST-238925",
+			"rendition_type__v": "imported_rendition__c",
+			"id": 238925,
+			"responseStatus": "FAILURE",
+			"minor_version_number__v": 1,
+			"errors": [
+				{
+					"type": "INVALID_DATA",
+					"message": "Document not found [238925/0/1]."
+				}
+			],
+			"major_version_number__v": 0
+		}
+	],
+	"responseStatus": "SUCCESS"
 }
-
-],
-
-"major_version_number__v": 0
-
-},
-
-\{
-
-"external_id__v": "TEST-238925",
-
-"rendition_type__v": "imported_rendition__c",
-
-"id": 238925,
-
-"responseStatus": "FAILURE",
-
-"minor_version_number__v": 1,
-
-"errors": [
-
-\{
-
-"type": "INVALID_DATA",
-
-"message": "Document not found [238925/0/1]."
-
-}
-
-],
-
-"major_version_number__v": 0
-
-}
-
-],
-
-"responseStatus": "SUCCESS"
-
-}
-____
+--------------------
 
 The Veeva Vault operations throw an exception when Veeva APIs returns a FAILURE response. E.g:
 
 * *FAILURE with an ERROR response*
-+
-\{
-+
-"responseStatus": "FAILURE",
-+
-"errors": [
-+
-\{
-+
-"type": "INVALID_DATA",
-+
-"message": "Unknown relationship [reviewer__v]"
-+
+--------------------
+{
+	"responseStatus": "FAILURE",+
+	"errors": [
+		{
+			"type": "INVALID_DATA",
+			"message": "Unknown relationship [reviewer__v]"
+		}
+	]
 }
-+
-]
-+
-}
-
+--------------------
 On receiving above FAILURE response from Veeva APIs, the connector operations will throw an exception, which needs to be caught in Error Handling component within Mule flow. E.g.:
 
+--------------------
 **********************************************************************************
-
-*Message : An error occurred from the Veeva Vault API.*
-
-*Error Code: INVALID_DATA.*
-
-*Original Error Message: Unknow relationship [reviewer__v].*
-
-*Error type : VEEVAVAULT:INVALID_DATA*
-
+Message : An error occurred from the Veeva Vault API.
+Error Code: INVALID_DATA.
+Original Error Message: Unknow relationship [reviewer__v].
+Error type : VEEVAVAULT:INVALID_DATA
 **********************************************************************************
+--------------------
 
 Following are the Error codes that can be caught in Error Handling component
 
