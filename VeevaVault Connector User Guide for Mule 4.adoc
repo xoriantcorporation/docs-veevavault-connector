@@ -141,7 +141,7 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 |*Username* |Enter the Veeva Vault instance username.
 |*Password* |Enter the corresponding password.
 |*Version* |Enter the Veeva Vault instance version (e.g: v19.1)
-|*Client Id* |Enter Client Id in format mulesoft-*{organisation}-{company|team}*-client-vaultconnector to send with each request in header for tracking purpose. E.g : mulesoft-abcpharma-clinicalprod-client-vaultconnector
+|*Client Id* |Enter Client Id in format mulesoft-*\{organisation}-\{company\|team}*-client-vaultconnector to send with each request in header for tracking purpose. E.g : mulesoft-abcpharma-clinicalprod-client-vaultconnector
 |===
 
 In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ. E.g. Below is an example snippet of configuration.yaml file under folder (src/main/resources/config)
