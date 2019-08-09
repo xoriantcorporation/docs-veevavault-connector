@@ -418,13 +418,13 @@ An Export Documents operation allows to query a set of documents for export to y
 
 The exported documents are stored on FTP Staging area in folder hierarchy structure – \{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}. For example, following is job status response:
 --------------------
-\{
-	"data": \{
+{
+	"data": {
 		"run_end_date": "2019-05-22T10:48:57.000Z",
 		"run_start_date": "2019-05-22T10:48:56.000Z",
 		"method": "POST",
 		"links": [
-			\{
+			{
 				"method": "GET",
 				"rel": "self",
 				"href": "/api/v18.2/services/jobs/34931",
