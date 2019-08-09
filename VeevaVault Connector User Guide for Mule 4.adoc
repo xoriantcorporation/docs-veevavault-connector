@@ -716,7 +716,7 @@ image:media/user-guide/image32.png[image,width=601,height=112]
 |===
 |*Field* |*Description*
 |*Object Name* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
-|Metadata Format* |Select CSV or JSON option to accept object metadata in specified format.
+|*Metadata Format* |Select CSV or JSON option to accept object metadata in specified format.
 |*Object Metadata* |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
 |*Input* a|
 You can find following list of object metadata required to create object records.
@@ -758,23 +758,25 @@ Enter https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] q
 
 *Note -- Do not specify LIMIT and OFFSET in VQL query.*
 
-|Input Parameters a|
+|*Input Parameters* a|
 The input parameters are to pass parameter(s) to VQL query dynamically. The parameters should be name-value pair, payload or variables value can be pass. Eg.
 
 ____
-#[\{
+#[
+	{
 
-'table': 'site__v',
+		'table': 'site__v',
 
-}]
+	}
+]
 ____
 
 Default parameter is *#[\{}].*
 
-|Fetch Size |Provide number of records per page. Default is 1000.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
+|*Fetch Size* |Provide number of records per page. Default is 1000.
+|*Batch Size* |Provide number of pages per batch. Default is 10.
+|*Input* |N/A
+|*Output* a|
 You can find the specified VQL query fields in output tab of operation. It returns specified VQL query result contains pagination data.
 
 image:media/user-guide/image42.png[image,width=305,height=145]
@@ -783,16 +785,16 @@ image:media/user-guide/image42.png[image,width=305,height=145]
 
 *Use Input Parameters to Protect VQL Queries*
 
-*The Query operation is used to retrieve documents, object, workflow information from the Vault. The primary concept of this operation is to supply a VQL query and use DataWeave to supply the parameters:*
+The Query operation is used to retrieve documents, object, workflow information from the Vault. The primary concept of this operation is to supply a VQL query and use DataWeave to supply the parameters:
 
-*In the above example, input parameters are supplied as key-value pairs, which you can create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference a parameter value by name. This is the recommended approach for using parameters in your VQL query.*
+In the above example, input parameters are supplied as key-value pairs, which you can create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference a parameter value by name. This is the recommended approach for using parameters in your VQL query.
 
-*The alternative is to directly write ` <veevavault:vql>SELECT id, name__v, study__v FROM documents WHERE name__v = #[payload] </veevavault:vql>`, but this is a very dangerous practice that is not recommended.*
+The alternative is to directly write ` *<veevavault:vql>SELECT id, name__v, study__v FROM documents WHERE name__v = #[payload] </veevavault:vql>`*, but this is a very dangerous practice that is not recommended.
 
 *Advantages of using input parameters to configure the WHERE clause in a SELECT statement this way:*
 
-* *The query becomes immune to VQL injection attacks.*
-* *The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.*
+* The query becomes immune to VQL injection attacks.
+* The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.
 
 ==== Get Picklists
 
@@ -804,7 +806,7 @@ The Get Picklists operation allows to retrieve all available picklist values con
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -812,10 +814,10 @@ image:media/user-guide/image43.png[image,width=601,height=60]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Picklist Name (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
-|Input |N/A
-|Output a|
+|*Field* |*Description*
+|*Picklist Name* (Optional) |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve picklists from vault. Select a picklist name from the list to retrieve picklist values.
+|*Input* |N/A
+|*Output* a|
 You can find picklist values with name and label as an output of Get Picklists operation.
 
 image:media/user-guide/image44.png[image,width=284,height=91]
@@ -834,7 +836,7 @@ Note – The output of the operation would be in pagination mechanism, please re
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -842,14 +844,14 @@ image:media/user-guide/image45.png[image,width=600,height=179]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Audit Type |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
-|Start date |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|End date |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
-|Fetch Size |Provide number of records per page. Default is 1000.
-|Batch Size |Provide number of pages per batch. Default is 10.
-|Input |N/A
-|Output a|
+|*Field* |*Description*
+|*Audit Type* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve audit types from vault. Select an audit type from the list whose audit details need to retrieve.
+|*Start date* |Optional, specify start date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM-DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|*End date* |Optional, specify end date to retrieve audit information. This date cannot be more than 30 days ago. Dates must be YYYY-MM- DDTHH:MM:SSZ format. Dates and times are in UTC. If time is not specified, it will default to midnight (T00:00:00Z) on the specified date.
+|*Fetch Size* |Provide number of records per page. Default is 1000.
+|*Batch* Size |Provide number of pages per batch. Default is 10.
+|*Input* |N/A
+|*Output* a|
 The following selected audit type details retrieved from vault in pagination format. Make sure to use For each / Splitter to fetch each record.
 
 image:media/user-guide/image46.png[image,width=282,height=232]
