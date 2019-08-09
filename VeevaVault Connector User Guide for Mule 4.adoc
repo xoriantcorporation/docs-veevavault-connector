@@ -670,7 +670,7 @@ The Delete Object Records operation allows to delete single or multiple object r
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -678,21 +678,21 @@ image:media/user-guide/image32.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to delete object records for selected object.
-|Metadata Format |Select CSV or JSON option to accept document metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Field* |*Description*
+|*Object Name* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to delete object records for selected object.
+|*Metadata Format* |Select CSV or JSON option to accept document metadata in specified format.
+|*Object Metadata* |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of object metadata required to delete object records.
 
 image:media/user-guide/image37.png[image,width=300,height=70]
 
-|Output a|
+|*Output* a|
 You can find operation output or response retrieved from vault for an object records deleted.
 
 image:media/user-guide/image38.png[image,width=303,height=110]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -706,7 +706,7 @@ The Update Object Records operation allows to update object records of specified
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -714,21 +714,21 @@ image:media/user-guide/image32.png[image,width=601,height=112]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|Object Name |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
-|Metadata Format |Select CSV or JSON option to accept object metadata in specified format.
-|Object Metadata |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
-|Input a|
+|*Field* |*Description*
+|*Object Name* |Click on icon image:media/user-guide/image14.png[image,width=22,height=22] to retrieve vault object list. Select the object name from the list to update object records of vault object.
+|Metadata Format* |Select CSV or JSON option to accept object metadata in specified format.
+|*Object Metadata* |Object fields payload with required metadata either in CSV or JSON format. Make sure payload would be in format as specified in Metadata format field.
+|*Input* a|
 You can find following list of object metadata required to create object records.
 
 image:media/user-guide/image39.png[image,width=283,height=346]
 
-|Output a|
+|*Output* a|
 You can find object status of an object updated as an output or response retrieved from vault under output tab of operation.
 
 image:media/user-guide/image40.png[image,width=281,height=112]
 
-*Note : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[Connector Operations SUCCESS and FAILURE Response].*
+*Note* : It’s important to check response status of Success and Failure of operation in section link:#connector-operations-success-and-failure-response[*Connector Operations SUCCESS and FAILURE Response*].
 
 |===
 
@@ -744,7 +744,7 @@ Note – The output of the operation would be in pagination mechanism, please re
 
 image:media/user-guide/image5.png[image,width=601,height=54]
 
-*Follow the instructions mentioned in link:#configuration[Connector Configuration]*
+Follow the instructions mentioned in link:#configuration[*Connector Configuration*]
 
 *Operation Configuration:*
 
@@ -752,8 +752,8 @@ image:media/user-guide/image41.png[image,width=595,height=355]
 
 [cols=",",options="header",]
 |===
-|Field |Description
-|VQL Query a|
+|*Field* |*Description*
+|*VQL Query* a|
 Enter https://developer.veevavault.com/vql/#introduction-to-vault-queries[VQL] query to send it to Vault.
 
 *Note -- Do not specify LIMIT and OFFSET in VQL query.*
