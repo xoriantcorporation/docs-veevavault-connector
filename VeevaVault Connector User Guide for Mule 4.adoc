@@ -69,13 +69,13 @@ If you are coding a Mavenized Mule application, this XML snippet must be include
 --------------------
 <dependency>
 <groupId>org.mule.extension</groupId>
-<artifactId>mule-[.underline]#veevavault#-connector</artifactId>
+<artifactId>mule-veevavault-connector</artifactId>
 <version>RELEASE</version>
-<classifier>mule-[.underline]#plugin#</classifier>
+<classifier>mule-plugin</classifier>
 </dependency>
 --------------------
 
-Inside the <version> tags, put the desired version number, the word RELEASE for the latest release, or SNAPSHOT for the latest available version.
+Inside the *<version>* tags, put the desired version number, the word *RELEASE* for the latest release, or SNAPSHOT for the latest available version.
 
 ==== Installing and Configuring in Studio
 
@@ -107,10 +107,10 @@ image:media/user-guide/image2.png[image,width=531,height=386]
 . Enter _Veeva Vault_ in the search box and hit Enter.
 . Click Veeva Vault Connection and then click Install
 . Follow the remaining instructions to complete the installation of the connector.
-. In Anypoint Studio click Help > Installation Details.*
+. In Anypoint Studio click Help > Installation Details.
 . Verify Veeva Vault connector appears in the list of installed software.
 +
-*Note:* The steps in the version of Anypoint Studio on your system might be different to the ones described here.
+*Note: The steps in the version of Anypoint Studio on your system might be different to the ones described here.*
 
 For information about installing connectors, see https://docs.mulesoft.com/connectors/[Installing Connectors]
 
@@ -141,7 +141,7 @@ image:media/user-guide/image6.png[image,width=579,height=183]
 |*Username* |Enter the Veeva Vault instance username.
 |*Password* |Enter the corresponding password.
 |*Version* |Enter the Veeva Vault instance version (e.g: v19.1)
-|*Client Id* |Enter Client Id in format mulesoft-\{organisation}-\{server}-connector to send with each request in header for tracking purpose. E.g : mulesoft-abcpharma-clinicalprod-connector
+|*Client Id* |Enter Client Id in format mulesoft-*\{organisation\|team\}*-client-vaultconnector to send with each request in header for tracking purpose. E.g : mulesoft-abcpharma-clinicalprod-client-vaultconnector
 |===
 
 In the images above, the placeholder values refer to a configuration file placed in the folder (src/main/resources) of your project. You can either hardcode your credentials into the global configuration properties or reference a configuration file that contains these values. For simpler maintenance and better re-usability of your project, Mule recommends that you use a configuration file. Keeping these values in a separate file is useful if you need to deploy to different environments, such as production, development, and QA, where your access credentials differ. E.g. Below is an example snippet of configuration.yaml file under folder (src/main/resources/config)
@@ -156,13 +156,13 @@ In the images above, the placeholder values refer to a configuration file placed
 		clientId: "mulesoft-abcpharma-clinicalprod-connector"
 --------------------
 
-The Connection Configuration will do Basic Authentication which will accept required parameters – Vault URL, Username, Password to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.
+The Connection Configuration will do Basic Authentication which will accept required parameters – *Vault URL, Username, Password* to perform connection with Veeva Vault instance to retrieve Session. The retrieved session will be used for each operation configured in Mule application for sending request.
 
 *Burst API Limit Exceed Profile:*
 
-The Burst API limit exceed profile configuration (Connector Configuration > Advanced Tab) to act upon if Burst API limit of Veeva Vault API is exceeded or reach threshold configure.
+The Burst API limit exceed profile configuration (*Connector Configuration > Advanced Tab*) to act upon if Burst API limit of Veeva Vault API is exceeded or reach threshold configure.
 
-By default, this option is enabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (X-VaultAPI-BurstLimitRemaining) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.
+By default, this option is enabled. If Burst API Limit Exceed Profile is enabled, then connector will evaluate Veeva APIs response header (*X-VaultAPI-BurstLimitRemaining*) value with API Limit threshold specified value. At Vault API burst limit remaining value exceed or reach this threshold value, the connector will wait for specified Wait time to roll over the Burst Limit Remaining in 5 minutes window.
 
 Below is an example from the application logs showing a warning message at 2019-06-06 10:34:45,096 and subsequently waiting for 5 minutes before re-running as shown in the next message after 5 minutes at 2019-06-06 10:39:45,098.
 
