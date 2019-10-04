@@ -4,8 +4,6 @@
 
 *for Mule 4*
 
-*1.0.4*
-
 
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
@@ -25,8 +23,8 @@ The Veeva Vault Connector supports these software versions:
 * Veeva APIs – 18.0 or higher
 
 *Fixed in this Release:*
--	Export Documents operation should return Job results instead of Job Status response.
--	Get Documents and Get Object Records operations thrown Null pointer exceptions when Document/Field properties list configured as empty or None.
+* Export Documents operation should return Job results instead of Job Status response.
+* Get Documents and Get Object Records operations thrown Null pointer exceptions when Document/Field properties list configured as empty or None.
 
 
 *Version 1.0.3*
