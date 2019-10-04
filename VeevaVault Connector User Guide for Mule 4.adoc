@@ -416,7 +416,7 @@ image:media/user-guide/image21.png[image,width=303,height=148]
 
 An Export Documents operation allows to query a set of documents for export to your vault’s FTP Staging server. It is recommended to use Export Documents operation is separate asynchronous flow using Async Scope and passing payload with document ids. Using asynchronously the operation executes in separate flow thread, will wait for specified polling interval to poll the Job status until it gets successful while the main flow continues its process.
 
-The exported documents are stored on FTP Staging area in folder hierarchy structure – *\{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}*. For example, following is job status response:
+The exported documents are stored on FTP Staging area in folder hierarchy structure – *\{root}/\{userId}/\{jobId}/\{documentIds}/\{versions}*. The Export Documents operation will return job results as response. For example:
 --------------------
 [
   {
@@ -450,13 +450,13 @@ The above example shows attributes as under :
  
 *file – "/{jobId}/{documentId}/{major-minor-version}/{filename}"*. It’s file absolute path location on Vault FTP server staging area.
  
-*user_id__v – * It’s a Vault system user Id of an user whose credentials are configured in connector. The folder is created in the name of user Id prefix with *‘u’ (e.g: uXXXXXXX)* on Vault FTP server staging area root location and under which exported file is located – *(e.g: "/uXXXXXXX/{jobId}/{documentId}/{major-minor-version}/{filename}"*.
+*user_id__v* –  It’s a Vault system user Id of an user whose credentials are configured in connector. The folder is created in the name of user Id prefix with *‘u’ (e.g: uXXXXXXX)* on Vault FTP server staging area root location and under which exported file is located – *(e.g: "/uXXXXXXX/{jobId}/{documentId}/{major-minor-version}/{filename})"*.
 
-*id – * It’s a document Id of exported document file.
+*id* – It’s a document Id of exported document file.
 
-*major_version_number__v – * It’s a major version number of exported document file.
+*major_version_number__v* – It’s a major version number of exported document file.
 
-*minor_version_number__v – * It’s a minor version number of exported document file.
+*minor_version_number__v* – It’s a minor version number of exported document file.
 
 
 *Configurations:*
