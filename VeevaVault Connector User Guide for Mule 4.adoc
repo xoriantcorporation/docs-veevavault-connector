@@ -448,7 +448,7 @@ The exported documents are stored on FTP Staging area in folder hierarchy struct
 
 The above example shows attributes as under :
  
-*file – "/{jobId}/{documentId}/{major-minor-version}/{filename}"*. It’s file absolute path location on Vault FTP server staging area.
+*file – "/{jobId}/{documentId}/{major-minor-version}/{filename}"*. It’s an absolute file path location on Vault FTP server staging area.
  
 *user_id__v* –  It’s a Vault system user Id of an user whose credentials are configured in connector. The folder is created in the name of user Id prefix with *‘u’ (e.g: uXXXXXXX)* on Vault FTP server staging area root location and under which exported file is located – *(e.g: "/uXXXXXXX/{jobId}/{documentId}/{major-minor-version}/{filename})"*.
 
