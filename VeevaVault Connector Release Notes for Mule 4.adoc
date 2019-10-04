@@ -4,21 +4,41 @@
 
 *for Mule 4*
 
-*1.0.3*
+*1.0.4*
 
-*August 2019*
+
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
 
-This is New Release
+*Version 1.0.4*
+October 2019
 
-Version 1.0.3
-
-Compatibility
+*Compatibility*
 
 The Veeva Vault Connector supports these software versions:
 
-Minimum Versions:
+*Minimum Versions:*
+
+* Anypoint Studio – 7.0.0 or higher
+* Mule Runtime – 4.1.0 or higher
+* JDK – 1.8.0 or higher
+* Veeva APIs – 18.0 or higher
+
+*Fixed in this Release:*
+-	Export Documents operation should return Job results instead of Job Status response.
+-	Get Documents and Get Object Records operations thrown Null pointer exceptions when Document/Field properties list configured as empty or None.
+
+
+*Version 1.0.3*
+August 2019
+
+This is New Release
+
+*Compatibility*
+
+The Veeva Vault Connector supports these software versions:
+
+*Minimum Versions:*
 
 * Anypoint Studio – 7.0.0 or higher
 * Mule Runtime – 4.1.0 or higher
@@ -30,7 +50,7 @@ Third Party Libraries:
 * Apache Common Language – 2.6 or higher
 * JSON Libraries – 20170516 or higher
 
-Features
+*Features:*
 
 * The Veeva Vault Connector includes Basic Authentication using Username and Password at connector configuration level.
 * At connector configuration level it also provides an option to configure response timeout, Burst API Limit Exceed profile and Daily API Limit Exceed profile – to configure API Limit Threshold, API Wait Time and Time Unit, by default it enable.
