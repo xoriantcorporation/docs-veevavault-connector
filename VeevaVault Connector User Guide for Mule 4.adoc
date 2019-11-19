@@ -274,7 +274,7 @@ Following are the list of operations with the connector:
 
 *Spark Messaging*
 
-* link:#spark-message-validator[*Spark Validator*]
+* link:#spark-validator[*Spark Validator*]
 
 ==== Create Documents
 
