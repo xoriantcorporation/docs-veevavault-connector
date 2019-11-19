@@ -777,9 +777,7 @@ The input parameters are to pass parameter(s) to VQL query dynamically. The para
 ____
 #[
 	{
-
 		'table': 'site__v',
-
 	}
 ]
 ____
