@@ -98,6 +98,7 @@ The Daily API Limit Profile to configure API limit threshold for evaluation with
 * link:#get-object-records[*Get Object Records*]
 * link:#get-picklists[*Get Picklists*]
 * link:#query[*Query*]
+* link:#spark-validator[*Spark Validator*]
 * link:#update-documents[*Update Documents*]
 * link:#update-object-records[*Update Object Records*]
 
@@ -671,6 +672,62 @@ link:#veevavault-connector-connection-config[Connection Configuration]
 * VEEVAVAULT:NO_PERMISSION
 * VEEVAVAULT:OPERATION_NOT_ALLOWED
 * VEEVAVAULT:PARAMETER_REQUIRED
+
+==== Spark Validator
+
+The Spark Validator validates and verify the Spark message with signature and public key retrieved from Vault.
+
+*<veevavault:spark-message-validator>*
+
+*Parameters:*
+
+[cols=",,,,",options="header",]
+|===
+|*Name* |*Type* |*Description* |*Default Value* |*Required*
+|Include Spark Headers|
+Boolean
+|Flag to include Spark Headers in Spark Message Validator output. 
+
+image:media/tech-ref/image13.png[image,width=590,height=35]
+|FALSE|
+|Public Key Path|
+String
+|The directory path to store public key (00001.pem) file retrieved from Vault, if does not exists.
+|${mule.home}/apps/${app.name}/publickeys|
+
+|Spark Headers|
+Object
+|An attributes header received from Vault embed in Spark message.
+|#[attributes.headers]|
+
+|Spark Message|
+Input Stream
+|A Spark body message received from Vault.
+|#[payload]|
+
+|===
+
+*For Configurations:*
+
+link:#veevavault-connector-connection-config[Connection Configuration]
+
+*Throws:*
+
+* VEEVAVAULT:API_LIMIT_EXCEEDED
+* VEEVAVAULT:ATTRIBUTE_NOT_SUPPORTED
+* VEEVAVAULT:INACTIVE_USER
+* VEEVAVAULT:INVALID_DATA
+* VEEVAVAULT:INVALID_DOCUMENT
+* VEEVAVAULT:INSUFFICIENT_ACCESS
+* VEEVAVAULT:MALFORMED_URL
+* VEEVAVAULT:METHOD_NOT_SUPPORTED
+* VEEVAVAULT:NO_PERMISSION
+* VEEVAVAULT:OPERATION_NOT_ALLOWED
+* VEEVAVAULT:PARAMETER_REQUIRED
+* VEEVAVAULT:INVALID_SPARK_MESSAGE
+* VEEVAVAULT:INVALID_KEY_FORMAT
+
+
 
 ==== Update Documents
 

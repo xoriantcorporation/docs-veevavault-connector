@@ -8,9 +8,9 @@
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
 
-*Version 1.0.4*
+*Version 1.1.0*
 
-October 2019
+November 2019
 
 *Compatibility*
 
@@ -27,6 +27,7 @@ The Veeva Vault Connector supports these software versions:
 
 * Export Documents operation should return Job results instead of Job Status response.
 * Get Documents and Get Object Records operations thrown Null pointer exceptions when Document/Field properties list configured as empty or None.
+* Spark Message Validator operation implemented to validate and verify Spark message with public key and signature received from Vault. Please refer user guide for more details.
 
 
 *Version 1.0.3*

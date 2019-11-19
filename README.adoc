@@ -2,7 +2,7 @@
 
 The Veeva Vault Connector lets you integrate Veeva Vault platform to third party vendors using connector operations in Mule Flow. The connector performs CRUD (Create, Retrieve, Update, Delete), Query, Export operations on Vault using Veeva Vault APIs. The connector works with the Veeva Vault REST, Bulk, and Streaming API, depending on the operation you configure.
 
-The Veeva Vault connector can be use in mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Export operations on following Vault Objects.
+The Veeva Vault connector can be use in mule application as an outbound connector with CRUD (Create, Retrieve, Update, Delete), Query, Export, Spark Validator operations operations on following Vault Objects.
 
 * Documents – Create, Retrieve, Update, Delete, Export.
 * Document Renditions – Create, Retrieve, Delete.
@@ -10,6 +10,7 @@ The Veeva Vault connector can be use in mule application as an outbound connecto
 * Picklists – Retrieve.
 * Audit Trial – Retrieve.
 * Query – VQL Query to query on Documents, Vault Object, Workflows.
+* Spark Validator – Validates and verifies the Spark message triggered from Vault with signature.
 
 Additional References:
 
