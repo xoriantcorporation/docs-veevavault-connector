@@ -873,7 +873,7 @@ image:media/user-guide/image46.png[image,width=282,height=232]
 
 ==== Spark Validator
 
-The Spark Validator operation validates and verify spark message triggered from Vault with signature and public key. On successful validation and verification, the Spark message can be process further in Mule Flow as per business requirements. You can refer to *https://developer.veevavault.com/sdk/#spark-messaging[Spark Messaging feature and functionalities] and setup for more details.
+The Spark Validator operation validates and verify spark message triggered from Vault with signature and public key. On successful validation and verification, the Spark message can be process further in Mule Flow as per business requirements. You can refer to https://developer.veevavault.com/sdk/#spark-messaging[Spark Messaging feature and functionalities] and setup for more details.
 
 The output of Spark Validator operation is Spark attributes (optional) with Spark Message as it is received from Vault.
 
@@ -900,7 +900,7 @@ image:media/user-guide/image61.png[image,width=600,height=195]
 |*Public Key Path*|The path where public key (00001.pem) file get saved and will be used for verifying incoming Spark message with Signature. Default is *“${mule.home}/apps/${app.name}/publickeys”*
 |*Spark Headers*|The Spark headers received from the Vault. Default is *#[attributes.headers]*
 |*Spark Message*|The Spark message body received from the Vault. Default is *#[payload]*.
-|*Input *|You can find the following inputs required for Spark Validator.
+|*Input*|You can find the following inputs required for Spark Validator.
 
 image:media/user-guide/image62.png[image,width=285,height=330]
 
