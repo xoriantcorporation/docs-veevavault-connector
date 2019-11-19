@@ -4,42 +4,21 @@
 
 *for Mule 4*
 
+*1.0.3*
 
+*August 2019*
 
 Veeva Vault connector connects Vault instances to integrate Vault data with other products or end applications through Mule Flow.
 
-*Version 1.0.4*
-
-October 2019
-
-*Compatibility*
-
-The Veeva Vault Connector supports these software versions:
-
-*Minimum Versions:*
-
-* Anypoint Studio – 7.0.0 or higher
-* Mule Runtime – 4.1.0 or higher
-* JDK – 1.8.0 or higher
-* Veeva APIs – 18.0 or higher
-
-*Fixed in this Release:*
-
-* Export Documents operation should return Job results instead of Job Status response.
-* Get Documents and Get Object Records operations thrown Null pointer exceptions when Document/Field properties list configured as empty or None.
-
-
-*Version 1.0.3*
-
-August 2019
-
 This is New Release
 
-*Compatibility*
+Version 1.0.3
+
+Compatibility
 
 The Veeva Vault Connector supports these software versions:
 
-*Minimum Versions:*
+Minimum Versions:
 
 * Anypoint Studio – 7.0.0 or higher
 * Mule Runtime – 4.1.0 or higher
@@ -51,13 +30,13 @@ Third Party Libraries:
 * Apache Common Language – 2.6 or higher
 * JSON Libraries – 20170516 or higher
 
-*Features:*
+Features
 
 * The Veeva Vault Connector includes Basic Authentication using Username and Password at connector configuration level.
 * At connector configuration level it also provides an option to configure response timeout, Burst API Limit Exceed profile and Daily API Limit Exceed profile – to configure API Limit Threshold, API Wait Time and Time Unit, by default it enable.
 * The Veeva Vault Connector includes following operations to create, update, delete, retrieve vault documents, document renditions, objects. It also retrieves picklists and audit details, executes VQL query to extract document, object and workflows data from vault.
 
-* Create Document Renditions – The Create Document Renditions operation allows to add document renditions in bulk with provided document metadata.
+* Create Document Renditions – The Create Document Renditions operation *allows to add document renditions in bulk with provided document metadata.*
 * Create Documents – The Create Documents operation allows to create single or multiple document(s) with provided document metadata in CSV or JSON format. and file(s) to upload.
 * Create Object Records - The Create Object Records operation allows to create bulk object records for selected vault object with provided object metadata in CSV or JSON format.
 * Delete Document Renditions – The Delete Document Renditions operation allows to delete document renditions in bulk using CSV or JSON format input metadata.
