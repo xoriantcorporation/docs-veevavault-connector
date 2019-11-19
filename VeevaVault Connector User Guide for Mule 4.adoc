@@ -272,6 +272,10 @@ Following are the list of operations with the connector:
 
 * link:#get-audit-details[*Get Audit Details*]
 
+*Spark Messaging*
+
+* link:#spark-message-validator[*Spark Validator*]
+
 ==== Create Documents
 
 The Create Documents operation allows to create single or multiple document(s) with provided document metadata in CSV or JSON format. Make sure you have uploaded document files on Vault FTP server location for document content to attach with created documents.
