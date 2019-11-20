@@ -1782,9 +1782,8 @@ To create Mule flow, follow these instructions:
 	}
 	
 * Drag Logger to log payload with below message.
-
 	
-	*Spark Message :: #[payload]
+	Spark Message :: #[payload]
 	
 
 
