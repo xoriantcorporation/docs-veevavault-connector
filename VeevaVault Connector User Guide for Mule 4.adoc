@@ -1766,6 +1766,14 @@ To create Mule flow, follow these instructions:
 
 * Drag Spark Validator operation from Veeva Vault Connector palette.
 * Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
+* Configure Spark Validator parameters as below:
+
+	Include Spark Header: FALSE
+	Public Key Path: ${file.keyPath} 
+			Define file.keyPath property in configuration.yaml with path where 			public key file (00001.pem) will be store.
+	Spark Headers: #[attributes.headers]
+	Spark Message: #[payload]
+
 * Drag Set Payload and defined following in Value field
 
 --------------------	
