@@ -1752,21 +1752,17 @@ To create Mule flow, follow these instructions:
 
 	a.	General Tab:
 
---------------------		
 		Protocol : HTTPS		
 		Host: 0.0.0.0		
 		Port: 8082
---------------------
 	
 	b.	TLS Tab -> Key Store Configuration:
 
---------------------		
 		Type: JKS		
 		Path: spark-listener.jks		
 		Alias: mule		
 		Key Password: password		
 		Password: password
---------------------
 
 * Drag Spark Validator operation from Veeva Vault Connector palette.
 * Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
