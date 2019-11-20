@@ -1776,18 +1776,16 @@ To create Mule flow, follow these instructions:
 
 * Drag Set Payload and defined following in Value field
 
---------------------	
 	output application/json --- { 
 		"payload" : payload,
 		"attributes": attributes
 	}
---------------------
 	
 * Drag Logger to log payload with below message.
-
 --------------------	
 	Spark Message :: #[payload]
---------------------
+--------------------	
+
 
 image:media/user-guide/image64.png[image,width=425,height=242]
 
