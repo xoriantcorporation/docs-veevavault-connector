@@ -1069,6 +1069,7 @@ The demo project we provide can be a starting point for your MuleSoft project. T
 |*Update Object Records* |Update Object Records operation updates object records of specified object in vault. Use this option when you want to update object records in bulk using object metadata received from external source. The object records updated status is stored into file system. However, you can trigger to external source etc. | |link:#update-object-records-example[Update Object Records]
 |*Query* |Query operation to execute VQL query on vault. Use this option when you want to retrieve document, object and workflow details using VQL query. The VQL query response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. For more details on VQL please refer Veeva https://developer.veevavault.com/vql/#introduction-to-vault-queries[Vault Query Language (VQL)]. | |link:#_Query_Example[Query]
 |*Get Audit Details* |Get Audit Details operation retrieve audit details of specified audit type. Use this option when you want to retrieve audit details of an audit type. The Audit details response retrieved in pagination and in order to fetch each records a For-Each element is added which will transform and store data into file system. However, you can trigger to external sources etc. | |link:#get-audit-details-example[Get Audit Details]
+|*Spark Validator* |Spark Validator operation validates and verify Spark message trigger from vault using public key and signature retrieved. | |link:#spark-validator-example[Spark Validator]
 |===
 
 *To use the demo project:*
@@ -1733,6 +1734,77 @@ image:media/user-guide/image59.png[image,width=601,height=242]
 		</error-handler>
 	</flow>
 --------------------
+
+==== Spark Validator Example
+
+To create Mule flow, follow these instructions:
+
+* Drag and drop HTTP Listener from Mule palette to project canvas.
+* JKS Certificate for HTTPS connector – Require .jks file for HTTPS Listener to received Spark message over TLS connection with Vault. Following are the steps to follow to create .jks file, you can use Java Keytool located under <JDK_HOME>/bin directory. Below is an example:
+	a.	Run command from <JDK_HOME>/bin directory.
+
+		keytool -genkey -keyalg RSA -alias mule -keystore spark-listener.jks -storepass password -validity 360 -keysize 2048	
+	
+	b.  This will create spark-listener.jks file at current directory.
+	
+	c.  Copy/Import spark-listener.jks file under project directory (src/main/resources).
+* Configure HTTPS Listener as below.
+
+	a.	General Tab:
+
+		Protocol : HTTPS		
+		Host: 0.0.0.0		
+		Port: 8082
+	
+	b.	TLS Tab -> Key Store Configuration:
+
+		Type: JKS		
+		Path: spark-listener.jks		
+		Alias: mule		
+		Key Password: password		
+		Password: password
+
+* Drag Spark Validator operation from Veeva Vault Connector palette.
+* Configure Veeva Vault connection configuration with username, password, vault Url, vault version, vault client Id.
+* Configure Spark Validator parameters as below:
+
+	Include Spark Header: FALSE
+	Public Key Path: ${file.keyPath} 
+			Define file.keyPath property in configuration.yaml with path where public key file (00001.pem) will be store.
+	Spark Headers: #[attributes.headers]
+	Spark Message: #[payload]
+
+* Drag Set Payload and defined following in Value field
+
+--------------------	
+	output application/json --- { 
+		"payload" : payload,
+		"attributes": attributes
+	}
+--------------------
+	
+* Drag Logger to log payload with below message.
+
+--------------------	
+	Spark Message :: #[payload]
+--------------------
+
+image:media/user-guide/image64.png[image,width=425,height=242]
+
+*Example XML Code:*
+
+--------------------
+	<flow name="spark-message-validator-operationFlow" doc:id="de35a9a3-61f3-4cd1-9c58-f645c95187d3" >
+		<http:listener doc:name="Listener" doc:id="687a4226-b8df-4657-a329-1a79e4b8b2ea" config-ref="Spark_Listener" path="/"/>
+		<veevavault:spark-message-validator doc:name="Spark Validator" doc:id="384e963f-3f1c-4117-a6f3-1e8b09a585a9" config-ref="Veeva_Vault_Config" publicKeyPath="${file.keyPath}" includeSparkHeader="TRUE"/>
+		<set-payload value='#[output application/json --- { 
+			"payload" : payload,
+			"attributes": attributes
+		}]' doc:name="Set Payload" doc:id="69071232-9e9b-459f-8061-59f44e76ae98" />
+		<logger level="INFO" doc:name="Logger" doc:id="3ce348b9-bfbb-4c16-8663-48ecb401fbb2" message="Spark Message :: #[payload]"/>
+	</flow>
+--------------------
+
 
 === Connector Namespace and Schema
 
