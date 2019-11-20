@@ -1742,9 +1742,11 @@ To create Mule flow, follow these instructions:
 * Drag and drop HTTP Listener from Mule palette to project canvas.
 * JKS Certificate for HTTPS connector – Require .jks file for HTTPS Listener to received Spark message over TLS connection with Vault. Following are the steps to follow to create .jks file, you can use Java Keytool located under <JDK_HOME>/bin directory. Below is an example:
 	a.	Run command from <JDK_HOME>/bin directory.
+
 --------------------		
 		keytool -genkey -keyalg RSA -alias mule -keystore spark-listener.jks -storepass password -validity 360 -keysize 2048	
---------------------	
+--------------------
+	
 	b.  This will create spark-listener.jks file at current directory.
 	
 	c.  Copy/Import spark-listener.jks file under project directory (src/main/resources).
