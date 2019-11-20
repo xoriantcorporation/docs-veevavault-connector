@@ -1751,11 +1751,13 @@ To create Mule flow, follow these instructions:
 * Configure HTTPS Listener as below.
 
 	a.	General Tab:
+
 --------------------		
 		Protocol : HTTPS		
 		Host: 0.0.0.0		
 		Port: 8082
---------------------	
+--------------------
+	
 	b.	TLS Tab -> Key Store Configuration:
 
 --------------------		
