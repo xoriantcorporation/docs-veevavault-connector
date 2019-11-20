@@ -1770,7 +1770,7 @@ To create Mule flow, follow these instructions:
 
 	Include Spark Header: FALSE
 	Public Key Path: ${file.keyPath} 
-			Define file.keyPath property in configuration.yaml with path where 			public key file (00001.pem) will be store.
+			Define file.keyPath property in configuration.yaml with path where public key file (00001.pem) will be store.
 	Spark Headers: #[attributes.headers]
 	Spark Message: #[payload]
 
