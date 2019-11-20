@@ -1785,7 +1785,6 @@ To create Mule flow, follow these instructions:
 
 	Spark Message :: #[payload]
 
-
 image:media/user-guide/image64.png[image,width=425,height=242]
 
 *Example XML Code:*
